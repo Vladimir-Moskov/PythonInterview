@@ -3,6 +3,11 @@ from util_decorators import timeit
 # Find and print all subsets(arrays) of a given set(array)! (Given as an array.)
 @timeit
 def all_sub_sets(original_array):
+    """
+    Iterative solution - best choose
+    :param original_array: given data
+    :return: array of all sub set/arrays
+    """
     start_index = 0
     # array of all sets
     all_sets = [[]]
@@ -22,6 +27,11 @@ def all_sub_sets(original_array):
 
 @timeit
 def all_sub_sets_recurs(original_array):
+    """
+       Recursive solution - not efficient at all, twice slower than iterative solution
+       :param original_array: given data
+       :return: array of all sub set/arrays
+       """
     subset = [None] * len(original_array)
     all_sets = []
     __helper(original_array, subset, 0, all_sets)
@@ -29,6 +39,14 @@ def all_sub_sets_recurs(original_array):
 
 
 def __helper(original_array, subset, i, all_sets):
+    """
+
+    :param original_array: given data
+    :param subset: current subset
+    :param i: index of recursion
+    :param all_sets:
+    :return:
+    """
     if i == len(original_array):
         all_sets.append(subset)
     else:
@@ -40,6 +58,12 @@ def __helper(original_array, subset, i, all_sets):
 
 # Find and print all subsets(arrays) of a given set(array)! (Given as an array.) - where sum(sunset) = original_sum
 def all_sub_sets_sum(original_array, original_sum):
+    """
+      Variation of all sub sets problem
+      Iterative solution - best choose
+      :param original_array: given data
+      :return: array of all sub set/arrays
+      """
     start_index = 0
     # array of all sets
     all_sets = [[]]
@@ -61,7 +85,9 @@ def all_sub_sets_sum(original_array, original_sum):
 @timeit
 def all_stair_path(num_stairs, steps_array):
     """
-    :param num_stairs: - high of steirs - total number of steps
+    Another problem - stair problem, all possible paths on top of stairs, where
+    possible step sizes in steps_array
+    :param num_stairs: - high of stairs - total number of steps
     :param steps_array: - array(set) of  integers > 0
     :return: all_ways [][]
     """
@@ -81,23 +107,24 @@ def all_stair_path(num_stairs, steps_array):
                 break;
     return all_ways
 
-
-test_step = [1, 3, 5]
-num_stairs = 5
-# test_step = [1, 2]
-# num_stairs = 4
-print(all_stair_path(num_stairs, test_step))
+# test of all_stair_path
+# test_step = [1, 3, 5]
+# num_stairs = 5
+# # test_step = [1, 2]
+# # num_stairs = 4
+# print(all_stair_path(num_stairs, test_step))
 
 # test_set = [1, 2, 3, 4, 4]
 # print(test_set)
 # test_set = set(test_set)
 # print(test_set)
 # test_set = list(test_set)
-#
-# test_set = [i for i in range(1, 20)]
-# test_all_sets = all_sub_sets(test_set)
-# print(len(test_all_sets))
-# #print(test_all_sets)
-# test_all_sets = all_sub_sets_recurs(test_set)
-# print(len(test_all_sets))
-# #print(test_all_sets)
+
+# test performance  iterative  vs. recursive solution of all_sub_sets
+test_set = [i for i in range(1, 21)]
+test_all_sets = all_sub_sets(test_set)
+print(len(test_all_sets))
+#print(test_all_sets)
+test_all_sets = all_sub_sets_recurs(test_set)
+print(len(test_all_sets))
+#print(test_all_sets)

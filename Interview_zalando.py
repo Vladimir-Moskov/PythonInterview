@@ -1,4 +1,6 @@
-# Zalando view codility, result is here  https://app.codility.com/c/feedback/QPPYH5-2UV/ until 2019-12-22
+# code interview solution for company Zalando
+# 2019-11-22
+# score is  88%, view codility, result is here  https://app.codility.com/c/feedback/QPPYH5-2UV/ until 2019-12-22
 
 # A = [0] * 6
 # A[0] = 3
