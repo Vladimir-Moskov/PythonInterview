@@ -34,10 +34,11 @@ This module contains code that:
 Your task is to uncover as many issues as you can.
 """
 
-# General conclusions: original code does not have any comments, pydocs documentation with is not good practice.
+# General conclusions: original code does not have any comments and pydocs documentation with it which is not really
+# good practice.
 # Variable/Class/Function names are mostly self described, code follow PEP 8 - so it deserves  some credits for this.
 
-
+# imports looks good so far
 import json
 import os
 import pathlib
@@ -63,7 +64,7 @@ sponsored_id_list = config.get_sponsored()
 
 
 class ProductFinder:
-
+    # 3
     # if the function should be "static" - use @staticmethod then,
     # else if function should be called on instance level, then the first argument 'self' is missed
     # For default value of ids - the value [] should not be used (on first function call  with dafault argument
@@ -79,13 +80,16 @@ class ProductFinder:
         '''.format(tuple(ids)))
         return cursor.fetchall()
 
+# 4
 # the folder name '/var/lib/app' as static string - should be moved to config.py we have imported early
 # code below can be replaced with one line
 #   plist = pathlib.Path(config.VAR_LIB_APP).glob('*.' + config.MANUAL_EXTENSION),
+# also it is better to use path.join if it consists from many parts
 # where config.VAR_LIB_APP = '/var/lib/app'
 # config.MANUAL_EXTENSION = 'pdf'
 # also this code should be moved inside render_product_manual method, there is no reason to keep it on module
 # level, it looks more logical to call this at the same time we want to do file processing
+# Anyway those 6 line of code are redundant - see reason below
 tmp = pathlib.Path('/var/lib/app').glob('*')
 plist = []
 for p in tmp:
@@ -93,7 +97,8 @@ for p in tmp:
         plist.insert(0, p)
 del tmp
 
-# the variable name data - to short and to common it is better to be more specific
+# 5
+# the variable name 'data' is too short and too common. it is better to be more specific
 # for instance - product_manual_db_data
 def render_product_manual(data):
     # again something like product_manual will be more appropriate name for the variable 'd'
@@ -101,11 +106,11 @@ def render_product_manual(data):
     if not d['manual_filename']:
         raise ValueError('Product details have no manual')
 
-    #  logic in section below could be replaced with
+    # 6
+    # logic in this  section below could be replaced with two lines bellow
     # if not pathlib.Path(config.VAR_LIB_APP).joinpath(d['manual_filename']).is_file():
     #     raise ValueError('Product PDF is not found')
-    #
-
+    # and all logic around plist will become redundant
     found_pdf = False
     for p in plist:
         if d['manual_filename'] == p:
@@ -113,18 +118,22 @@ def render_product_manual(data):
     if not found_pdf:
         raise ValueError('Product PDF is not found')
 
+    # 7
     # It will be a good idea to have some validators for case
-    # when d.manual_render_params is not empty
+    # when d.manual_render_params is not empty - to validate does ImageMagic can handle it
     # temp folder  "/tmp" should also be taken from config and
-    # file image name 'tmp_image.jpg' should be uniq to avoid processing collisions
+    # file image name 'tmp_image.jpg' should be unique to avoid processing collisions
     # like 'tmp_' + d['manual_filename'] + random_str '.jpg'
     # where random_str = ''.join(random.choices(string.ascii_uppercase + string.digits, k=16))
     os.system('convert {} {} /tmp/tmp_image.jpg'.format(
         d.get('manual_render_params', ''), d['manual_filename']))
 
-    # I am not sure to silence catch of exception is a good practice
+    # 8
+    # I am not sure is silence catch of exception is a good practice,
+    # actually I am 100% sure it is not best way to deal with file system
     try:
         return open('/tmp/tmp_image.jpg', 'rb')
     except:
         pass
 
+# The End
