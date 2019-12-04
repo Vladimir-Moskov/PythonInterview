@@ -1,4 +1,4 @@
-from util_decorators import timeit
+from Companies.util_decorators import timeit
 
 # Find and print all subsets(arrays) of a given set(array)! (Given as an array.)
 @timeit
