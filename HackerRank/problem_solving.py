@@ -1,8 +1,4 @@
-import math
-import os
-import random
-import re
-import sys
+
 
 # Complete the climbingLeaderboard function below.
 def climbingLeaderboard_0(scores, alice):
@@ -56,6 +52,12 @@ scores = [100, 90, 90, 80, 75, 60]
 alice = [50, 65, 77, 90, 102]
 
 print(climbingLeaderboard(scores, alice))
+
+import math
+import os
+import random
+import re
+import sys
 
 # if __name__ == '__main__':
 #     fptr = open(os.environ['OUTPUT_PATH'], 'w')
