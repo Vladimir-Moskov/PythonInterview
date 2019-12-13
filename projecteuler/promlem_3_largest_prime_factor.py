@@ -1,4 +1,6 @@
 # https://projecteuler.net/problem=3
+# https://www.hackerrank.com/contests/projecteuler/challenges/euler003/problem
+
 import math
 
 

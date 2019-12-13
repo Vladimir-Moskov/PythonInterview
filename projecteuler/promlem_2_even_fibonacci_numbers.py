@@ -1,4 +1,5 @@
 # https://projecteuler.net/problem=2
+# https://www.hackerrank.com/contests/projecteuler/challenges/euler002/problem
 
 def solution(max_num):
     sum_fib = 0

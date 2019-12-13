@@ -1,5 +1,5 @@
 # https://projecteuler.net/problem=1
-
+# https://www.hackerrank.com/contests/projecteuler/challenges/euler001/problem
 
 def solution(max_num):
     max_num -= 1
