@@ -1,6 +1,19 @@
-# technical / code interview for EclecticIQ
-# Date: 2019-12-01
-# Created by: Volodymyr Moskov
+"""
+ technical / code interview for EclecticIQ
+ Date: 2019-12-01
+ Refactored:
+ Created by: Volodymyr Moskov
+
+ Summary: Hi Volodymyr,
+    Thanks again for your application, and for submitting the assignment.
+    Unfortunately, we have decided not to move forward with you in the hiring process as we believe we have other
+     candidates more fit for the role in our pipeline right now.
+
+    We wish you the best in your next career steps.
+
+    Best regards,
+    EclecticIQ
+"""
 
 """
 Hi Volodymyr,

@@ -1,5 +1,14 @@
-# code interview solution for company Zenefits
-# 2019-11-15
+"""
+ Code interview solution for company Zenefits
+ Created: 2019-11-15
+ Refactored: 2019-12-24
+
+ Summary: I has passed the interview, had good feedback,
+ was invited to finish hiring process with on site round.
+ It was the last stop - company had denied to do visa sponsorship,
+ which was mandatory at this point - hr person had just miss lead me with this.
+"""
+
 
 """
 Assumption: data structure is valid (no any additional validation needed)
@@ -46,7 +55,7 @@ given_data = [
 ]
 
 
-# just OOP god style have DAO for object
+# just OOP good style have DAO for object
 class Person:
     def __init__(self, name, parent, position, location):
         self.name = name
@@ -87,7 +96,9 @@ def print_children(person_item):
         print_children(child)
 
 
-execute_task(given_data)
+if __name__ == '__main__':
+    execute_task(given_data)
+
 
 
 
