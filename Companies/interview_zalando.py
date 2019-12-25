@@ -38,72 +38,75 @@
     Zalando SE
 """
 
-#  Task 1
 
-# given data - test example
-# Case 1
-A = [0] * 6
-A[0] = 3
-A[1] = 5
-A[2] = 6
-A[3] = 3
-A[4] = 3
-A[5] = 5
+class Task1:
 
-# Case 2
-A[0] = 3
-A[1] = 5
-A[2] = 6
-A[3] = 3
-A[4] = 3
-A[5] = 5
-#
-#
-# def solution(A):
-#     # write your code in Python 3.6
-#     # O(2*N), => could be O(N) if step 2 logic put in step 1 as after-math after "if"
-#     # TODO: I will optimize it tomorrow,
-#     result = 0
-#     dic_calc = {}
-#
-#     # step 1 - find all pears loop
-#     for num_item in A:
-#         if num_item in dic_calc:
-#             dic_calc[num_item] += 1
-#         else:
-#             dic_calc[num_item] = 1
-#         # here may be logic from step 2
-#
-#     # step 2 - calculate all pears combination
-#     for val in dic_calc.values():
-#         if val > 1:
-#             n = val - 1
-#             result += n * (1 + n) // 2
-#     return result
+    @staticmethod
+    def solution(given_ar):
+        # write your code in Python 3.6
+        # O(2*N), => could be O(N) if step 2 logic put in step 1 as after-math after "if"
+        # TODO: I will optimize it tomorrow,
+        result = 0
+        dic_calc = {}
+
+        # step 1 - find all pears loop
+        for num_item in given_ar:
+            if num_item in dic_calc:
+                dic_calc[num_item] += 1
+            else:
+                dic_calc[num_item] = 1
+            # here may be logic from step 2
+
+        # step 2 - calculate all pears combination
+        for val in dic_calc.values():
+            if val > 1:
+                n = val - 1
+                result += n * (1 + n) // 2
+        return result
+
+    @classmethod
+    def run_test(cls):
+        # given data - test example
+        # Case 1
+        A = [0] * 6
+        A[0] = 3
+        A[1] = 5
+        A[2] = 6
+        A[3] = 3
+        A[4] = 3
+        A[5] = 5
+        print(cls.solution(A))
+
+        # Case 2
+        A[0] = 3
+        A[1] = 5
+        A[2] = 6
+        A[3] = 3
+        A[4] = 3
+        A[5] = 5
+
+        print(cls.solution(A))
 
 
-#
-#
-# print(solution(A))
-
-
-# Compilation successful.
-#
-# Example test:   [2, 1, 3, 5, 4]
-# OK
-#
-# Example test:   [2, 3, 4, 1, 5]
-# OK
-#
-# Example test:   [1, 3, 4, 2, 5]
-# OK
-#
-# Your test case: [2, 1, 3, 5, 4]
-# Returned value: 3
-#
-# Your code is syntactically correct and works properly on the example test.
-# Note that the example tests are not part of your score. On submission at least 8 test cases not shown here will assess your solution.
-
+"""
+    Compilation successful.
+    
+    Example test:   [2, 1, 3, 5, 4]
+    OK
+    
+    Example test:   [2, 3, 4, 1, 5]
+    OK
+    
+    Example test:   [1, 3, 4, 2, 5]
+    OK
+    
+    Your test case: [2, 1, 3, 5, 4]
+    Returned value: 3
+    
+    Your code is syntactically correct and works properly on the example test.
+    Note that the example tests are not part of your score. On submission at least 8 test cases not shown here will assess 
+    your solution.
+"""
 
 
 
