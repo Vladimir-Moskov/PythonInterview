@@ -1,3 +1,9 @@
+"""
+    Solve puzzle for all sub sets  and stair-ways variations problem
+
+"""
+# TODO: redo it with collections and itertools
+
 from Companies.util_decorators import timeit
 
 # Find and print all subsets(arrays) of a given set(array)! (Given as an array.)

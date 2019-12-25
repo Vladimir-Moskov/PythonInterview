@@ -1,4 +1,13 @@
+"""
+    code interview solution for company Booking.com
+    Date: 2019-12-15
 
+    Summary:
+        score is  about 80% with www.hackerrank.com
+        No answer so far :(
+
+    No answer
+"""
 # Complete the 'multiple' function below.
 #
 # The function is expected to return an INTEGER_ARRAY.

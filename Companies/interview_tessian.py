@@ -1,3 +1,25 @@
+"""
+    code interview solution for company Tessian
+    Date: 2019-12-07
+    Hm, there is only one task, some how 2 other tasks have been lost
+
+    Summary:
+        score is  about 80% with www.hackerrank.com, had spend 2 hours on it - supposed to do it in 80 minutes
+
+        I was very concerned again, that it was very low result, I was not familiar with first type of task and task
+        itself where very confusing and I was just shucked for a while.
+        But even though I was invited to the next round, remote - face to face  technical interview.
+
+        Rob Partridge
+        Hi Volodymyr,
+        Great news!
+        We would like to progress to the next stage of the interview, this is a 90 minute technical interview via
+        Zoom (Code pair) exercise.
+        What does your diary look like this week?
+        All the best,
+        Rob
+"""
+
 from typing import Dict, Optional, Tuple
 import itertools
 
@@ -7,6 +29,7 @@ operatorTable = {
   "*": (lambda a, b: a * b),
   "/": (lambda a, b: a // b)
 }
+
 
 def max_result_expression(expression: str, variables: Dict[str, Tuple[int, int]]) -> Optional[int]:
     result = None
