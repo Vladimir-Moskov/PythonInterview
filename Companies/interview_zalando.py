@@ -40,12 +40,20 @@
 
 
 class Task1:
-
+    """
+        solution for Task1
+    """
     @staticmethod
     def solution(given_ar):
-        # write your code in Python 3.6
-        # O(2*N), => could be O(N) if step 2 logic put in step 1 as after-math after "if"
-        # TODO: I will optimize it tomorrow,
+        """
+         solution itself
+          write your code in Python 3.6
+          O(2*N), => could be O(N) if step 2 logic put in step 1 as after-math after "if"
+
+        :param given_ar: input data
+        :return:
+        """
+        # TODO: I will optimize it next time
         result = 0
         dic_calc = {}
 
@@ -66,6 +74,10 @@ class Task1:
 
     @classmethod
     def run_test(cls):
+        """
+        execute solution for given test cases
+        :return: just print
+        """
         # given data - test example
         # Case 1
         A = [0] * 6
@@ -88,6 +100,8 @@ class Task1:
         print(cls.solution(A))
 
 
+Task1.run_test()
+
 """
     Compilation successful.
     
@@ -109,61 +123,85 @@ class Task1:
 """
 
 
+class Task2:
+    """
+        solution for Task2
+    """
+    @staticmethod
+    def solution(given_ar):
+        """
+        solution itself
+         write your code in Python 3.6
+        :param given_ar: input array
+        :return:
+        """
+        moments = 0
+        sum_bulb = 0
+        index = 1
 
-# def solution(A):
-#     # write your code in Python 3.6
-#
-#     moments = 0
-#     sum_bulb = 0
-#     index = 1
-#
-#     # overflow sum_bulb and exp_sum wont happen, because
-#     # "if the operations are done in pure python, because python integers have arbitrary precision"
-#     for bulb in A:
-#         sum_bulb += bulb
-#         exp_sum = index * (1 + index) / 2
-#         if sum_bulb == exp_sum:
-#             moments += 1
-#         index += 1
-#
-#     return moments
+        # overflow sum_bulb and exp_sum wont happen, because
+        # "if the operations are done in pure python, because python integers have arbitrary precision"
+        for bulb in given_ar:
+            sum_bulb += bulb
+            exp_sum = index * (1 + index) / 2
+            if sum_bulb == exp_sum:
+                moments += 1
+            index += 1
 
-
-#
-# 1 1100‬
-#   1110‬
-#    111
-#    110
-#     11
-#      10
-#      1
-#      0
-S = "011100"
+        return moments
 
 
-def solution(S):
-    # write your code in Python 3.6
-    result = 0
-    lead_zero_index = 0
+class Task3:
+    """
+        solution for Task3
+    """
+    @staticmethod
+    def solution(given_str):
+        """
+             solution itself
+              write your code in Python 3.6
+             :param given_str: input str
+             :return:
+             """
+        result = 0
+        lead_zero_index = 0
 
-    # get rid of leading zero
-    while S[lead_zero_index] == "0":
-        lead_zero_index += 1
+        # get rid of leading zero
+        while given_str[lead_zero_index] == "0":
+            lead_zero_index += 1
 
-    # run calculation
-    current_index = len(S)
-    for last_bit in reversed(S):
-        current_index -= 1
-        # count until met leading zeros
-        if current_index > lead_zero_index:
-            if last_bit == "0":
+        # run calculation
+        current_index = len(given_str)
+        for last_bit in reversed(given_str):
+            current_index -= 1
+            # count until met leading zeros
+            if current_index > lead_zero_index:
+                if last_bit == "0":
+                    result += 1
+                else:
+                    result += 2
+            # last '1' should be count as last step
+            elif current_index == lead_zero_index:
                 result += 1
-            else:
-                result += 2
-        # last '1' should be count as last step
-        elif current_index == lead_zero_index:
-            result += 1
 
-    return result
+        return result
 
-print(solution(S))
+    @classmethod
+    def run_test(cls):
+        """
+        execute solution for given test cases
+        :return: just print
+        """
+        # 1 1100‬
+        #   1110‬
+        #    111
+        #    110
+        #     11
+        #      10
+        #      1
+        #      0
+        s = "011100"
+        print(cls.solution(s))
+
+
+Task3.run_test()
