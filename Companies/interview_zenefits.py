@@ -65,9 +65,13 @@ class Person:
         self.children = []
         self.indent = 0 # printing indent
 
-    # default print / tostring format
     def __repr__(self):
-        return "     " * self.indent + "%s [%s, %s]" % (self.name, self.position, self.location)
+        """
+        default print / tostring format
+        :return: representasion
+        """
+        indent_str = " " * 4 * self.indent
+        return f"{indent_str}{self.name} [{self.position}, {self.location}]"
 
 
 # pretty straight forward solution with dictionary helper
@@ -91,7 +95,7 @@ def execute_task(matrix_data):
 # recursive print with indent calculation
 def print_children(person_item):
     print(person_item)
-    for child in person_item.childs:
+    for child in person_item.children:
         child.indent = 1 + person_item.indent
         print_children(child)
 
