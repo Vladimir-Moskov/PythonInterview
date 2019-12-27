@@ -1,4 +1,4 @@
 # PythonInterview
-Python Interview puzzles
+Solving Python Interview puzzles
 
 
