@@ -29,5 +29,6 @@ data_json = {
     'approve': 'APPROVED'
 }
 # sending get request and saving the response as response object
-request_self = requests.put(url=URL, json=data_json)
-print(request_self)
+# request_self = requests.put(url=URL, json=data_json)
+# print(request_self)
+print(requests)
