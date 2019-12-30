@@ -41,7 +41,7 @@ def solution(max_sum):
 # max_sum = 12
 # max_sum = 3000
 max_sum = 2992 # 946833360
-print(solution(max_sum)) # 31875000
+# print(solution(max_sum)) # 31875000
 
 
 # def divisors(n):
@@ -57,3 +57,5 @@ print(solution(max_sum)) # 31875000
 #         pn[x] = (r+s) * (r+t) * (r+s+t)
 #
 # print(pn)
+
+

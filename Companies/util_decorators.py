@@ -61,7 +61,7 @@ def change_making(coins, n: int):
 
 
 given_coins = [25, 10, 1]
-# print(change_making(given_coins, 30))
+print(change_making(given_coins, 30))
 "stre".index('re',)
 
 import sys
@@ -98,4 +98,4 @@ given_coins = [2]
 val = 3
 # given_coins = [1, 2, 5]
 # val = 11
-print(Solution().coinChange(given_coins, val))
+# print(Solution().coinChange(given_coins, val))
