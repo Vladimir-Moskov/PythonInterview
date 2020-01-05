@@ -28,7 +28,11 @@ data_json = {
     "user": 'user1',
     'approve': 'APPROVED'
 }
+
+URL = "http://127.0.0.1:8000/api/pyDjangoRESTApp/2/"
+#       http://127.0.0.1:8000/api/pyDjangoRESTApp/5/
 # sending get request and saving the response as response object
 # request_self = requests.put(url=URL, json=data_json)
+request_self = requests.delete(url=URL)
 # print(request_self)
 print(requests)
