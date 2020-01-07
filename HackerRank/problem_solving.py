@@ -104,3 +104,18 @@ s2 = "NOHARAAA" # 3
 # s1 = "OUDFRMYMAW"
 # s1 = "AWHYFCCMQX" # 2
 print(commonChild(s1, s2))
+
+
+# Left Rotation
+# https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
+def rotLeft(given_ar, shift_size):
+    shift_size = shift_size % len(given_ar)
+    if shift_size == 0:
+        return given_ar
+
+    result_ar = given_ar[shift_size:] + given_ar[:shift_size]
+    return result_ar
+
+ar = [1, 2, 3, 4, 5]
+val = 4
+print(rotLeft(ar, val))
