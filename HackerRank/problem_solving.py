@@ -76,3 +76,31 @@ import sys
 #     fptr.write('\n')
 #
 #     fptr.close()
+
+# https://www.hackerrank.com/challenges/common-child/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=strings
+def commonChild(given_str_1, given_str_2):
+    size = len(given_str_1)
+    matrix_str = [[0 for i in range(size)] for j in range(size)]
+
+    # create matrex
+    for i, char_i in enumerate(given_str_2):
+        for j, char_j in enumerate(given_str_1):
+            matrix_str[i][j] = int(char_i == char_j)
+
+    # process matrix
+    for i, line in enumerate(matrix_str):
+        for j, flag in enumerate(matrix_str):
+            if i != 0 and j != 0:
+                new_val = matrix_str[i][j] + max(matrix_str[i-1][j-1], matrix_str[i][j-1])
+                matrix_str[i][j] = max(new_val, matrix_str[i-1][j])
+
+    result = matrix_str[i][j]
+    return result
+
+# s1 = "HARRY"
+# s2 = "SALLY" # 2
+s1 = "SHINCHAN"
+s2 = "NOHARAAA" # 3
+# s1 = "OUDFRMYMAW"
+# s1 = "AWHYFCCMQX" # 2
+print(commonChild(s1, s2))
