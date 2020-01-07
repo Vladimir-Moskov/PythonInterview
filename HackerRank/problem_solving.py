@@ -119,3 +119,40 @@ def rotLeft(given_ar, shift_size):
 ar = [1, 2, 3, 4, 5]
 val = 4
 print(rotLeft(ar, val))
+
+
+# =================
+def minimumBribes(given_q):
+    result = 0
+    # bribe_dic = {}
+    for index, val in enumerate(given_q):
+        # dif = val - 1 - index
+        dif = 0
+        for j in range(index + 1, len(given_q)):
+            dif += int(given_q[j] < val)
+        if dif > 2:
+            result = -1
+            break
+        elif dif > 0:
+            result += dif
+
+    return "Too chaotic" if result == -1 else result
+
+def minimumBribes_optimal(q):
+    bribes = 0
+    for i in range(len(q)-1,-1,-1):
+        if q[i] - (i + 1) > 2:
+            return 'Too chaotic'
+        for j in range(max(0, q[i] - 2),i):
+            if q[j] > q[i]:
+                bribes+=1
+
+    return "Too chaotic" if bribes == -1 else bribes
+
+"Too chaotic"
+case_1 = [2, 1, 5, 3, 4]  # 3
+case_2 = [2, 5, 1, 3, 4]  # ---
+case_3 = [1, 2, 5, 3, 7, 8, 6, 4]  # 7
+print(minimumBribes(case_1))
+print(minimumBribes(case_2))
+print(minimumBribes(case_3))
