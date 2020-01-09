@@ -10,7 +10,7 @@
         itself where very confusing and I was just shucked for a while.
         But even though I was invited to the next round, remote - face to face  technical interview.
 
-        Rob Partridge
+        Rob Par****
         Hi Volodymyr,
         Great news!
         We would like to progress to the next stage of the interview, this is a 90 minute technical interview via
@@ -18,6 +18,54 @@
         What does your diary look like this week?
         All the best,
         Rob
+        
+    Interview #2: Next Technical Interview for Stage 3 -  (Code pair) exercise
+       Date: 2020-01-08
+       Summary: Had a quick feedback - Interview had been sucsessfuly passed, self estime increased, 
+                even if provided solution was not perfect (interviewing is still too stressful for me)
+      
+      Classical Python Questions:
+            1. Difference betwen Tuple and List
+            2. What is generators
+            3. concurency in python, pros and cons for every option (Thread, Processes, Async)
+            
+       Coding task:
+            given class, it needs to implement in order to sotisfy test cases and solves problem below,
+             + after added "windows" argument 
+             + optimise get method to be as fast as possible, update performance can be ignored
+            
+         class Occurrences:
+            def __init__(self, windows: int):
+                sel.windows = windows
+
+
+            def update(self, string_val):
+                
+                 #   string_val - SPACE SEPARETED STRING OF NAMES, may be with dublicates
+                
+
+                pass
+
+            def get(self, string_1, string_2):
+               
+                  #  return number of lines wich has full ocurance of string_1 and string_2 at the same time,
+                  #  addithional requarment - distance between string_1 and string_2 should br within sel.windows value
+                
+                pass 
+
+
+         # Test cases
+
+         occur = Occurrences()
+         # 
+         occur.update("name1 name2 name 3 name 4")
+         occur.update("name1 name7 name2")
+         occur.update("name3 name5 name6")
+
+         print(occur.get("name1", "name2")) # result = 2
+         print(occur.get("name3", "name2")) # result = 1
+         print(occur.get("name6", "name2")) # result = 0
+     
 """
 
 from typing import Dict, Optional, Tuple
