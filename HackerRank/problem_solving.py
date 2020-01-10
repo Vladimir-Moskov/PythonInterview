@@ -1,4 +1,4 @@
-
+# TODO - clean up here!!!
 
 # Complete the climbingLeaderboard function below.
 def climbingLeaderboard_0(scores, alice):
@@ -156,3 +156,56 @@ case_3 = [1, 2, 5, 3, 7, 8, 6, 4]  # 7
 print(minimumBribes(case_1))
 print(minimumBribes(case_2))
 print(minimumBribes(case_3))
+
+############################################################
+
+
+def minimumSwaps_BrutForce(given_ar):
+    result = 0
+    if len(given_ar) < 2:
+        return 0
+    start_index = 0
+    while start_index < len(given_ar) - 1:
+        cur_elem = given_ar[start_index]
+        if cur_elem != start_index:
+            next_index = start_index
+            next_min = given_ar[next_index]
+            next_min_index = next_index
+            while next_index < len(given_ar):
+                next_elem = given_ar[next_index]
+                if cur_elem > next_elem:
+                    if next_elem < next_min:
+                        next_min = next_elem
+                        next_min_index = next_index
+                next_index += 1
+            # do swap
+            if next_min_index != start_index:
+                given_ar[start_index], given_ar[next_min_index] = given_ar[next_min_index], given_ar[start_index]
+                result += 1
+            else:
+                start_index += 1
+    return result
+
+
+def minimumSwaps(arr):
+    temp = [0] * (len(arr) + 1)
+    for pos, val in enumerate(arr):
+        temp[val] = pos
+        pos += 1
+    swaps = 0
+    for i in range(len(arr)):
+        if arr[i] != i+1:
+            swaps += 1
+            t = arr[i]
+            arr[i] = i+1
+            arr[temp[i+1]] = t
+            temp[t] = temp[i+1]
+    return swaps
+
+case_1 = [4, 3, 1, 2] # 3
+case_2 = [2, 3, 4, 1, 5] # 3
+case_3 = [1, 3, 5, 2, 4, 6, 7] # 3
+
+print(minimumSwaps(case_1))
+print(minimumSwaps(case_2))
+print(minimumSwaps(case_3))
