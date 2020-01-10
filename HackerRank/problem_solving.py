@@ -209,3 +209,39 @@ case_3 = [1, 3, 5, 2, 4, 6, 7] # 3
 print(minimumSwaps(case_1))
 print(minimumSwaps(case_2))
 print(minimumSwaps(case_3))
+
+#########################################################################
+
+def maxSubsetSum(arr):
+    result = arr[0]
+    if len(arr) < 3:
+        return result
+    matrix_sum = [[0 for i in range(len(arr)-2)] for j in range(len(arr) -2)]
+
+    for i in range(len(arr) -2):
+        line = matrix_sum[i]
+        for j in range(0, i + 1):
+            el_x = arr[j] #if i - j < 2 else max(arr[j], matrix_sum[i - 2][j])
+            el_y = arr[i+2]
+            new_sum = el_x + el_y
+            matrix_sum[i][j] = max(new_sum, el_y)
+            result = max(result, new_sum)
+    return result
+
+def maxSubsetSum0(arr):
+    dp = []
+    dp.append(arr[0])
+    dp.append(max(arr[:2]))
+    ans = max(dp)
+    for a in arr[2:]:
+        dp.append(max(max(dp[-2]+a, a), ans))
+        ans = max(ans, dp[-1])
+    return ans
+
+case_1 = [3, 7, 4, 6, 5] # 13
+case_2 = [2, 1, 5, 8, 4] # 11
+case_3 = [3, 5, -7, 8, 10] # 15
+# print(maxSubsetSum(case_1))
+# print(maxSubsetSum(case_2))
+# print(maxSubsetSum(case_3))
+
