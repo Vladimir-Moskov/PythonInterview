@@ -1,5 +1,5 @@
 """
-    code interview solution for company Zalando
+    code interview solution for company Zalando, Berlin, Germany
     Date: 2019-11-22
     score is  88%, view Codility, result is here  https://app.codility.com/c/feedback/QPPYH5-2UV/ until 2019-12-22
 

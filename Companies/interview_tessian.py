@@ -1,5 +1,5 @@
 """
-    code interview solution for company Tessian
+    code interview solution for company Tessian, London, UK
     Date: 2019-12-07
     Hm, there is only one task, some how 2 other tasks have been lost
 

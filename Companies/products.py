@@ -1,5 +1,5 @@
 """
- technical / code interview for EclecticIQ
+ technical / code interview for EclecticIQ, Amsterdam, Netherlands
  Date: 2019-12-01
  Refactored:
  Created by: Volodymyr Moskov

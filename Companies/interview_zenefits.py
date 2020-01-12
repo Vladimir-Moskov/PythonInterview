@@ -1,12 +1,12 @@
 """
- Code interview solution for company Zenefits
+ Code interview solution for company Zenefits, Vancouver, Canada
  Created: 2019-11-15
  Refactored: 2019-12-24
 
- Summary: I has passed the interview, had good feedback,
+ Summary: I had passed the interview, had a good feedback,
  was invited to finish hiring process with on site round.
  It was the last stop - company had denied to do visa sponsorship,
- which was mandatory at this point - hr person had just miss lead me with this.
+ which was mandatory, at this point - hr person had just miss lead me with this.
 """
 
 
