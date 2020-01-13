@@ -245,3 +245,51 @@ case_3 = [3, 5, -7, 8, 10] # 15
 # print(maxSubsetSum(case_2))
 # print(maxSubsetSum(case_3))
 
+
+######################
+# https://www.hackerrank.com/challenges/abbr/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dynamic-programming&h_r=next-challenge&h_v=zen
+
+def abbreviation(str_val, str_abr):
+    calculation_line = [0 for _ in str_val]
+    if len(str_val) >= len(str_abr):
+        for capital_abr in str_abr:
+            has_letter = False
+            for i, not_cap_str in enumerate(str_val):
+                has_letter = has_letter or not_cap_str.upper() == capital_abr
+                cur_fit = not_cap_str.islower() or not_cap_str.upper() == capital_abr
+                cur_fit = calculation_line[i] == 1 or cur_fit
+                calculation_line[i] = int(cur_fit)
+                if not cur_fit:
+                    break
+            if not has_letter:
+                calculation_line[-1] = 0
+                break
+    result = calculation_line[-1] == 1
+    return "YES" if result else "NO"
+
+def abbreviation_0(a, b):
+    m, n = len(a), len(b)
+    dp = [[False]*(m+1) for _ in range(n+1)]
+    dp[0][0] = True
+    for i in range(n+1):
+        for j in range(1,m+1):
+            if a[j-1] == b[i-1]:
+                dp[i][j] = dp[i-1][j-1]
+            elif a[j-1].upper() == b[i-1]:
+                dp[i][j] = dp[i-1][j-1] or dp[i][j-1]
+            elif a[j-1].islower():
+                dp[i][j] = dp[i][j-1]   
+    return "YES" if dp[n][m] else "NO"
+
+case_1_0 = "daBcd"  # Y
+case_1_1 = 'ABC'
+case_2_0 = "AbCdE"  # N
+case_2_1 = 'AFE'
+case_3_0 = "AfPZN"  # N
+case_3_1 = 'APZNC'
+
+# print(abbreviation(case_1_0, case_1_1))
+# print(abbreviation(case_2_0, case_2_1))
+print(abbreviation(case_3_0, case_3_1))
+###################
+
