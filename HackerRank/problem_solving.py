@@ -326,3 +326,58 @@ data = sorted(data, key=cmp_to_key(Player.comparator))
 print(data)
 
 ################
+# https://www.hackerrank.com/challenges/fraudulent-activity-notifications
+
+def activityNotifications(expenditure, days):
+    result = 0
+    if len(expenditure) < days:
+        return result
+
+    midl_index = int(days // 2)
+    sub_ar = expenditure[:days]
+    sub_ar.sort()
+    if days % 2 == 0:
+        midl_index_start = midl_index - 1
+        midl_index_end = midl_index
+    else:
+        midl_index_start = midl_index
+        midl_index_end = midl_index
+
+    for i in range(days, len(expenditure) - 1):
+        median = sub_ar[midl_index_start] + sub_ar[midl_index_end]
+        if median <= expenditure[i]:
+            result += 1
+        # sub_ar.append(expenditure[i])
+        sub_ar.remove(sub_ar[0])
+        for k, el in enumerate(sub_ar):
+            if expenditure[i] < sub_ar[k]:
+                break
+        sub_ar.insert(k + 1, expenditure[i])
+
+    return result
+
+
+def activityNotifications_2(expenditure, d):
+    from bisect import insort, bisect_left
+    v = sorted(expenditure[: d])
+    count = 0
+    for i, current in enumerate(expenditure[d:]):
+        de = expenditure[i]
+        if d%2 == 0:
+            if current >= v[d//2] + v[d//2-1]:
+                count += 1
+        elif current >= v[d//2]*2:
+                count += 1
+        ix = bisect_left(v, de)
+        del v[ix]
+        insort(v, current)
+    return count
+
+
+case_1 = [2, 3, 4, 2, 3, 6, 8, 4, 5]  # 2
+days_1 = 5
+case_2 = [1, 2, 3, 4, 4] # 0
+days_2 = 4
+
+print(activityNotifications(case_1, days_1))
+print(activityNotifications(case_2, days_2))
