@@ -46,12 +46,12 @@ def climbingLeaderboard(scores, alice):
 scores = [100,100, 50, 40, 40, 20, 10]
 alice = [5, 25, 50, 120]
 
-print(climbingLeaderboard(scores, alice))
+#print(climbingLeaderboard(scores, alice))
 
 scores = [100, 90, 90, 80, 75, 60]
 alice = [50, 65, 77, 90, 102]
 
-print(climbingLeaderboard(scores, alice))
+#print(climbingLeaderboard(scores, alice))
 
 import math
 import os
@@ -103,7 +103,7 @@ s1 = "SHINCHAN"
 s2 = "NOHARAAA" # 3
 # s1 = "OUDFRMYMAW"
 # s1 = "AWHYFCCMQX" # 2
-print(commonChild(s1, s2))
+# print(commonChild(s1, s2))
 
 
 # Left Rotation
@@ -118,7 +118,7 @@ def rotLeft(given_ar, shift_size):
 
 ar = [1, 2, 3, 4, 5]
 val = 4
-print(rotLeft(ar, val))
+# print(rotLeft(ar, val))
 
 
 # =================
@@ -153,9 +153,9 @@ def minimumBribes_optimal(q):
 case_1 = [2, 1, 5, 3, 4]  # 3
 case_2 = [2, 5, 1, 3, 4]  # ---
 case_3 = [1, 2, 5, 3, 7, 8, 6, 4]  # 7
-print(minimumBribes(case_1))
-print(minimumBribes(case_2))
-print(minimumBribes(case_3))
+# print(minimumBribes(case_1))
+# print(minimumBribes(case_2))
+# print(minimumBribes(case_3))
 
 ############################################################
 
@@ -206,9 +206,9 @@ case_1 = [4, 3, 1, 2] # 3
 case_2 = [2, 3, 4, 1, 5] # 3
 case_3 = [1, 3, 5, 2, 4, 6, 7] # 3
 
-print(minimumSwaps(case_1))
-print(minimumSwaps(case_2))
-print(minimumSwaps(case_3))
+# print(minimumSwaps(case_1))
+# print(minimumSwaps(case_2))
+# print(minimumSwaps(case_3))
 
 #########################################################################
 
@@ -290,7 +290,7 @@ case_3_1 = 'APZNC'
 
 # print(abbreviation(case_1_0, case_1_1))
 # print(abbreviation(case_2_0, case_2_1))
-print(abbreviation(case_3_0, case_3_1))
+# print(abbreviation(case_3_0, case_3_1))
 ###################
 
 # https://www.hackerrank.com/challenges/ctci-comparator-sorting/problem
@@ -323,7 +323,7 @@ class Player:
 
 data = [Player('amy', 100), Player('david', 100), Player('heraldo', 50), Player('aakansha', 75), Player('aleksa', 150)]
 data = sorted(data, key=cmp_to_key(Player.comparator))
-print(data)
+# print(data)
 
 ################
 # https://www.hackerrank.com/challenges/fraudulent-activity-notifications
@@ -379,8 +379,8 @@ days_1 = 5
 case_2 = [1, 2, 3, 4, 4] # 0
 days_2 = 4
 
-print(activityNotifications(case_1, days_1))
-print(activityNotifications(case_2, days_2))
+# print(activityNotifications(case_1, days_1))
+# print(activityNotifications(case_2, days_2))
 
 
 ##############################################################
@@ -395,5 +395,40 @@ def sherlockAndAnagrams(s):
         for j in b:
             count+=b[j]*(b[j]-1)/2
     return int(count)
+
+##############################################################
+# https://www.hackerrank.com/challenges/minimum-absolute-difference-in-an-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=greedy-algorithms
+def minimumAbsoluteDifference(given_arr):
+    ar_len = len(given_arr)
+    given_arr.sort()
+    result = abs(given_arr[0] - given_arr[1])
+    for i in range(1, ar_len - 1):
+        next_val = abs(given_arr[i] - given_arr[i+1])
+        result = min(next_val, result)
+    return result
+
+##############################################################
+# https://www.hackerrank.com/challenges/luck-balance/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=greedy-algorithms
+
+def luckBalance(k, contests):
+    result = 0
+    dic_helper = {
+        0: [],
+        1: []
+    }
+
+    for item in contests:
+        dic_helper[item[1]].append(item[0])
+
+    result = sum(dic_helper[0])
+    need_win = sorted(dic_helper[1])
+    lose_len = len(need_win) - k
+    if lose_len > 0:
+        result -= sum(need_win[:lose_len])
+    result += sum(need_win[lose_len:])
+    return result
+
+# case_1 = [[5, 1], [2, 1], [1, 1], [8, 1], [10, 0], [5, 0]]
+print(luckBalance(3, case_1))
 
 ##############################################################
