@@ -428,7 +428,7 @@ def luckBalance(k, contests):
     result += sum(need_win[lose_len:])
     return result
 
-# case_1 = [[5, 1], [2, 1], [1, 1], [8, 1], [10, 0], [5, 0]]
-print(luckBalance(3, case_1))
+case_1 = [[5, 1], [2, 1], [1, 1], [8, 1], [10, 0], [5, 0]]
+# print(luckBalance(3, case_1))
 
 ##############################################################
