@@ -122,3 +122,48 @@ print(commonChild(case_4, case_4_2))
 
 
 
+
+#######################################
+# https://www.hackerrank.com/challenges/triple-sum/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=search
+def triplets(arr_a, arr_b, arr_c):
+    def index_max(set_int, val, start_index):
+        set_len = len(set_int)
+        for i in range(start_index, set_len):
+            set_val = set_int[i]
+            if set_val > val:
+                return i
+        return set_len
+
+    result = 0
+    set_a = sorted(set(arr_a))
+    set_b = sorted(set(arr_b))
+    set_c = sorted(set(arr_c))
+    a_index = 0
+    c_index = 0
+    for val_b in set_b:
+        a_index = index_max(arr_a, val_b, a_index)
+        c_index = index_max(arr_c, val_b, c_index)
+        result += a_index * c_index
+
+    return result
+
+# 8
+case_1_1 = [1, 3, 5]
+case_1_2 = [2, 3]
+case_1_3 = [1, 2, 3]
+
+# 5
+case_2_1 = [1, 4, 5]
+case_2_2 = [2, 3, 3]
+case_2_3 = [1, 2, 3]
+
+# 12
+case_3_1 = [1, 3, 5, 7]
+case_3_2 = [5, 7, 9]
+case_3_3 = [7, 9, 11, 13]
+# print(triplets(case_1_1, case_1_2, case_1_3))
+# print(triplets(case_2_1, case_2_2, case_2_3))
+print(triplets(case_3_1, case_3_2, case_3_3))
+
+#######################################
+
