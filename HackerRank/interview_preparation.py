@@ -113,12 +113,69 @@ case_3_2 = "BB"  # 0
 case_4 = "WEWOUCUIDGCGTRMEZEPXZFEJWISRSBBSYXAYDFEJJDLEBVHHKS"
 case_4_2 = "FDAGCXGKCTKWNECHMRXZWMLRYUCOCZHJRRJBOAJOQJZZVUYXIC"  # 15
 
-print(commonChild(case_00, case_00_2))
-print(commonChild(case_0, case_0_2))
-print(commonChild(case_1, case_1_2))
-print(commonChild(case_2, case_2_2))
-print(commonChild(case_3, case_3_2))
-print(commonChild(case_4, case_4_2))
+# print(commonChild(case_00, case_00_2))
+# print(commonChild(case_0, case_0_2))
+# print(commonChild(case_1, case_1_2))
+# print(commonChild(case_2, case_2_2))
+# print(commonChild(case_3, case_3_2))
+# print(commonChild(case_4, case_4_2))
 
+
+# https://www.hackerrank.com/challenges/ctci-ice-cream-parlor/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=search
+# Hash Tables: Ice Cream Parlor
+
+
+def whatFlavors_slow(cost, money):
+    len_cost = len(cost)
+    for i in range(len_cost - 1):
+        if cost[i] < money:
+            for j in range(i + 1, len_cost):
+                if cost[j] < money and money == (cost[i] + cost[j]):
+                    break
+        if money == (cost[i] + cost[j]):
+            break
+    return f"{i+1} {j+1}"
+
+
+def whatFlavors_no(cost, money):
+    len_cost = len(cost)
+    dic = {}
+    for i in range(len_cost):
+        dic[cost[i]] = i
+    cost.sort()
+    for i in range(len_cost - 1):
+        el_i = cost[i]
+        for j in range(i + 1, len_cost):
+            if money < (el_i + cost[j]):
+                j -= 1
+                break
+        if money == (el_i + cost[j]):
+            break
+
+    return f"{dic[cost[i]] + 1} {dic[cost[j]] + 1}"
+
+
+def whatFlavors(cost, money):
+    prce_dic = {}
+    for i, cost in enumerate(cost):
+        rest = money - cost
+        if rest > 0:
+            if prce_dic.get(rest, 0) != 0:
+                return f"{prce_dic[rest]} {i + 1}"
+            else:
+                prce_dic[cost] = i + 1
+
+    return ""
+
+
+case_1 = [1, 4, 5, 3, 2]
+money_1 = 4  # 1 4
+case_2 = [2, 2, 4, 3]
+money_2 = 4  # 1 2
+
+# print(whatFlavors(case_1, money_1))
+# print(whatFlavors(case_2, money_2))
+
+########################################################
 
 
