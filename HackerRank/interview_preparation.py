@@ -223,4 +223,109 @@ case_3_3 = [7, 9, 11, 13]
 print(triplets(case_3_1, case_3_2, case_3_3))
 
 #######################################
+#######################################
+# Castle on the Grid
+# https://www.hackerrank.com/challenges/castle-on-the-grid/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=stacks-queues
 
+
+def minimumMoves(grid, startX, startY, goalX, goalY):
+    """
+    Breath first algorithm
+    :param grid:
+    :param startX:
+    :param startY:
+    :param goalX:
+    :param goalY:
+    :return:
+    """
+    valid_step = '.'
+    invalid_step = 'X'
+
+    # edge cases
+    if grid[startX][startY] == invalid_step or\
+        grid[goalX][goalY] == invalid_step :
+        return -1
+    if startX == goalX and startY == goalY:
+        return 0
+
+    from collections import deque, namedtuple
+    result = 0
+    Point = namedtuple("Point", 'x, y')
+    steps_queue = deque()
+    grid_size = len(grid)
+    visited_matrix = [[0 for _ in range(grid_size)] for _ in range(grid_size)]
+    start_point = Point(startY, startX)
+    visited_matrix[start_point.y][start_point.x] = 1
+    steps_queue.append(start_point)
+    end_point = Point(goalY, goalX)
+    def get_next_step(step, delta_x, delta_y, end_step):
+
+        next_step = Point(step.x + delta_x, step.y + delta_y)
+        while next_step.x >= 0 and next_step.y >= 0 and \
+            next_step.x < grid_size and next_step.y < grid_size:
+            if visited_matrix[next_step.y][next_step.x] == 1:
+                break
+            visited_matrix[next_step.y][next_step.x] = 1
+            if grid[next_step.y][next_step.x] == valid_step:
+                if next_step.x == end_step.x and next_step.y == end_step.y:
+                    return 1
+                steps_queue.append(next_step)
+            else:
+                break
+            next_step = Point(next_step.x + delta_x, next_step.y + delta_y)
+
+        return 0
+
+    while len(steps_queue) > 0:
+
+        cur_steps = list(steps_queue)
+        steps_queue.clear()
+        result += 1
+        for current_step in cur_steps:
+            # get next steps
+
+            is_done = get_next_step(current_step, 0, -1, end_point)
+            if is_done:
+                return result
+
+            is_done = get_next_step(current_step, 0, 1, end_point)
+            if is_done:
+                return result
+
+            is_done = get_next_step(current_step, -1, 0, end_point)
+            if is_done:
+                return result
+
+            is_done = get_next_step(current_step, 1, 0, end_point)
+            if is_done:
+                return result
+
+    return result
+
+def minimumMoves_good(grid, startY, startX, goalY, goalX):
+    from collections import deque
+    q = deque()
+    q.append((startX, startY, 0, -1))
+    visited = {(startY, startX): 0}
+    x, y = [-1, 0, 0, 1, 1], [0, 1, -1, 0, 1]
+    def is_valid(x, y, new_dist):
+        return x < len(grid) and y < len(grid) and x >= 0 and y >= 0 and grid[y][x] == '.' and ((y, x) not in visited or ((y, x) in visited and new_dist <= visited[(y, x)]))
+    while q:
+        n = q.pop()
+        for k in range(4):
+            dist = 0 if (x[k], y[k]) == (x[n[3]], y[n[3]]) else 1
+            if is_valid(n[0] + x[k], n[1] + y[k], n[2] + dist):
+                visited[(n[1] + y[k], n[0] + x[k])] = n[2] + dist
+                q.appendleft((n[0] + x[k], n[1] + y[k], n[2] + dist, k))
+    return visited[(goalY ,goalX)]
+# 3
+case_1_grid = ['.X.', '.X.', '...']
+startX, startY = 0, 0
+goalX, goalY = 0, 2
+print(minimumMoves(case_1_grid, startX, startY, goalX, goalY))
+
+# 2
+case_1_grid = ['...', '.X.', '.X.']
+startX, startY = 2, 0
+goalX, goalY = 0, 2
+print(minimumMoves(case_1_grid, startX, startY, goalX, goalY))
