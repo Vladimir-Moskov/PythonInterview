@@ -65,7 +65,12 @@
          print(occur.get("name1", "name2")) # result = 2
          print(occur.get("name3", "name2")) # result = 1
          print(occur.get("name6", "name2")) # result = 0
-     
+  
+ Update(15-01-2020)- Interview #3: Next Technical Interview for Stage 4
+    Well, I ashamed to addmit, that this was tough expireance for me, I had sucsessfully failed the interview
+    (there were two tech guys) - code qestions was fine, but archetecture and design questions needs a lot of improvment from my side.
+    also, early morning 6/7 am still a factot and do effect overall interview performance.
+    Unfortunately, Had not get any meaninful performance feedback from them.
 """
 
 from typing import Dict, Optional, Tuple
