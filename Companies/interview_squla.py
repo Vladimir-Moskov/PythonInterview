@@ -2,6 +2,7 @@
 # Date: 2020-01-21
 # https://app.codility.com/c/feedback/XWZ28J-283/
 
+
 # def solution(phone_numbers, phone_owners, number):
 #     """
 #         solution time complexity - O(n)
@@ -16,6 +17,7 @@
 #             return phone_owners[i]
 #
 #     return number
+
 
 def solution(lower_case_chars):
     """
