@@ -220,7 +220,7 @@ case_3_2 = [5, 7, 9]
 case_3_3 = [7, 9, 11, 13]
 # print(triplets(case_1_1, case_1_2, case_1_3))
 # print(triplets(case_2_1, case_2_2, case_2_3))
-print(triplets(case_3_1, case_3_2, case_3_3))
+# print(triplets(case_3_1, case_3_2, case_3_3))
 
 #######################################
 #######################################
@@ -319,13 +319,103 @@ def minimumMoves_good(grid, startY, startX, goalY, goalX):
                 q.appendleft((n[0] + x[k], n[1] + y[k], n[2] + dist, k))
     return visited[(goalY ,goalX)]
 # 3
-case_1_grid = ['.X.', '.X.', '...']
+_grid = ['.X.', '.X.', '...']
 startX, startY = 0, 0
 goalX, goalY = 0, 2
-print(minimumMoves(case_1_grid, startX, startY, goalX, goalY))
+# print(minimumMoves(case_1_grid, startX, startY, goalX, goalY))
 
 # 2
 case_1_grid = ['...', '.X.', '.X.']
 startX, startY = 2, 0
 goalX, goalY = 0, 2
-print(minimumMoves(case_1_grid, startX, startY, goalX, goalY))
+# print(minimumMoves(case_1_grid, startX, startY, goalX, goalY))
+
+
+###########################################################################
+# Balanced Brackets
+# https://www.hackerrank.com/challenges/balanced-brackets/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=stacks-queues
+
+
+def isBalanced(given_str):
+    """
+    Time complecity - O(n)
+    :param given_str:
+    :return:
+    """
+    result = True
+    left_bracket = ('(', '[', '{')
+    right_bracket = (')', ']', '}')
+    righ_to_left_dic = dict(zip(right_bracket, left_bracket))
+    helper_dic = {}
+
+    for bracket in given_str:
+        helper_dic[bracket] = helper_dic.get(bracket, 0) + 1
+        if bracket in right_bracket:
+            left_br = righ_to_left_dic[bracket]
+            if helper_dic.get(bracket, 0) > helper_dic.get(left_br, 0):
+                result = False
+                break
+
+    for bracket in right_bracket:
+        left_br = righ_to_left_dic[bracket]
+        if helper_dic.get(left_br, 0) != helper_dic.get(bracket, 0):
+            result = False
+            break
+
+    return "YES" if result else "NO"
+
+case_1 = '{[()]}'
+case_2 = '{[(])}'
+case_3 = '{{[[(())]]}}'
+
+assert isBalanced(case_1), "YES"
+assert isBalanced(case_2), "NO"
+assert isBalanced(case_3), "YES"
+
+#print(isBalanced(case_1))
+print(isBalanced(case_2))
+#print(isBalanced(case_3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############################################
