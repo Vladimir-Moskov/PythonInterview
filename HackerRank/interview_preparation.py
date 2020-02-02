@@ -335,32 +335,52 @@ goalX, goalY = 0, 2
 # Balanced Brackets
 # https://www.hackerrank.com/challenges/balanced-brackets/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=stacks-queues
 
+def isBalanced(s):
+    lefts = '{[('
+    rights = '}])'
+    closes = {a: b for a, b in zip(rights, lefts)}
 
-def isBalanced(given_str):
+    stack = []
+    for c in s:
+        if c in lefts:
+            stack.append(c)
+        elif c in rights:
+            if not stack or stack.pop() != closes[c]:
+                return False
+
+    return "NO" if stack else "YES"
+
+
+def isBalanced_long(given_str):
     """
-    Time complecity - O(n)
+    Time complexity - O(n)
     :param given_str:
     :return:
     """
+    from collections import deque
+
     result = True
     left_bracket = ('(', '[', '{')
     right_bracket = (')', ']', '}')
-    righ_to_left_dic = dict(zip(right_bracket, left_bracket))
-    helper_dic = {}
+    right_to_left_dic = dict(zip(right_bracket, left_bracket))
+    bracket_deque = deque()
 
-    for bracket in given_str:
-        helper_dic[bracket] = helper_dic.get(bracket, 0) + 1
-        if bracket in right_bracket:
-            left_br = righ_to_left_dic[bracket]
-            if helper_dic.get(bracket, 0) > helper_dic.get(left_br, 0):
-                result = False
-                break
-
-    for bracket in right_bracket:
-        left_br = righ_to_left_dic[bracket]
-        if helper_dic.get(left_br, 0) != helper_dic.get(bracket, 0):
-            result = False
-            break
+    if len(given_str) % 2 == 0:
+        for bracket in given_str:
+            if bracket in left_bracket:
+                bracket_deque.append(bracket)
+            else:
+                if len(bracket_deque) == 0:
+                    result = False
+                    break
+                else:
+                    left_br = right_to_left_dic[bracket]
+                    prev_br = bracket_deque.pop()
+                    if left_br != prev_br:
+                        result = False
+                        break
+    else:
+        result = False
 
     return "YES" if result else "NO"
 
@@ -372,11 +392,17 @@ assert isBalanced(case_1), "YES"
 assert isBalanced(case_2), "NO"
 assert isBalanced(case_3), "YES"
 
-#print(isBalanced(case_1))
+case_1 = '[()][{}()][](){}([{}(())([[{}]])][])[]([][])(){}{{}{[](){}}}()[]({})[{}{{}([{}][])}]'
+case_2 = '[()][{}[{}[{}]]][]{}[]{}[]{{}({}(){({{}{}[([[]][[]])()]})({}{{}})})}'
+case_3 = '(])[{{{][)[)])(]){(}))[{(})][[{)(}){[(]})[[{}(])}({)(}[[()}{}}]{}{}}()}{({}](]{{[}}(([{]'
+case_4 = '){[]()})}}]{}[}}})}{]{](]](()][{))])(}]}))(}[}{{)}{[[}[]'
+
+print(isBalanced(case_1))
 print(isBalanced(case_2))
-#print(isBalanced(case_3))
+print(isBalanced(case_3))
+print(isBalanced(case_4))
 
-
+##################################
 
 
 
