@@ -1,4 +1,6 @@
+# Amazone coding Challenge
 # Date: 2019-01-24
+# Failed
 
 
 def numberAmazonTreasureTrucks(rows, column, grid):
@@ -6,6 +8,7 @@ def numberAmazonTreasureTrucks(rows, column, grid):
         have to do it in my IDE, to slow run/compile time, crazy prompt too annoying
 
          solution can be optimized, have time limitation for now
+         BFS - actually the right solution and proper implementation - 100% test cases
     """
     from collections import deque
 
@@ -55,40 +58,44 @@ def minimumHours(rows, columns, grid):
         have to do it in my IDE, to slow run/compile time, crazy prompt too annoying
 
          solution can be optimized, have time limitation for now
+
+        originally - dynamic programming was a very wrong approach - 0% (wrong solution)
+        BFS is the right one (it sad but naive approach was the solution)
+
+        naive approach - time complexity = O(n^3)
+         BFS approach - time complexity = O(n^2)
     """
     result = 0
     empty_server = 0
-    calculation_grid = [[0 for _ in range(columns)] for _ in range(rows)]
-    def check_all_zeros(i, j):
-        if i > 0 and grid[i-1][j] != empty_server:
-            return False
-        if j > 0 and grid[i][j - 1] != empty_server:
-            return False
-        if i < columns and grid[i + 1][j] != empty_server:
-            return False
-        if j < rows and grid[i ][j+1] != empty_server:
-            return False
-        return True
+    full_server = 1
 
-    def get_min(i, j):
-        res = columns*rows
-        if i > 0:
-            res = min(calculation_grid[i-1][j], res)
-        if j > 0:
-            res = min(calculation_grid[i][j-1], res)
-        return res
+    def check_has_ones(cel_i, cel_j):
+        if cel_i > 0 and grid[cel_i-1][cel_j] == full_server:
+            return True
+        if cel_j > 0 and grid[cel_i][cel_j - 1] == full_server:
+            return True
+        if cel_i < (rows - 1) and grid[cel_i + 1][cel_j] == full_server:
+            return True
+        if cel_j < (columns - 1) and grid[cel_i][cel_j+1] == full_server:
+            return True
+        return False
 
-    for i, row in enumerate(grid):
-        for j, cel in enumerate(row):
-            if grid[i][j] == empty_server:
-                calculation_grid[i][j] = 1 + get_min(i, j)
-                result = max(result, calculation_grid[i][j])
-            else:
-                calculation_grid[i][j] = 0
+    has_zero = True
+    while has_zero:
+        has_zero = False
+        calculation_grid = [[0 for _ in range(columns)] for _ in range(rows)]
+        for i, row in enumerate(grid):
+            for j, cel in enumerate(row):
+                if grid[i][j] == empty_server:
+                    has_zero = True
+                    if check_has_ones(i, j):
+                        calculation_grid[i][j] = 1
+                else:
+                    calculation_grid[i][j] = grid[i][j]
+        grid = calculation_grid
+        if has_zero:
+            result += 1
 
-
-    # it suppose to be in corner, cant make it work so far
-    # result = calculation_grid[-1][-1]
     return result
 
 case_2 = [[0, 1, 1, 0, 1],
@@ -275,8 +282,7 @@ sol = Solution()
 
 class Solution:
 
-
-    def biggestTable(self, grid):
+    def biggestSquareTable(self, grid):
         row = len(grid)  # no. of rows in M[][]
         column = len(grid[0])  # no. of columns in M[][]
 
@@ -286,11 +292,11 @@ class Solution:
         # Construct other entries
         for i in range(0, row):
             for j in range(0, column):
-                if i ==0 or j == 0:
+                if i == 0 or j == 0:
                     matrix_helper[i][j] = grid[i][j]
-                elif (grid[i][j] == 1):
+                elif grid[i][j] == 1:
                     matrix_helper[i][j] = min(matrix_helper[i][j - 1], matrix_helper[i - 1][j],
-                                  matrix_helper[i - 1][j - 1]) + 1
+                                              matrix_helper[i - 1][j - 1]) + 1
                 else:
                     matrix_helper[i][j] = 0
 
@@ -298,6 +304,23 @@ class Solution:
         # indices of maximum entry in S[][]
         max_of_s = max(map(max, matrix_helper))
         return max_of_s
+
+    def biggestTable(self, grid):
+        def max_histogram(hist_ar):
+            hist_res = 0
+            return hist_res
+
+        result = max_histogram(grid[0])
+        row = len(grid)  # no. of rows in M[][]
+        column = len(grid[0])  # no. of columns in M[][]
+        # Construct other entries
+        for i in range(1, row):
+            for j in range(0, column):
+                if grid[i][j] == 1:
+                    grid[i][j] += grid[i-1][j]
+
+            result = max(result, max_histogram(grid[i]))
+        return result
 
  # 9
 grid = [[1, 0, 1, 1, 1],
@@ -312,4 +335,4 @@ grid = [[1, 0, 1, 0, 0],
 sol = Solution()
 bigTable = sol.biggestTable(grid)
 
-print(bigTable)
+# print(bigTable)
