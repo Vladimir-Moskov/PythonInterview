@@ -335,4 +335,4 @@ grid = [[1, 0, 1, 0, 0],
 sol = Solution()
 bigTable = sol.biggestTable(grid)
 
-# print(bigTable)
+print(bigTable)
