@@ -305,9 +305,39 @@ class Solution:
         max_of_s = max(map(max, matrix_helper))
         return max_of_s
 
+    from collections import deque
+
+
     def biggestTable(self, grid):
+        from collections import deque
+
         def max_histogram(hist_ar):
             hist_res = 0
+            stack = deque()
+            index = 0
+            len_hist = len(hist_ar)
+            while index < len_hist:
+                if (not stack) or (hist_ar[stack[-1]] <= hist_ar[index]):
+                    stack.append(index)
+                    index += 1
+                else:
+                    top_of_stack = stack.pop()
+                    area = (hist_ar[top_of_stack] *
+                            ((index - stack[-1] - 1)
+                             if stack else index))
+
+                    # update max area, if needed
+                    hist_res = max(hist_res, area)
+            while stack:
+                top_of_stack = stack.pop()
+
+                area = (hist_ar[top_of_stack] *
+                        ((index - stack[-1] - 1)
+                         if stack else index))
+
+                # update max area, if needed
+                hist_res = max(hist_res, area)
+
             return hist_res
 
         result = max_histogram(grid[0])
@@ -323,16 +353,25 @@ class Solution:
         return result
 
  # 9
-grid = [[1, 0, 1, 1, 1],
+grid_1 = [[1, 0, 1, 1, 1],
 	    [1, 0, 1, 1, 1],
         [1, 1, 1, 1, 1],
         [1, 0, 0, 1, 0]]
 # 6
-grid = [[1, 0, 1, 0, 0],
+grid_2 = [[1, 0, 1, 0, 0],
 	    [1, 0, 1, 1, 1],
         [1, 1, 1, 1, 1],
         [1, 0, 0, 1, 0]]
 sol = Solution()
-bigTable = sol.biggestTable(grid)
 
-print(bigTable)
+print(sol.biggestTable(grid_1))
+print(sol.biggestTable(grid_2))
+
+t = '%(a)s, %(b)s, %(c)s'
+#print(t % dict(a='hello', b='world', c='universe'))
+
+a={1,2,3}
+b=a.copy()
+b.add(4)
+# print(a)
+print(''.isdigit())
