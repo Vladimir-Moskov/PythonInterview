@@ -432,3 +432,12 @@ case_1 = [[5, 1], [2, 1], [1, 1], [8, 1], [10, 0], [5, 0]]
 # print(luckBalance(3, case_1))
 
 ##############################################################
+# Flipping bits
+# https://www.hackerrank.com/challenges/flipping-bits/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=miscellaneous
+
+def flippingBits(n):
+    max_int = 2**32 -1
+    result = (max_int & ~n)
+    return result
+
+##############################################################
