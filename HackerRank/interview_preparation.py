@@ -403,9 +403,70 @@ print(isBalanced(case_3))
 print(isBalanced(case_4))
 
 ##################################
+# Friend Circle Queries
+# https://www.hackerrank.com/challenges/friend-circle-queries/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=miscellaneous
+
+def maxCircle_faster(queries):
+    elems  = {} # reference for which set they are in
+    groups = {} # collection of the sets
+    results = []
+    maxl = 0
+    for a,b in queries:
+        if a not in elems:
+            groups[a] = set([a])
+            elems[a] = a
+        if b not in elems:
+            groups[b] = set([b])
+            elems[b] = b
+        if elems[a] != elems[b]:
+            a,b =elems[a],elems[b]
+            if len(groups[b])>len(groups[a]): a,b=b,a
+            groups[a] |= groups[b]
+            for p in groups[b]: elems[p] = a
+            del groups[b]
+        maxl = max(maxl, len(groups[elems[a]]))
+        results.append(maxl)
+    return results
+
+def maxCircle(queries):
+    from collections import deque
+    friends_deque = deque()
+    friends_deque.append(set(queries[0]))
+    max_circle = 2
+    queries_len = len(queries)
+    result_ar = [max_circle]*queries_len
+    for i in range(1, queries_len):
+        row = queries[i]
+        found = False
+        for j, circle in enumerate(friends_deque):
+            if row[0] in circle or row[1] in circle:
+                found = True
+                circle.add(row[0])
+                circle.add(row[1])
+                max_circle = len(circle)
+                if j < len(friends_deque) - 1:
+                    for k in range(j + 1, len(friends_deque)):
+                        circle_2 = friends_deque[k]
+                        if row[0] in circle_2 or row[1] in circle_2:
+                            circle.update(circle_2)
+                            friends_deque.remove(circle_2)
+                            break
+                break
+        if not found:
+            friends_deque.append(set(queries[i]))
+        else:
+            for circle in friends_deque:
+                if len(circle) > max_circle:
+                    max_circle = len(circle)
+        result_ar[i] = max_circle
+
+    return result_ar
 
 
+queries_1 =[[1, 2], [3, 4], [2, 3]]
 
+# print(maxCircle(queries_1))
+###############################################
 
 
 
