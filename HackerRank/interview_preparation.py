@@ -463,6 +463,32 @@ def maxCircle(queries):
     return result_ar
 
 
+def maxCircle_2(queries):
+    """
+        optimized version of maxCircle with dictionary instead of set
+        :param queries: - matrix of friends 
+        :return: 
+    """
+    dic_helper = {}
+    max_circle = 0
+    result_ar = []
+    for a, b in queries:
+        new_set = set()
+        new_set.add(a)
+        new_set.add(b)
+        if a not in dic_helper and b not in dic_helper:
+            dic_helper[a] = new_set
+            dic_helper[b] = new_set
+        else:
+            new_set = dic_helper.get(a, set())
+            set_b = dic_helper.get(b, set())
+            new_set.update(set_b)
+            dic_helper[b] = new_set
+
+        max_circle = max(len(new_set), max_circle)
+        result_ar.append(max_circle)
+    return result_ar
+
 queries_1 =[[1, 2], [3, 4], [2, 3]]
 
 # print(maxCircle(queries_1))
