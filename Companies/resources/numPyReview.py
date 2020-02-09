@@ -69,6 +69,7 @@ import matplotlib.pyplot as plt
 #plt.show()
 
 # photo_sin = numpy.sign(photo)
+# 2d array/ operations
 print(numpy.sign(photo))
 print(numpy.prod(photo))
 print(numpy.mean(photo))
@@ -90,6 +91,7 @@ print(another_ar > 3)
 # plt.imshow(photo_mask)
 # plt.show()
 
+#  array/ operations
 a_array = numpy.array([1, 2, 3, 4, 5])
 b_array = numpy.array([6, 7, 8, 9, 10])
 print(a_array + b_array)
@@ -101,6 +103,7 @@ print(a_array @ b_array)
 #plt.imshow(photo[:, :, 0].T)
 #plt.show()
 
+#  array sorting
 sort_array = numpy.array([61, 17, 81, 19, 10])
 print(sort_array)
 

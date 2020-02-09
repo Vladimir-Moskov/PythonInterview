@@ -1,5 +1,5 @@
 """
-    Code interview solution for company Booking.com, EclecticIQ, Amsterdam, Netherlands
+    Code interview solution for company Booking.com, Amsterdam, Netherlands
     Date: 2019-12-15
 
     Summary:
