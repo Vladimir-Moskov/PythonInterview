@@ -388,19 +388,19 @@ case_1 = '{[()]}'
 case_2 = '{[(])}'
 case_3 = '{{[[(())]]}}'
 
-assert isBalanced(case_1), "YES"
-assert isBalanced(case_2), "NO"
-assert isBalanced(case_3), "YES"
+# assert isBalanced(case_1), "YES"
+# assert isBalanced(case_2), "NO"
+# assert isBalanced(case_3), "YES"
 
 case_1 = '[()][{}()][](){}([{}(())([[{}]])][])[]([][])(){}{{}{[](){}}}()[]({})[{}{{}([{}][])}]'
 case_2 = '[()][{}[{}[{}]]][]{}[]{}[]{{}({}(){({{}{}[([[]][[]])()]})({}{{}})})}'
 case_3 = '(])[{{{][)[)])(]){(}))[{(})][[{)(}){[(]})[[{}(])}({)(}[[()}{}}]{}{}}()}{({}](]{{[}}(([{]'
 case_4 = '){[]()})}}]{}[}}})}{]{](]](()][{))])(}]}))(}[}{{)}{[[}[]'
 
-print(isBalanced(case_1))
-print(isBalanced(case_2))
-print(isBalanced(case_3))
-print(isBalanced(case_4))
+# print(isBalanced(case_1))
+# print(isBalanced(case_2))
+# print(isBalanced(case_3))
+# print(isBalanced(case_4))
 
 ##################################
 # Friend Circle Queries
@@ -494,7 +494,15 @@ queries_1 =[[1, 2], [3, 4], [2, 3]]
 # print(maxCircle(queries_1))
 ###############################################
 
+# Complete the pairs function below.
+def pairs(k, arr):
+    result = 0
+    set_values = set(arr)
+    for val in set_values:
+        if val > k and (val - k) in set_values:
+            result += 1
 
+###############################
 
 
 
