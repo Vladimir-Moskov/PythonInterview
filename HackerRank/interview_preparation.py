@@ -503,14 +503,37 @@ def pairs(k, arr):
             result += 1
 
 ###############################
+# Minimum Time Required
+# https://www.hackerrank.com/challenges/minimum-time-required/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=search
 
 
+def minTime(machines, goal):
+    import math
+    one_day = sum([1 / x for x in machines])
+    min_time = math.ceil(round(goal / one_day, 2))
+
+    return min_time
 
 
+def minTime_good(machines, goal):
+    l, h = 1, int(1e20)
+    while l < h:
+        m = (l + h) // 2
+        actual = sum(m // p for p in machines)
+        if actual >= goal:
+            h = m
+        else:
+            l = m + 1
+    return l
 
+case_1 = [2, 3]
+# print(minTime(case_1, 5))
 
+case_2 = [1, 3, 4]
+# print(minTime(case_2, 10))
 
-
+case_3 = [63, 2, 26, 59, 16, 55, 99, 21, 98, 65]
+print(minTime(case_3, 56)) # 82
 
 
 
