@@ -75,5 +75,3 @@ hist = [6, 2, 5, 4, 5, 1, 6]
 print("Maximum area is",
       max_area_histogram(hist))
 
-# This code is contributed
-# by Jinay Shah
