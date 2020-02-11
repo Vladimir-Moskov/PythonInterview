@@ -1,22 +1,30 @@
-# Implement the Logger which could be used in server side application
-# for logging each request running time. It can be assumed that each
-# request has access to Logger and its two public methods:
-# request_start and request_end, both accepting a unique request id as parameter.
+"""
+    code interview solution for company Web Summit, Dublin, Irland
+    Date: 2020-02-11
 
-# get_by_id
+    Task:
+        Implement the Logger which could be used in server side application
+        for logging each request running time. It can be assumed that each
+        request has access to Logger and its two public methods:
+        request_start and request_end, both accepting a unique request id as parameter.
 
-# 1    3     6     11
-# R1   R2               request_start
-#            R2    R1   request_end
+    get_by_id
 
-# R1: 10s     R2: 3s
-# R2  3s      R1: 10s
+    1    3     6     11
+    R1   R2               request_start
+               R2    R1   request_end
 
-# 6 R2  - R2 R1 - no print
-# 11 R1 - R2 R1 - print
+    R1: 10s     R2: 3s
+    R2  3s      R1: 10s
 
-# r1 r2 r3  r3 r1 r2
-# r1 r2 r3  r3 r2 r1
+    6 R2  - R2 R1 - no print
+    11 R1 - R2 R1 - print
+
+    r1 r2 r3  r3 r1 r2
+    r1 r2 r3  r3 r2 r1
+
+"""
+
 
 from collections import namedtuple
 from collections import deque
@@ -45,23 +53,26 @@ class LoggerOrder:
 
     def __init__(self):
         self.request_data = {}  # {request_id: {start_time: value, end_time: value, order: int_value}}
-        self.request_deque = deque()  # not finished requests
-        self.print_deque = deque()  #  finished requests
+        # queries in deque in order print it with the same start position - first come - first print
+        self.request_deque = deque()
 
     def request_start(self, request_id):
         new_item = RequestTime(time.time(), None, len(self.request_order))
-        self.request_data[request_id] =new_item
-        self.request_deque.push(new_item)
+        self.request_data[request_id] = new_item
+        self.request_deque.append(new_item)
 
     def request_end(self, request_id):
         request_item = self.request_data[request_id]
         request_item.end_time = time.time()
-        self.print_deque.push(request_item)
-        while len(self.print_deque) > 0 and self.print_deque[-1] == self.request_deque[0]:
-            self.print_request_by_id(self.request_deque.popleft())
-            self.print_deque.popleft()
+        self.request_deque.append(request_item)
 
-    def print_request_by_id(self, request_item):
+        # if latest ended request has been added as very first - pop it and print
+        while self.request_deque[-1] == self.request_deque[0]:
+            self.print_request_by_id(self.request_deque.popleft())
+            self.request_deque.pop()
+
+    @staticmethod
+    def print_request_by_id(request_item):
         duration = request_item.end_time - request_item.start_time
         print(f'Request {request_item.id} duration = {duration} mls, order = {request_item.order}')
 
