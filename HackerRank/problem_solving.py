@@ -1,5 +1,44 @@
 # TODO - clean up here!!!
 
+##############################################
+# Maximum Subarray Sum
+from bisect import insort, bisect_right
+def maximumSum(a, m):
+    # Create prefix tree
+    prefix = [0] * len(a)
+    curr = 0;
+    for i in range(len(a)):
+        curr = (a[i] % m + curr) % m
+        prefix[i] = curr
+    
+    # Compute max modsum
+    pq = [prefix[0]]
+    maxmodsum = max(prefix)
+    for i in range(1, len(a)):
+        # Find cheapest prefix larger than prefix[i]
+        left = bisect_right(pq, prefix[i])
+        if left != len(pq):
+            # Update maxmodsum if possible
+            modsum = (prefix[i] - pq[left] + m) % m
+            maxmodsum = max(maxmodsum, modsum)
+
+        # add current prefix to heap
+        insort(pq, prefix[i])
+
+    return maxmodsum
+
+def maximumSum2(a, m):
+    ar_len = len(a)
+    result_set = set()
+    for i in range(ar_len):
+        cur_val = 0
+        for j in range(i, ar_len):
+            cur_val += a[j]
+            result_set.add(cur_val% m)
+    result = max( result_set)
+    return result
+
+#############################################
 # Complete the climbingLeaderboard function below.
 def climbingLeaderboard_0(scores, alice):
     result = []
