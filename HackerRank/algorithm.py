@@ -72,6 +72,50 @@ def max_area_histogram(histogram):
 
 # Driver Code
 hist = [6, 2, 5, 4, 5, 1, 6]
-print("Maximum area is",
-      max_area_histogram(hist))
+# print("Maximum area is",  max_area_histogram(hist))
+
+
+###########################################################
+# Maximum Xor
+def maxXor_naiv(arr, queries):
+    result = [0] * len(queries)
+    arr_set = set(arr)
+    temp_result = [0] * len(arr_set)
+    for i, q_val in enumerate(queries):
+        temp_max = 0
+        for j, num_val in enumerate(arr_set):
+            temp_result[j] = num_val ^ q_val
+        result[i] = max(temp_result)
+    return result
+
+def maxXor(arr, queries):
+    ans = []
+    trie = {}
+    k = len(bin(max(arr+queries))) - 2
+    for number in ['{:b}'.format(x).zfill(k) for x in arr]:
+        node = trie
+        for char in number:
+            node = node.setdefault(char, {})
+    for n in queries:
+        node = trie
+        s = ''
+        for char in'{:b}'.format(n).zfill(k) :
+            tmp = str(int(char) ^ 1)
+            tmp = tmp if tmp in node else char
+            s += tmp
+            node = node[tmp]
+        ans.append(int(s, 2) ^ n)
+    return ans
+num_ar = [0, 1, 2]
+cases = [3, 7, 2]
+
+num_ar = [5, 1, 7, 4, 3]
+cases = [2, 0]
+
+import time
+te = time.time()
+for _ in range(1000000):
+    x = maxXor(num_ar, cases)
+    # print(maxXor(num_ar, cases))
+print(time.time() - te)
 
