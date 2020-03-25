@@ -113,10 +113,32 @@ cases = [3, 7, 2]
 num_ar = [5, 1, 7, 4, 3]
 cases = [2, 0]
 
-import time
-te = time.time()
-for _ in range(1000000):
-    x = maxXor(num_ar, cases)
+# import time
+# te = time.time()
+# for _ in range(1000000):
+    # x = maxXor(num_ar, cases)
     # print(maxXor(num_ar, cases))
-print(time.time() - te)
+# print(time.time() - te)
 
+###########################################################
+# Cycle Detection
+# https://www.hackerrank.com/challenges/detect-whether-a-linked-list-contains-a-cycle/problem
+
+def has_cycle(head):
+    if not head:
+        return 0
+
+    slow = head;
+    fast = head;
+
+    while fast and fast.next:
+        slow = slow.next;
+        fast = fast.next.next;
+
+        if slow == fast:
+            return 1;
+
+    return 0;
+
+
+###########################################################
