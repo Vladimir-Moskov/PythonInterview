@@ -88,6 +88,7 @@ def maxXor_naiv(arr, queries):
         result[i] = max(temp_result)
     return result
 
+
 def maxXor(arr, queries):
     ans = []
     trie = {}
