@@ -142,3 +142,19 @@ def has_cycle(head):
 
 
 ###########################################################
+# https://www.hackerrank.com/challenges/find-the-merge-point-of-two-joined-linked-lists/problem
+def findMergeNode(headA, headB):
+    curA = headA
+    curB = headB
+    while not curA == curB:
+        if curA.next is None:
+            curA = headB
+        else:
+            curA = curA.next
+        if curB.next is None:
+            curB = headA
+        else:
+            curB = curB.next
+    return curA.data
+
+###########################################################
