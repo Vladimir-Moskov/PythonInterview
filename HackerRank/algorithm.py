@@ -158,3 +158,35 @@ def findMergeNode(headA, headB):
     return curA.data
 
 ###########################################################
+# https://www.hackerrank.com/challenges/count-triplets-1/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dictionaries-hashmaps
+# Count Triplets
+import math
+from collections import defaultdict
+
+def countTriplets_0(arr, base):
+    result = 0
+    count_ar = [0] * len(arr)
+    for x in arr:
+        val = round(math.log(x, base), 4)
+        if val == math.floor(val):
+            count_ar[int(val)] += 1
+    y = 0
+    while y < len(count_ar) - 2:
+        result += count_ar[y] * count_ar[y + 1] * count_ar[y + 2]
+        y += 1
+    return result
+
+def countTriplets(arr, r):
+    v2 = defaultdict(int)
+    v3 = defaultdict(int)
+    count = 0
+    for k in arr:
+        count += v3[k]
+        v3[k*r] += v2[k]
+        v2[k*r] += 1
+
+    return count
+
+# print(countTriplets([1, 2, 2, 4], 2)) # 2
+# print(countTriplets([1, 3, 9, 9, 27, 81], 3)) # 6
+print(countTriplets([1, 5, 5, 25, 125], 5)) # 4
