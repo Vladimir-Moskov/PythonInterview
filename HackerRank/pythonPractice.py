@@ -59,3 +59,23 @@ if __name__ == '__main__':
     fptr.write(str(result) + '\n')
 
     fptr.close()
+
+############################################################
+# Calendar Module
+# https://www.hackerrank.com/challenges/calendar-module/problem
+
+import calendar
+import os
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    dates = list(map(int, input().rstrip().split()))
+
+    result = calendar.day_name[calendar.weekday(dates[2], dates[0], dates[1])]
+
+    fptr.write(str(result).upper() + '\n')
+
+    fptr.close()
+
+#############################################################
