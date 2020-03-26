@@ -33,3 +33,29 @@ if __name__ == '__main__':
 
     fptr.close()
 ########################################################################################
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+# The Captain's Room
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    K = int(input())
+    rooms = list(map(int , input().rstrip().split()))
+
+    result = 0
+    result = Counter(rooms)
+    for key, val in result.items():
+        if val == 1:
+            result = key
+            break
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
