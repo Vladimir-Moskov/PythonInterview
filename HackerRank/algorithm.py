@@ -200,20 +200,21 @@ def countTriplets(arr, r):
 #      DoublyLinkedListNode next
 #      DoublyLinkedListNode prev
 
-def sortedInsert(head, data):
-    node = DoublyLinkedListNode(data)
-    current_node = head
-    while current_node.data < data and current_node.next:
-        current_node = current_node.next
-
-    if current_node.data < data:
-        node.prev = current_node
-        current_node.next = node
-    else:
-        node.prev = current_node.prev
-        node.next = current_node
-        current_node.prev = node
-        if node.prev:
-            node.prev.next = node
-
-    return head if head.data < data else node
+# def sortedInsert(head, data):
+#     node = DoublyLinkedListNode(data)
+#     current_node = head
+#     while current_node.data < data and current_node.next:
+#         current_node = current_node.next
+#
+#     if current_node.data < data:
+#         node.prev = current_node
+#         current_node.next = node
+#     else:
+#         node.prev = current_node.prev
+#         node.next = current_node
+#         current_node.prev = node
+#         if node.prev:
+#             node.prev.next = node
+#
+#     return head if head.data < data else node
+#
