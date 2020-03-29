@@ -16,7 +16,7 @@ def setOperation(operation, A, B):
     func(B)
 
 
-if __name__ == '__main__':
+if __name__ != '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
     A = int(input())
@@ -44,7 +44,7 @@ import sys
 from collections import Counter
 
 
-if __name__ == '__main__':
+if __name__ != '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
     K = int(input())
@@ -67,7 +67,7 @@ if __name__ == '__main__':
 import calendar
 import os
 
-if __name__ == '__main__':
+if __name__ != '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
     dates = list(map(int, input().rstrip().split()))
@@ -79,3 +79,32 @@ if __name__ == '__main__':
     fptr.close()
 
 #############################################################
+# Zipped
+# https://www.hackerrank.com/challenges/zipped/problem
+import os
+
+import os
+
+n, x = map(int, input().split())
+
+sheet = []
+for _ in range(x):
+    sheet.append(map(float, input().split()))
+
+for i in zip(*sheet):
+    print(sum(i)/len(i))
+
+
+N, X = map(int, input()).split()
+
+students = []
+for _ in range(X):
+    students.append(map(int, input().split()))
+
+students = zip(*students)
+for val in students:
+    result = sum(val) / X
+    print(result + '\n')
+
+#############################################################
+
