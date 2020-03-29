@@ -189,4 +189,31 @@ def countTriplets(arr, r):
 
 # print(countTriplets([1, 2, 2, 4], 2)) # 2
 # print(countTriplets([1, 3, 9, 9, 27, 81], 3)) # 6
-print(countTriplets([1, 5, 5, 25, 125], 5)) # 4
+# print(countTriplets([1, 5, 5, 25, 125], 5)) # 4
+
+###################################################################
+# Inserting a Node Into a Sorted Doubly Linked List
+# https://www.hackerrank.com/challenges/insert-a-node-into-a-sorted-doubly-linked-list/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=linked-lists
+
+# class DoublyLinkedListNode:
+#      int data
+#      DoublyLinkedListNode next
+#      DoublyLinkedListNode prev
+
+def sortedInsert(head, data):
+    node = DoublyLinkedListNode(data)
+    current_node = head
+    while current_node.data < data and current_node.next:
+        current_node = current_node.next
+
+    if current_node.data < data:
+        node.prev = current_node
+        current_node.next = node
+    else:
+        node.prev = current_node.prev
+        node.next = current_node
+        current_node.prev = node
+        if node.prev:
+            node.prev.next = node
+
+    return head if head.data < data else node
