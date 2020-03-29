@@ -218,3 +218,40 @@ def countTriplets(arr, r):
 #
 #     return head if head.data < data else node
 #
+# Complete the insertNodeAtPosition function below.
+
+#
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+#
+#
+
+#######################################################
+# https://www.hackerrank.com/challenges/insert-a-node-at-a-specific-position-in-a-linked-list/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=linked-lists
+# Insert a node at a specific position in a linked list
+# def insertNodeAtPosition(head, data, position):
+#     new_node = SinglyLinkedListNode(data)
+#     if not head:
+#         return
+#
+#     if position == 0:
+#         new_node.next = head
+#         return new_node
+#
+#     current_node = head
+#     counter = 1
+#     while counter < position:
+#         current_node = current_node.next
+#         counter += 1
+#         if not current_node:
+#             break;
+#     if current_node:
+#         new_node.next = current_node.next
+#         current_node.next = new_node
+#
+#     return head
+
+#######################################################
