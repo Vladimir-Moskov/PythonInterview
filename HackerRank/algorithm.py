@@ -331,3 +331,27 @@ for i in range(t):
     tree.create(arr[i])
 
 print(height(tree.root))
+
+##################################################
+# Tree: Huffman Decoding
+def decodeHuff(root, s):
+    result = []
+    str_position = 0
+    while str_position < len(s):
+        str_position = recurcive_pass(str_position, root, s, result)
+
+    # print(result)
+    print("".join(result))
+
+
+def recurcive_pass(start_pos, root, s, result):
+    if not root.left and not root.right:
+        result.append(root.data)
+        return start_pos
+    char_val = s[start_pos]
+    if char_val == "0":
+        start_pos = recurcive_pass(start_pos + 1, root.left, s, result)
+    else:
+        start_pos = recurcive_pass(start_pos + 1, root.right, s, result)
+
+    return start_pos
