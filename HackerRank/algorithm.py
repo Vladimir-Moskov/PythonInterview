@@ -355,3 +355,29 @@ def recurcive_pass(start_pos, root, s, result):
         start_pos = recurcive_pass(start_pos + 1, root.right, s, result)
 
     return start_pos
+
+#############################################################################
+# Trees: Is This a Binary Search Tree?
+# https://www.hackerrank.com/challenges/ctci-is-binary-search-tree/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=trees
+
+
+def checkBST(root):
+    result = True
+    if root:
+        result_let = checkBSTRecursive(root.left, root.data, -1)
+        result_right = checkBSTRecursive(root.right, 10 ** 5, root.data)
+        result = result_let & result_right
+
+    return result
+
+
+def checkBSTRecursive(root, max_val, min_val):
+    if not root:
+        return True
+    if root.data >= max_val or root.data <= min_val:
+        return False
+
+    result_let = checkBSTRecursive(root.left, root.data, min_val)
+    result_right = checkBSTRecursive(root.right, max_val, root.data)
+
+    return result_let & result_right
