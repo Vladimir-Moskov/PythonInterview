@@ -3,6 +3,8 @@
 ##############################################
 # Maximum Subarray Sum
 from bisect import insort, bisect_right
+
+
 def maximumSum(a, m):
     # Create prefix tree
     prefix = [0] * len(a)
@@ -10,7 +12,7 @@ def maximumSum(a, m):
     for i in range(len(a)):
         curr = (a[i] % m + curr) % m
         prefix[i] = curr
-    
+
     # Compute max modsum
     pq = [prefix[0]]
     maxmodsum = max(prefix)
@@ -27,6 +29,7 @@ def maximumSum(a, m):
 
     return maxmodsum
 
+
 def maximumSum2(a, m):
     ar_len = len(a)
     result_set = set()
@@ -34,9 +37,10 @@ def maximumSum2(a, m):
         cur_val = 0
         for j in range(i, ar_len):
             cur_val += a[j]
-            result_set.add(cur_val% m)
-    result = max( result_set)
+            result_set.add(cur_val % m)
+    result = max(result_set)
     return result
+
 
 #############################################
 # Complete the climbingLeaderboard function below.
@@ -44,10 +48,10 @@ def climbingLeaderboard_0(scores, alice):
     result = []
     rank = [1]
     for i in range(1, len(scores)):
-        if scores[i-1] == scores[i]:
-            rank.append(rank[i-1])
+        if scores[i - 1] == scores[i]:
+            rank.append(rank[i - 1])
         else:
-            rank.append(rank[i-1] + 1)
+            rank.append(rank[i - 1] + 1)
 
     k = len(scores) - 1
     for i in alice:
@@ -63,6 +67,7 @@ def climbingLeaderboard_0(scores, alice):
                 result.append(rank[k] + 1)
 
     return result
+
 
 def climbingLeaderboard(scores, alice):
     scores_set = sorted(list(set(scores)), reverse=True)
@@ -82,21 +87,23 @@ def climbingLeaderboard(scores, alice):
 
     return result
 
-scores = [100,100, 50, 40, 40, 20, 10]
+
+scores = [100, 100, 50, 40, 40, 20, 10]
 alice = [5, 25, 50, 120]
 
-#print(climbingLeaderboard(scores, alice))
+# print(climbingLeaderboard(scores, alice))
 
 scores = [100, 90, 90, 80, 75, 60]
 alice = [50, 65, 77, 90, 102]
 
-#print(climbingLeaderboard(scores, alice))
+# print(climbingLeaderboard(scores, alice))
 
 import math
 import os
 import random
 import re
 import sys
+
 
 # if __name__ == '__main__':
 #     fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -130,16 +137,19 @@ def commonChild(given_str_1, given_str_2):
     for i, line in enumerate(matrix_str):
         for j, flag in enumerate(matrix_str):
             if i != 0 and j != 0:
-                new_val = matrix_str[i][j] + max(matrix_str[i-1][j-1], matrix_str[i][j-1])
-                matrix_str[i][j] = max(new_val, matrix_str[i-1][j])
+                new_val = matrix_str[i][j] + max(matrix_str[i - 1][j - 1], matrix_str[i][j - 1])
+                matrix_str[i][j] = max(new_val, matrix_str[i - 1][j])
 
     result = matrix_str[i][j]
     return result
 
+
 # s1 = "HARRY"
 # s2 = "SALLY" # 2
 s1 = "SHINCHAN"
-s2 = "NOHARAAA" # 3
+s2 = "NOHARAAA"  # 3
+
+
 # s1 = "OUDFRMYMAW"
 # s1 = "AWHYFCCMQX" # 2
 # print(commonChild(s1, s2))
@@ -155,8 +165,11 @@ def rotLeft(given_ar, shift_size):
     result_ar = given_ar[shift_size:] + given_ar[:shift_size]
     return result_ar
 
+
 ar = [1, 2, 3, 4, 5]
 val = 4
+
+
 # print(rotLeft(ar, val))
 
 
@@ -177,21 +190,25 @@ def minimumBribes(given_q):
 
     return "Too chaotic" if result == -1 else result
 
+
 def minimumBribes_optimal(q):
     bribes = 0
-    for i in range(len(q)-1,-1,-1):
+    for i in range(len(q) - 1, -1, -1):
         if q[i] - (i + 1) > 2:
             return 'Too chaotic'
-        for j in range(max(0, q[i] - 2),i):
+        for j in range(max(0, q[i] - 2), i):
             if q[j] > q[i]:
-                bribes+=1
+                bribes += 1
 
     return "Too chaotic" if bribes == -1 else bribes
+
 
 "Too chaotic"
 case_1 = [2, 1, 5, 3, 4]  # 3
 case_2 = [2, 5, 1, 3, 4]  # ---
 case_3 = [1, 2, 5, 3, 7, 8, 6, 4]  # 7
+
+
 # print(minimumBribes(case_1))
 # print(minimumBribes(case_2))
 # print(minimumBribes(case_3))
@@ -233,17 +250,19 @@ def minimumSwaps(arr):
         pos += 1
     swaps = 0
     for i in range(len(arr)):
-        if arr[i] != i+1:
+        if arr[i] != i + 1:
             swaps += 1
             t = arr[i]
-            arr[i] = i+1
-            arr[temp[i+1]] = t
-            temp[t] = temp[i+1]
+            arr[i] = i + 1
+            arr[temp[i + 1]] = t
+            temp[t] = temp[i + 1]
     return swaps
 
-case_1 = [4, 3, 1, 2] # 3
-case_2 = [2, 3, 4, 1, 5] # 3
-case_3 = [1, 3, 5, 2, 4, 6, 7] # 3
+
+case_1 = [4, 3, 1, 2]  # 3
+case_2 = [2, 3, 4, 1, 5]  # 3
+case_3 = [1, 3, 5, 2, 4, 6, 7]  # 3
+
 
 # print(minimumSwaps(case_1))
 # print(minimumSwaps(case_2))
@@ -255,17 +274,18 @@ def maxSubsetSum(arr):
     result = arr[0]
     if len(arr) < 3:
         return result
-    matrix_sum = [[0 for i in range(len(arr)-2)] for j in range(len(arr) -2)]
+    matrix_sum = [[0 for i in range(len(arr) - 2)] for j in range(len(arr) - 2)]
 
-    for i in range(len(arr) -2):
+    for i in range(len(arr) - 2):
         line = matrix_sum[i]
         for j in range(0, i + 1):
-            el_x = arr[j] #if i - j < 2 else max(arr[j], matrix_sum[i - 2][j])
-            el_y = arr[i+2]
+            el_x = arr[j]  # if i - j < 2 else max(arr[j], matrix_sum[i - 2][j])
+            el_y = arr[i + 2]
             new_sum = el_x + el_y
             matrix_sum[i][j] = max(new_sum, el_y)
             result = max(result, new_sum)
     return result
+
 
 def maxSubsetSum0(arr):
     dp = []
@@ -273,13 +293,16 @@ def maxSubsetSum0(arr):
     dp.append(max(arr[:2]))
     ans = max(dp)
     for a in arr[2:]:
-        dp.append(max(max(dp[-2]+a, a), ans))
+        dp.append(max(max(dp[-2] + a, a), ans))
         ans = max(ans, dp[-1])
     return ans
 
-case_1 = [3, 7, 4, 6, 5] # 13
-case_2 = [2, 1, 5, 8, 4] # 11
-case_3 = [3, 5, -7, 8, 10] # 15
+
+case_1 = [3, 7, 4, 6, 5]  # 13
+case_2 = [2, 1, 5, 8, 4]  # 11
+case_3 = [3, 5, -7, 8, 10]  # 15
+
+
 # print(maxSubsetSum(case_1))
 # print(maxSubsetSum(case_2))
 # print(maxSubsetSum(case_3))
@@ -306,19 +329,21 @@ def abbreviation(str_val, str_abr):
     result = calculation_line[-1] == 1
     return "YES" if result else "NO"
 
+
 def abbreviation_0(a, b):
     m, n = len(a), len(b)
-    dp = [[False]*(m+1) for _ in range(n+1)]
+    dp = [[False] * (m + 1) for _ in range(n + 1)]
     dp[0][0] = True
-    for i in range(n+1):
-        for j in range(1,m+1):
-            if a[j-1] == b[i-1]:
-                dp[i][j] = dp[i-1][j-1]
-            elif a[j-1].upper() == b[i-1]:
-                dp[i][j] = dp[i-1][j-1] or dp[i][j-1]
-            elif a[j-1].islower():
-                dp[i][j] = dp[i][j-1]   
+    for i in range(n + 1):
+        for j in range(1, m + 1):
+            if a[j - 1] == b[i - 1]:
+                dp[i][j] = dp[i - 1][j - 1]
+            elif a[j - 1].upper() == b[i - 1]:
+                dp[i][j] = dp[i - 1][j - 1] or dp[i][j - 1]
+            elif a[j - 1].islower():
+                dp[i][j] = dp[i][j - 1]
     return "YES" if dp[n][m] else "NO"
+
 
 case_1_0 = "daBcd"  # Y
 case_1_1 = 'ABC'
@@ -343,7 +368,7 @@ class Player:
         self.score = score
 
     def __repr__(self):
-        return f"Player: name = {self.name}, score = {self.score }"
+        return f"Player: name = {self.name}, score = {self.score}"
 
     def comparator(a, b):
         if a.score == b.score:
@@ -362,6 +387,8 @@ class Player:
 
 data = [Player('amy', 100), Player('david', 100), Player('heraldo', 50), Player('aakansha', 75), Player('aleksa', 150)]
 data = sorted(data, key=cmp_to_key(Player.comparator))
+
+
 # print(data)
 
 ################
@@ -402,11 +429,11 @@ def activityNotifications_2(expenditure, d):
     count = 0
     for i, current in enumerate(expenditure[d:]):
         de = expenditure[i]
-        if d%2 == 0:
-            if current >= v[d//2] + v[d//2-1]:
+        if d % 2 == 0:
+            if current >= v[d // 2] + v[d // 2 - 1]:
                 count += 1
-        elif current >= v[d//2]*2:
-                count += 1
+        elif current >= v[d // 2] * 2:
+            count += 1
         ix = bisect_left(v, de)
         del v[ix]
         insort(v, current)
@@ -415,7 +442,7 @@ def activityNotifications_2(expenditure, d):
 
 case_1 = [2, 3, 4, 2, 3, 6, 8, 4, 5]  # 2
 days_1 = 5
-case_2 = [1, 2, 3, 4, 4] # 0
+case_2 = [1, 2, 3, 4, 4]  # 0
 days_2 = 4
 
 # print(activityNotifications(case_1, days_1))
@@ -426,14 +453,17 @@ days_2 = 4
 # https://www.hackerrank.com/challenges/sherlock-and-anagrams
 
 from collections import Counter
+
+
 def sherlockAndAnagrams(s):
     count = 0
-    for i in range(1,len(s)+1):
-        a = ["".join(sorted(s[j:j+i])) for j in range(len(s)-i+1)]
+    for i in range(1, len(s) + 1):
+        a = ["".join(sorted(s[j:j + i])) for j in range(len(s) - i + 1)]
         b = Counter(a)
         for j in b:
-            count+=b[j]*(b[j]-1)/2
+            count += b[j] * (b[j] - 1) / 2
     return int(count)
+
 
 ##############################################################
 # https://www.hackerrank.com/challenges/minimum-absolute-difference-in-an-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=greedy-algorithms
@@ -442,9 +472,10 @@ def minimumAbsoluteDifference(given_arr):
     given_arr.sort()
     result = abs(given_arr[0] - given_arr[1])
     for i in range(1, ar_len - 1):
-        next_val = abs(given_arr[i] - given_arr[i+1])
+        next_val = abs(given_arr[i] - given_arr[i + 1])
         result = min(next_val, result)
     return result
+
 
 ##############################################################
 # https://www.hackerrank.com/challenges/luck-balance/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=greedy-algorithms
@@ -467,7 +498,10 @@ def luckBalance(k, contests):
     result += sum(need_win[lose_len:])
     return result
 
+
 case_1 = [[5, 1], [2, 1], [1, 1], [8, 1], [10, 0], [5, 0]]
+
+
 # print(luckBalance(3, case_1))
 
 ##############################################################
@@ -475,9 +509,10 @@ case_1 = [[5, 1], [2, 1], [1, 1], [8, 1], [10, 0], [5, 0]]
 # https://www.hackerrank.com/challenges/flipping-bits/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=miscellaneous
 
 def flippingBits(n):
-    max_int = 2**32 -1
+    max_int = 2 ** 32 - 1
     result = (max_int & ~n)
     return result
+
 
 ##############################################################
 # PracticeAlgorithmsGreedyCandies
@@ -489,15 +524,15 @@ def candies(n, arr):
     minArr2 = [1 for i in range(n)]
     finalArr = []
 
-    for i in range(1,len(arr)):
-        if arr[i] > arr[i-1]:
-            minArr1[i]=minArr1[i-1]+1
+    for i in range(1, len(arr)):
+        if arr[i] > arr[i - 1]:
+            minArr1[i] = minArr1[i - 1] + 1
         else:
             minArr1[i] = 1
 
-    for j in range(len(arr)-2,-1,-1):
-        if arr[j] > arr[j+1]:
-            minArr2[j] = minArr2[j+1] +1
+    for j in range(len(arr) - 2, -1, -1):
+        if arr[j] > arr[j + 1]:
+            minArr2[j] = minArr2[j + 1] + 1
         else:
             minArr2[j] = 1
 
@@ -506,11 +541,13 @@ def candies(n, arr):
 
     return sum(finalArr)
 
+
 ############################
 # Find the nearest clone
 # https://www.hackerrank.com/challenges/find-the-nearest-clone/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=graphs
 
 import itertools
+
 
 # initial approach
 def findShortest(graph_nodes, graph_from, graph_to, ids, val):
@@ -527,7 +564,7 @@ def findShortest(graph_nodes, graph_from, graph_to, ids, val):
 
     for i in range(graph_nodes):
         color = ids[i]
-        color_dic[color].add(i+1)
+        color_dic[color].add(i + 1)
 
     color_nodes = color_dic[val]
     pre_result = 0
@@ -543,13 +580,13 @@ def findShortest(graph_nodes, graph_from, graph_to, ids, val):
             pas_dic[key].update(new_set)
             visited_ar.append(len(pas_dic[key]))
 
-
         for key, val in pas_dic.items():
             for node in val:
                 if node != key and node in color_nodes:
                     return pre_result
         visited = min(visited_ar)
     return result
+
 
 # optimized solution
 from collections import deque
@@ -592,26 +629,87 @@ def findShortest(graph_nodes, graph_from, graph_to, ids, val):
                 return path_len + visited[n.index][1] + 1
 
     return -1
+
+
 # Case 0
 graph_nodes = 4
 graph_from = [1, 1, 4]
 graph_to = [2, 3, 2]
 ids = [1, 2, 1, 1]
-val = 1 # 1
+val = 1  # 1
 
 # Case 1
 graph_nodes = 4
 graph_from = [1, 1, 4]
 graph_to = [2, 3, 2]
 ids = [1, 2, 3, 4]
-val = 2 # -1
+val = 2  # -1
 
 # Case 2
 graph_nodes = 5
 graph_from = [1, 1, 2, 3]
 graph_to = [2, 3, 4, 5]
 ids = [1, 2, 3, 3, 2]
-val = 2 # 3
+val = 2  # 3
+
+# print(findShortest(graph_nodes, graph_from, graph_to, ids, val))
+
+#####################################################################################
+# Frequency Queries
+# https://www.hackerrank.com/challenges/frequency-queries/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=dictionaries-hashmaps
+
+import collections
 
 
-print(findShortest(graph_nodes, graph_from, graph_to, ids, val))
+def freqQuery_slow(queries):
+    result = collections.deque()
+    data_dic = collections.defaultdict(int)
+    for opertion, val in queries:
+        if opertion == 1:
+            data_dic[val] += 1
+        elif opertion == 2:
+            data_dic[val] = 0 if data_dic[val] == 0 else data_dic[val] - 1
+        else:
+            result.append(0)
+            for key, val_0 in data_dic.items():
+                if val_0 == val:
+                    result.pop()
+                    result.append(1)
+                    break
+    return list(result)
+
+
+def freqQuery(queries):
+    result = collections.deque()
+    data_dic = collections.defaultdict(int)
+    counter_dic = collections.defaultdict(int)
+    for opertion, val in queries:
+        if opertion == 1:
+            if data_dic[val] != 0:
+                counter_dic[data_dic[val]] -= 1
+            data_dic[val] += 1
+            counter_dic[data_dic[val]] += 1
+        elif opertion == 2:
+            if data_dic[val] != 0:
+                counter_dic[data_dic[val]] -= 1
+            data_dic[val] = 0 if data_dic[val] == 0 else data_dic[val] - 1
+            if data_dic[val] != 0:
+                counter_dic[data_dic[val]] += 1
+        else:
+            if counter_dic[val] == 0:
+                result.append(0)
+            else:
+                result.append(1)
+
+    return list(result)
+
+# Case2 [0, 1, 1]
+queries = [[1, 3], [2, 3], [3, 2], [1, 4], [1, 5], [1, 5], [1, 4], [3, 2], [2, 4], [3, 2]]
+
+# Case1 [0, 1]
+queries = [[3, 4], [2, 1003], [1, 16], [3, 1]]
+
+# Case0 [0, 1]
+queries = [[1, 5], [1, 6], [3, 2], [1, 10], [1, 10], [1, 6], [2, 5], [3, 2]]
+
+print(freqQuery(queries))
