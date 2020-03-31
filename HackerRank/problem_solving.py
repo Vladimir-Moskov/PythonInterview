@@ -507,3 +507,61 @@ def candies(n, arr):
     return sum(finalArr)
 
 ############################
+# Find the nearest clone
+# https://www.hackerrank.com/challenges/find-the-nearest-clone/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=graphs
+
+import itertools
+
+
+def findShortest(graph_nodes, graph_from, graph_to, ids, val):
+    result = -1
+
+    node_dic = {(key + 1): set() for key in range(graph_nodes)}
+    color_dic = {key: set() for key in ids}
+
+    for i in range(len(graph_from)):
+        from_val = graph_from[i]
+        to_val = graph_to[i]
+        node_dic[from_val].add(to_val)
+        node_dic[to_val].add(from_val)
+
+    for i in range(graph_nodes):
+        color = ids[i]
+        color_dic[color].add(i+1)
+
+    color_nodes = color_dic[val]
+    search_set = set(color_nodes)
+    pre_result = 0
+    pas_dic = {(key): set([key]) for key in color_nodes}
+    while len(search_set) < graph_nodes:
+        pre_result += 1
+        for key, val in pas_dic.items():
+            new_set = set()
+            for dep in val:
+                search_set.update(node_dic[dep])
+                new_set.update(node_dic[dep])
+            pas_dic[key] = new_set
+
+        for key, val in pas_dic.items():
+            for node in val:
+                if node != key and node in color_nodes:
+                    return pre_result
+    return result
+
+# Case 0
+graph_nodes = 4
+graph_from = [1, 1, 4]
+graph_to = [2, 3, 2]
+ids = [1, 2, 1, 1]
+val = 1 # 1
+
+# Case 1
+graph_nodes = 4
+graph_from = [1, 1, 4]
+graph_to = [2, 3, 2]
+ids = [1, 2, 3, 4]
+val = 2 # -1
+
+
+
+print(findShortest(graph_nodes, graph_from, graph_to, ids, val))
