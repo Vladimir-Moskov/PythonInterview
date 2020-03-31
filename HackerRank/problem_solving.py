@@ -512,7 +512,7 @@ def candies(n, arr):
 
 import itertools
 
-
+# initial approach
 def findShortest(graph_nodes, graph_from, graph_to, ids, val):
     result = -1
 
@@ -530,24 +530,68 @@ def findShortest(graph_nodes, graph_from, graph_to, ids, val):
         color_dic[color].add(i+1)
 
     color_nodes = color_dic[val]
-    search_set = set(color_nodes)
     pre_result = 0
     pas_dic = {(key): set([key]) for key in color_nodes}
-    while len(search_set) < graph_nodes:
+    visited = 1
+    while visited < graph_nodes:
         pre_result += 1
+        visited_ar = []
         for key, val in pas_dic.items():
             new_set = set()
             for dep in val:
-                search_set.update(node_dic[dep])
                 new_set.update(node_dic[dep])
-            pas_dic[key] = new_set
+            pas_dic[key].update(new_set)
+            visited_ar.append(len(pas_dic[key]))
+
 
         for key, val in pas_dic.items():
             for node in val:
                 if node != key and node in color_nodes:
                     return pre_result
+        visited = min(visited_ar)
     return result
 
+# optimized solution
+from collections import deque
+
+
+class Node:
+    def __init__(self, index):
+        self.index = index
+        self.neighbors = set()
+
+    def conn(self, other):
+        self.neighbors.add(other)
+        other.neighbors.add(self)
+
+
+def findShortest(graph_nodes, graph_from, graph_to, ids, val):
+    nodes = {i + 1: Node(i + 1) for i in range(graph_nodes)}
+    for start, end in zip(graph_from, graph_to):
+        nodes[start].conn(nodes[end])
+
+    queue = deque()
+    visited = {}
+
+    for i, id in enumerate(ids):
+        if id == val:
+            visited[i + 1] = (i + 1, 0)
+            queue.append(nodes[i + 1])
+
+    while queue:
+        current = queue.popleft()
+        source, path_len = visited[current.index]
+
+        for n in current.neighbors:
+            if n.index not in visited:
+                visited[n.index] = (source, path_len + 1)
+                queue.append(n)
+            else:
+                if visited[n.index][0] == source:
+                    continue
+                return path_len + visited[n.index][1] + 1
+
+    return -1
 # Case 0
 graph_nodes = 4
 graph_from = [1, 1, 4]
@@ -562,6 +606,12 @@ graph_to = [2, 3, 2]
 ids = [1, 2, 3, 4]
 val = 2 # -1
 
+# Case 2
+graph_nodes = 5
+graph_from = [1, 1, 2, 3]
+graph_to = [2, 3, 4, 5]
+ids = [1, 2, 3, 3, 2]
+val = 2 # 3
 
 
 print(findShortest(graph_nodes, graph_from, graph_to, ids, val))
