@@ -182,13 +182,19 @@ def max_area_histogram(histogram):
     # Return maximum area under
     # the given histogram
     return max_area
+import timeit
+import inspect
 
 # Driver Code
 hist = [6, 2, 5, 4, 5, 1, 6]
 print("Maximum area is",
        max_area_histogram(hist))
 
-# This code is contributed
-# by Jinay Shah
+test_code = inspect.getsource(max_area_histogram)
+test_code += """
+hist = [6, 2, 5, 4, 5, 1, 6]
+max_area_histogram(hist)"""
+print(timeit.timeit(stmt=test_code, number=100000))
+
 
 
