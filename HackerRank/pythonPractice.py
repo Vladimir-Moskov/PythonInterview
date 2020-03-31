@@ -196,5 +196,21 @@ hist = [6, 2, 5, 4, 5, 1, 6]
 max_area_histogram(hist)"""
 print(timeit.timeit(stmt=test_code, number=100000))
 
+##############################################################
+# Arrays
+# https://www.hackerrank.com/challenges/np-arrays/problem
+
+import numpy
+
+def arrays(arr):
+    # complete this function
+    # use numpy.array
+    arr1d = numpy.array(arr, float)
+    reversed_arr = numpy.flipud(arr1d)
+    return reversed_arr
+
+arr = input().strip().split(' ')
+result = arrays(arr)
+print(result)
 
 
