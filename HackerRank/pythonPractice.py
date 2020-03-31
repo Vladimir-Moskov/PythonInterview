@@ -213,4 +213,13 @@ arr = input().strip().split(' ')
 result = arrays(arr)
 print(result)
 
+####################################################################
+# https://www.hackerrank.com/challenges/input/problem
+# Input()
+
+x, k = list(map(int, input().split()))
+expression = input()
+result = eval(expression) == k
+print(result)
+
 
