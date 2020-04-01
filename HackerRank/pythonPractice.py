@@ -286,3 +286,24 @@ class Complex(object):
         else:
             result = "%.2f-%.2fi" % (self.real, abs(self.imaginary))
         return result
+
+##########################################################################
+# Dot and Cross
+# https://www.hackerrank.com/challenges/np-dot-and-cross/problem
+
+def DotandCross():
+    import numpy
+
+
+    N = int(input())
+    A = []
+    B = []
+    for _ in range (N):
+        A.append(list(map(int , input().rstrip().split())))
+    for _ in range (N):
+        B.append(list(map(int , input().rstrip().split())))
+
+    A = numpy.array(A)
+    B = numpy.array(B)
+
+    print(numpy.matmul(A, B))
