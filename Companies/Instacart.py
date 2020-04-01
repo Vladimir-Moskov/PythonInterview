@@ -3,8 +3,6 @@ Challenge #3
 
 Write an in-memory, key-value store that can "time travel." This can build off of Challenge #2.
 
-
-
 Support 'fuzzy' matching on a timestamp.
 
 kv = KV.new
@@ -21,43 +19,43 @@ kv.get('foo', timestamp + 0.75)
 
 => "bar" # returns the closest set value to that timestamp, but always in the past
 
-
-
-**** Note: a number of languages have a 2 or 3 second timeout ***
-
-These include C, C++, C++14, C#, Objective-C, Swift, OCaml, and COBOL.
-
-Full list: https://www.hackerrank.com/environment
-
+Note:
+OrderedDict add/get time complexity is O(1)
+# https://stackoverflow.com/questions/38558288/set-get-and-popitem-performance-of-ordereddict
 """
 
 from collections import defaultdict
 from collections import OrderedDict
 from datetime import datetime
 import time
-# https://stackoverflow.com/questions/38558288/set-get-and-popitem-performance-of-ordereddict
+
+
+def get_time_mls() -> float:
+    """
+
+    :return: now in milliseconds
+    """
+    return time.time()*1000.0
+
 
 class CashData:
-    LATEST_KEY = "LATES"
+    LATEST_KEY = 0.0
 
     def __init__(self):
-        # self.data_dict = defaultdict({})
-        self.data_dict = defaultdict(str, '')
+        self.data_dict = defaultdict(OrderedDict)
 
-    def set(self, key, value):
+    def set(self, key: str, value: str) -> int:
         time_dict = self.data_dict[key]
-        if not time_dict:
-            time_dict = OrderedDict()
         time_dict[CashData.LATEST_KEY] = value
-        now = repr(datetime.now())
+        now = get_time_mls()
         time_dict[now] = value
         self.data_dict[key] = time_dict
         return now
 
-    def get(self, key, timestamp=None):
+    def get(self, key: str, timestamp: float = None) -> str:
         time_dict = self.data_dict[key]
         if not time_dict:
-            return ''
+            return None
 
         if not timestamp:
             return time_dict[CashData.LATEST_KEY]
@@ -67,18 +65,18 @@ class CashData:
             for time_key, value in reversed(time_dict.items()):
                 if time_key != CashData.LATEST_KEY and time_key < timestamp:
                     return value
-            return None  # time_dict[CashData.LATEST_KEY]
+            return None
 
 
 # Case 1
 test_obj = CashData()
-now_00 = repr(datetime.now())
+now_00 = get_time_mls()
 time.sleep(1)
 now_0 = test_obj.set('foo', 'bar0')
 time.sleep(1)
 now_1 = test_obj.set('foo', 'bar2')
 time.sleep(1)
-now_fuz = repr(datetime.now())
+now_fuz = get_time_mls()
 time.sleep(1)
 now_2 = test_obj.set('foo', 'bar3')
 time.sleep(1)
