@@ -62,6 +62,7 @@ class CashData:
         elif time_dict.get(timestamp, False):
             return time_dict[timestamp]
         else:
+            # TODO: could be done as binary search - but have forgot to mansion that
             for time_key, value in reversed(time_dict.items()):
                 if time_key != CashData.LATEST_KEY and time_key < timestamp:
                     return value
