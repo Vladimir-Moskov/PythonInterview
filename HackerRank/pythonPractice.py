@@ -321,3 +321,25 @@ A = numpy.array(A)
 B = numpy.array(B)
 print(numpy.inner(A, B))
 print(numpy.outer(A, B))
+
+############################################################################
+# Map and Lambda Function
+# https://www.hackerrank.com/challenges/map-and-lambda-expression/problem
+
+
+cube = lambda x: x**3# complete the lambda function
+
+def fibonacci(n):
+    result = [0] * n
+
+    for i in range(n):
+        if i < 2:
+          result[i] = i
+        else:
+            result[i] = result[i-1] + result[i-2]
+    return result
+
+
+if __name__ == '__main__':
+    n = int(input())
+    print(list(map(cube, fibonacci(n))))
