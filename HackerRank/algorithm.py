@@ -308,29 +308,29 @@ class Node:
        // this is a node of the tree , which contains info as data, left , right
 '''
 
-
-def height(root):
-    result = 0
-    result = max(deep_counter(root.left, 0), deep_counter(root.right, 0))
-    return result
-
-
-def deep_counter(node, cur_max):
-    if node:
-        cur_max = max(deep_counter(node.left, cur_max), deep_counter(node.right, cur_max))
-        cur_max += 1
-    return cur_max
+def HeightofaBinaryTree():
+    def height(root):
+        result = 0
+        result = max(deep_counter(root.left, 0), deep_counter(root.right, 0))
+        return result
 
 
-tree = BinarySearchTree()
-t = int(input())
+    def deep_counter(node, cur_max):
+        if node:
+            cur_max = max(deep_counter(node.left, cur_max), deep_counter(node.right, cur_max))
+            cur_max += 1
+        return cur_max
 
-arr = list(map(int, input().split()))
 
-for i in range(t):
-    tree.create(arr[i])
+    tree = BinarySearchTree()
+    t = int(input())
 
-print(height(tree.root))
+    arr = list(map(int, input().split()))
+
+    for i in range(t):
+        tree.create(arr[i])
+
+    print(height(tree.root))
 
 ##################################################
 # Tree: Huffman Decoding
@@ -388,30 +388,52 @@ def checkBSTRecursive(root, max_val, min_val):
 # https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=stacks-queues
 from collections import deque
 
+def TaleofTwoStacks():
+    class MyQueue(object):
+        def __init__(self):
+            self.data = deque()
 
-class MyQueue(object):
-    def __init__(self):
-        self.data = deque()
+        def peek(self):
+            return self.data[0]
 
-    def peek(self):
-        return self.data[0]
+        def pop(self):
+            return self.data.popleft()
 
-    def pop(self):
-        return self.data.popleft()
-
-    def put(self, value):
-        self.data.append(value)
+        def put(self, value):
+            self.data.append(value)
 
 
-queue = MyQueue()
-t = int(input())
-for line in range(t):
-    values = map(int, input().split())
-    values = list(values)
-    if values[0] == 1:
-        queue.put(values[1])
-    elif values[0] == 2:
-        queue.pop()
-    else:
-        print(queue.peek())
+    queue = MyQueue()
+    t = int(input())
+    for line in range(t):
+        values = map(int, input().split())
+        values = list(values)
+        if values[0] == 1:
+            queue.put(values[1])
+        elif values[0] == 2:
+            queue.pop()
+        else:
+            print(queue.peek())
 
+############################################################################
+# Recursion: Davis' Staircase
+# https://www.hackerrank.com/challenges/ctci-recursive-staircase/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=recursion-backtracking
+
+
+def stepPerms(stair_height):
+    possible_steps = (1, 2, 3)
+    path_ar = [0] * stair_height
+    for i in range(stair_height):
+        for step in possible_steps:
+            if step == i + 1:
+                path_ar[i] += 1
+            else:
+                prev_ind = i - step
+                if prev_ind >= 0:
+                    path_ar[i] += path_ar[prev_ind]
+
+    return path_ar[-1]
+
+print(stepPerms(1)) # 1
+print(stepPerms(3)) # 4
+print(stepPerms(7)) # 44
