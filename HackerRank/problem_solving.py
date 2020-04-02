@@ -660,56 +660,100 @@ val = 2  # 3
 
 import collections
 
-
-def freqQuery_slow(queries):
-    result = collections.deque()
-    data_dic = collections.defaultdict(int)
-    for opertion, val in queries:
-        if opertion == 1:
-            data_dic[val] += 1
-        elif opertion == 2:
-            data_dic[val] = 0 if data_dic[val] == 0 else data_dic[val] - 1
-        else:
-            result.append(0)
-            for key, val_0 in data_dic.items():
-                if val_0 == val:
-                    result.pop()
-                    result.append(1)
-                    break
-    return list(result)
-
-
-def freqQuery(queries):
-    result = collections.deque()
-    data_dic = collections.defaultdict(int)
-    counter_dic = collections.defaultdict(int)
-    for opertion, val in queries:
-        if opertion == 1:
-            if data_dic[val] != 0:
-                counter_dic[data_dic[val]] -= 1
-            data_dic[val] += 1
-            counter_dic[data_dic[val]] += 1
-        elif opertion == 2:
-            if data_dic[val] != 0:
-                counter_dic[data_dic[val]] -= 1
-            data_dic[val] = 0 if data_dic[val] == 0 else data_dic[val] - 1
-            if data_dic[val] != 0:
-                counter_dic[data_dic[val]] += 1
-        else:
-            if counter_dic[val] == 0:
-                result.append(0)
+def Frequency_Queries():
+    def freqQuery_slow(queries):
+        result = collections.deque()
+        data_dic = collections.defaultdict(int)
+        for opertion, val in queries:
+            if opertion == 1:
+                data_dic[val] += 1
+            elif opertion == 2:
+                data_dic[val] = 0 if data_dic[val] == 0 else data_dic[val] - 1
             else:
-                result.append(1)
+                result.append(0)
+                for key, val_0 in data_dic.items():
+                    if val_0 == val:
+                        result.pop()
+                        result.append(1)
+                        break
+        return list(result)
 
-    return list(result)
 
-# Case2 [0, 1, 1]
-queries = [[1, 3], [2, 3], [3, 2], [1, 4], [1, 5], [1, 5], [1, 4], [3, 2], [2, 4], [3, 2]]
+    def freqQuery(queries):
+        result = collections.deque()
+        data_dic = collections.defaultdict(int)
+        counter_dic = collections.defaultdict(int)
+        for opertion, val in queries:
+            if opertion == 1:
+                if data_dic[val] != 0:
+                    counter_dic[data_dic[val]] -= 1
+                data_dic[val] += 1
+                counter_dic[data_dic[val]] += 1
+            elif opertion == 2:
+                if data_dic[val] != 0:
+                    counter_dic[data_dic[val]] -= 1
+                data_dic[val] = 0 if data_dic[val] == 0 else data_dic[val] - 1
+                if data_dic[val] != 0:
+                    counter_dic[data_dic[val]] += 1
+            else:
+                if counter_dic[val] == 0:
+                    result.append(0)
+                else:
+                    result.append(1)
 
-# Case1 [0, 1]
-queries = [[3, 4], [2, 1003], [1, 16], [3, 1]]
+        return list(result)
 
-# Case0 [0, 1]
-queries = [[1, 5], [1, 6], [3, 2], [1, 10], [1, 10], [1, 6], [2, 5], [3, 2]]
+    # Case2 [0, 1, 1]
+    queries = [[1, 3], [2, 3], [3, 2], [1, 4], [1, 5], [1, 5], [1, 4], [3, 2], [2, 4], [3, 2]]
 
-print(freqQuery(queries))
+    # Case1 [0, 1]
+    queries = [[3, 4], [2, 1003], [1, 16], [3, 1]]
+
+    # Case0 [0, 1]
+    queries = [[1, 5], [1, 6], [3, 2], [1, 10], [1, 10], [1, 6], [2, 5], [3, 2]]
+
+    print(freqQuery(queries))
+
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/largest-rectangle/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=stacks-queues
+# Largest Rectangle
+
+from collections import deque
+
+
+def largestRectangle(histogram):
+    areas_stack = deque()
+    index = 0
+    max_area = 0
+    while index < len(histogram):
+        if len(areas_stack) == 0 or \
+                histogram[areas_stack[-1]] <= histogram[index]:
+
+            areas_stack.append(index)
+            index += 1
+
+        else:
+            prev_index = areas_stack.pop()
+            current_area = histogram[prev_index] * ((index - areas_stack[-1] - 1) if areas_stack else index)
+
+            max_area = max(current_area, max_area)
+
+    while areas_stack:
+        prev_index = areas_stack.pop()
+
+        current_area = (histogram[prev_index] *
+                ((index - areas_stack[-1] - 1)
+                 if areas_stack else index))
+
+        # update max area, if needed
+        max_area = max(max_area, current_area)
+
+    return max_area
+
+case_1 = [1, 2, 3, 4, 5] # 9
+print(largestRectangle(case_1))
+
+
+
+#####################################################################################
