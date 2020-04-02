@@ -419,21 +419,48 @@ def TaleofTwoStacks():
 # Recursion: Davis' Staircase
 # https://www.hackerrank.com/challenges/ctci-recursive-staircase/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=recursion-backtracking
 
+def DavisStaircase():
+    def stepPerms(stair_height):
+        possible_steps = (1, 2, 3)
+        path_ar = [0] * stair_height
+        for i in range(stair_height):
+            for step in possible_steps:
+                if step == i + 1:
+                    path_ar[i] += 1
+                else:
+                    prev_ind = i - step
+                    if prev_ind >= 0:
+                        path_ar[i] += path_ar[prev_ind]
 
-def stepPerms(stair_height):
-    possible_steps = (1, 2, 3)
-    path_ar = [0] * stair_height
-    for i in range(stair_height):
-        for step in possible_steps:
-            if step == i + 1:
-                path_ar[i] += 1
-            else:
-                prev_ind = i - step
-                if prev_ind >= 0:
-                    path_ar[i] += path_ar[prev_ind]
+        return path_ar[-1]
 
-    return path_ar[-1]
+    print(stepPerms(1)) # 1
+    print(stepPerms(3)) # 4
+    print(stepPerms(7)) # 44
 
-print(stepPerms(1)) # 1
-print(stepPerms(3)) # 4
-print(stepPerms(7)) # 44
+############################################################################
+# https://www.hackerrank.com/challenges/greedy-florist/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=greedy-algorithms
+# Greedy Florist
+
+# Complete the getMinimumCost function below.
+def getMinimumCost(friends_num, prices):
+    result = 0
+    if friends_num >= len(prices):
+        return sum(prices)
+    prices.sort()
+
+    for i in range(friends_num):
+        next = len(prices) - (i + 1)
+        factor = 1
+        while next >= 0:
+            result += prices[next] * factor
+            factor += 1
+            next = next - friends_num
+
+    return result
+
+print(getMinimumCost(3, [6, 5, 2]))
+print(getMinimumCost(2, [6, 5, 2]))
+print(getMinimumCost(3, [1, 3, 5, 7, 9]))
+
+############################################################################
