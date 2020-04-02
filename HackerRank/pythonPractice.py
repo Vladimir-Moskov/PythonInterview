@@ -307,3 +307,17 @@ def DotandCross():
     B = numpy.array(B)
 
     print(numpy.matmul(A, B))
+
+############################################################################
+# Inner and Outer
+# https://www.hackerrank.com/challenges/np-inner-and-outer/problem
+
+import numpy
+
+A = list(map(int , input().rstrip().split()))
+B= list(map(int , input().rstrip().split()))
+
+A = numpy.array(A)
+B = numpy.array(B)
+print(numpy.inner(A, B))
+print(numpy.outer(A, B))
