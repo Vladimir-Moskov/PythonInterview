@@ -381,3 +381,37 @@ def checkBSTRecursive(root, max_val, min_val):
     result_right = checkBSTRecursive(root.right, max_val, root.data)
 
     return result_let & result_right
+
+
+############################################################################
+# Queues: A Tale of Two Stacks
+# https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=stacks-queues
+from collections import deque
+
+
+class MyQueue(object):
+    def __init__(self):
+        self.data = deque()
+
+    def peek(self):
+        return self.data[0]
+
+    def pop(self):
+        return self.data.popleft()
+
+    def put(self, value):
+        self.data.append(value)
+
+
+queue = MyQueue()
+t = int(input())
+for line in range(t):
+    values = map(int, input().split())
+    values = list(values)
+    if values[0] == 1:
+        queue.put(values[1])
+    elif values[0] == 2:
+        queue.pop()
+    else:
+        print(queue.peek())
+
