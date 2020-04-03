@@ -838,3 +838,21 @@ def LinkedListsDetectCycle():
             if fast:
                  fast = fast.next
         return fast == slow
+
+
+#####################################################################################
+# Jumping on the Clouds
+# https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=warmup
+
+def jumpingOnClouds(c):
+    start = 0
+    counter = 0
+    while start < len(c):
+        start += 2
+        if start < len(c) and c[start] == 0:
+            pass
+        else:
+          start -= 1
+        if start < len(c):
+            counter +=1
+    return counter
