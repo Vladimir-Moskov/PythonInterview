@@ -719,41 +719,72 @@ def Frequency_Queries():
 # https://www.hackerrank.com/challenges/largest-rectangle/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=stacks-queues
 # Largest Rectangle
 
-from collections import deque
+def LargestRectangle():
+    from collections import deque
 
 
-def largestRectangle(histogram):
-    areas_stack = deque()
-    index = 0
-    max_area = 0
-    while index < len(histogram):
-        if len(areas_stack) == 0 or \
-                histogram[areas_stack[-1]] <= histogram[index]:
+    def largestRectangle(histogram):
+        areas_stack = deque()
+        index = 0
+        max_area = 0
+        while index < len(histogram):
+            if len(areas_stack) == 0 or \
+                    histogram[areas_stack[-1]] <= histogram[index]:
 
-            areas_stack.append(index)
-            index += 1
+                areas_stack.append(index)
+                index += 1
 
-        else:
+            else:
+                prev_index = areas_stack.pop()
+                current_area = histogram[prev_index] * ((index - areas_stack[-1] - 1) if areas_stack else index)
+
+                max_area = max(current_area, max_area)
+
+        while areas_stack:
             prev_index = areas_stack.pop()
-            current_area = histogram[prev_index] * ((index - areas_stack[-1] - 1) if areas_stack else index)
 
-            max_area = max(current_area, max_area)
+            current_area = (histogram[prev_index] *
+                    ((index - areas_stack[-1] - 1)
+                     if areas_stack else index))
 
-    while areas_stack:
-        prev_index = areas_stack.pop()
+            # update max area, if needed
+            max_area = max(max_area, current_area)
 
-        current_area = (histogram[prev_index] *
-                ((index - areas_stack[-1] - 1)
-                 if areas_stack else index))
+        return max_area
 
-        # update max area, if needed
-        max_area = max(max_area, current_area)
-
-    return max_area
-
-case_1 = [1, 2, 3, 4, 5] # 9
-print(largestRectangle(case_1))
+    case_1 = [1, 2, 3, 4, 5] # 9
+    print(largestRectangle(case_1))
 
 
 
 #####################################################################################
+# Recursive Digit Sum
+# https://www.hackerrank.com/challenges/recursive-digit-sum/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=recursion-backtracking
+
+from Companies.util_decorators import timeit
+
+def RecursiveDigitSum():
+    @timeit
+    def superDigit(num_val, factor):
+        num_str = str(num_val)
+        num_str = str(sum(int(s) for s in num_str) * factor)
+        result = 0
+        while len(num_str) > 1:
+            num_str = str(sum(int(x) for x in num_str))
+
+        result += int(num_str)
+
+        return result
+
+
+    def superDigitRecursive(n, k):
+        def add_digits(string):
+            if len(string) == 1:
+                return string
+            result = sum(int(s) for s in string)
+            return add_digits(str(result))
+
+        start = sum(int(s) for s in n) * k
+        return add_digits(str(start))
+
+    print(superDigit(148, 3)) # 3
