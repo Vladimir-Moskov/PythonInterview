@@ -809,3 +809,19 @@ def SockMerchant():
         return result
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/reverse-a-doubly-linked-list/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=linked-lists
+# Reverse a doubly linked list
+
+
+def Reverseadoublylinkedlist():
+    def reverse(head):
+        current_node = head
+        last = head
+        while current_node:
+            last = current_node
+            current_node.next, current_node.prev = current_node.prev, current_node.next
+            current_node = current_node.prev
+
+        return last
+
+#####################################################################################
