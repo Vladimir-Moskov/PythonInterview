@@ -825,3 +825,16 @@ def Reverseadoublylinkedlist():
         return last
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/ctci-linked-list-cycle/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=linked-lists
+# Linked Lists: Detect a Cycle
+
+def LinkedListsDetectCycle():
+    def has_cycle(head):
+        fast = head.next
+        slow = head
+        while fast and fast != slow:
+            slow = slow.next
+            fast = fast.next
+            if fast:
+                 fast = fast.next
+        return fast == slow
