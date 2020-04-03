@@ -438,3 +438,32 @@ A = list(map(float, input().split()))
 x = float(input())
 A = numpy.array(A)
 print(numpy.polyval(A, x))
+
+############################################################################
+# Standardize Mobile Number Using Decorators
+
+pref = '+91 '
+def wrapper(f):
+    def fun(l):
+        new_l = []
+        for phone in l:
+            if phone[0] == '0':
+               phone = pref + phone[1:6] + ' ' + phone[6:]
+            elif phone[0] == '+':
+               phone = pref + phone[3:8] + ' ' + phone[8:]
+            else:
+               if len(phone) == 10:
+                    phone = pref + phone[0:5] + ' ' + phone[5:]
+               else:
+                    phone = pref + phone[2:7] + ' ' + phone[7:]
+            new_l.append(phone)
+        return f(new_l)
+    return fun
+
+@wrapper
+def sort_phone(l):
+    print(*sorted(l), sep='\n')
+
+if __name__ == '__main__':
+    l = [input() for _ in range(int(input()))]
+    sort_phone(l)
