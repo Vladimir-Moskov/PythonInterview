@@ -430,3 +430,11 @@ for i in range(N):
 
 A = numpy.array(A)
 print(round(numpy.linalg.det(A), 2))
+
+############################################################################
+# Polynomials
+
+A = list(map(float, input().split()))
+x = float(input())
+A = numpy.array(A)
+print(numpy.polyval(A, x))
