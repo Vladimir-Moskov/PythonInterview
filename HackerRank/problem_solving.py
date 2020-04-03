@@ -788,3 +788,24 @@ def RecursiveDigitSum():
         return add_digits(str(start))
 
     print(superDigit(148, 3)) # 3
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/sock-merchant/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=warmup
+# Sock Merchant
+
+def SockMerchant():
+    from collections import defaultdict
+
+    # Complete the sockMerchant function below.
+    def sockMerchant(n, sock_ar):
+        result = 0
+        sock_dic = defaultdict(int)
+        for color in sock_ar:
+            sock_dic[color] += 1
+            if sock_dic[color] == 2:
+                result += 1
+                sock_dic[color] = 0
+
+        return result
+
+#####################################################################################
