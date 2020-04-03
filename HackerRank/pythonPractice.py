@@ -418,3 +418,15 @@ if __name__ == '__main__':
 filtered_emails = filter_mail(emails)
 filtered_emails.sort()
 print(filtered_emails)
+############################################################################
+# Linear Algebra
+
+import numpy
+
+N = int(input())
+A = [0] * N
+for i in range(N):
+    A[i] = list(map(float, input().split()))
+
+A = numpy.array(A)
+print(round(numpy.linalg.det(A), 2))
