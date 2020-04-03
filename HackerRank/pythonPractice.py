@@ -348,9 +348,10 @@ if __name__ == '__main__':
 # ginortS
 # https://www.hackerrank.com/challenges/ginorts/problem
 
-input_str = input()
 
 def ginortS():
+    input_str = input()
+
     def comparator(ch: str):
         if ch.isupper():
             return ord(ch)
@@ -363,5 +364,9 @@ def ginortS():
 
     input_str = "".join(sorted(input_str, key=comparator))
 
-
     print(input_str)
+
+############################################################################
+
+
+
