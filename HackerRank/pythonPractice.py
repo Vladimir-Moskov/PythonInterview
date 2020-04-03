@@ -343,3 +343,25 @@ def fibonacci(n):
 if __name__ == '__main__':
     n = int(input())
     print(list(map(cube, fibonacci(n))))
+
+############################################################################
+# ginortS
+# https://www.hackerrank.com/challenges/ginorts/problem
+
+input_str = input()
+
+def ginortS():
+    def comparator(ch: str):
+        if ch.isupper():
+            return ord(ch)
+        elif ch.isdigit():
+            if int(ch) % 2 == 0:
+                 return 66 + ord(ch)
+            else:
+                return 60 + ord(ch)
+        return ord(ch) - 48
+
+    input_str = "".join(sorted(input_str, key=comparator))
+
+
+    print(input_str)
