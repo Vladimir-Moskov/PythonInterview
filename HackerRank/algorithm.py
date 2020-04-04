@@ -443,25 +443,26 @@ def DavisStaircase():
 # Greedy Florist
 
 # Complete the getMinimumCost function below.
-def getMinimumCost(friends_num, prices):
-    result = 0
-    if friends_num >= len(prices):
-        return sum(prices)
-    prices.sort()
+def GreedyFlorist():
+    def getMinimumCost(friends_num, prices):
+        result = 0
+        if friends_num >= len(prices):
+            return sum(prices)
+        prices.sort()
 
-    for i in range(friends_num):
-        next = len(prices) - (i + 1)
-        factor = 1
-        while next >= 0:
-            result += prices[next] * factor
-            factor += 1
-            next = next - friends_num
+        for i in range(friends_num):
+            next = len(prices) - (i + 1)
+            factor = 1
+            while next >= 0:
+                result += prices[next] * factor
+                factor += 1
+                next = next - friends_num
 
-    return result
+        return result
 
-print(getMinimumCost(3, [6, 5, 2]))
-print(getMinimumCost(2, [6, 5, 2]))
-print(getMinimumCost(3, [1, 3, 5, 7, 9]))
+    print(getMinimumCost(3, [6, 5, 2]))
+    print(getMinimumCost(2, [6, 5, 2]))
+    print(getMinimumCost(3, [1, 3, 5, 7, 9]))
 
 ############################################################################
 
@@ -498,10 +499,10 @@ def change_making(coins, n: int):
                 m[c][r] = min(m[c - 1][r], 1 + m[c][r - coins[c - 1]])
     return m[-1][-1]
 
-
-given_coins = [25, 10, 1]
-print(change_making(given_coins, 30))
-"stre".index('re',)
+def check_it():
+    given_coins = [25, 10, 1]
+    print(change_making(given_coins, 30))
+    "stre".index('re',)
 
 import sys
 
@@ -538,3 +539,30 @@ val = 3
 # given_coins = [1, 2, 5]
 # val = 11
 # print(Solution().coinChange(given_coins, val))
+
+############################################################################
+# Max Min
+# https://www.hackerrank.com/challenges/angry-children/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=greedy-algorithms
+
+def MaxMin():
+    def maxMin(k, arr):
+        arr.sort()
+        cur_min = arr[-1]
+        for i in range(len(arr) - k + 1):
+            cur_min = min(cur_min, arr[i+k-1] - arr[i])
+
+        return cur_min
+
+    # Case 2
+    arr = [1, 4, 7, 2]
+    k = 2 # 3
+
+    # case 3
+    k = 3
+    arr = [10,100,300,200,1000,20,30]
+    #print(maxMin(k, arr)) # 20
+
+    # case 4
+    k = 3
+    arr = [100,200,300,350,400,401,402]
+    print(maxMin(k, arr)) # 2
