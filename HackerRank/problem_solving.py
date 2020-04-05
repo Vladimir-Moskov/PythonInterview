@@ -856,3 +856,40 @@ def jumpingOnClouds(c):
         if start < len(c):
             counter +=1
     return counter
+
+#####################################################################################
+# Counting Valley
+# https://www.hackerrank.com/challenges/counting-valleys/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=warmup
+
+def CountingValley():
+    import math
+    import os
+    import random
+    import re
+    import sys
+
+    # Complete the countingValleys function below.
+    def countingValleys(n, s):
+        result = 0
+        current_level = 0
+        for i in s:
+            if i == "U":
+                current_level += 1
+            else:
+                if current_level == 0:
+                    result += 1
+                current_level -= 1
+        return result
+
+    if __name__ == '__main__':
+        fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+        n = int(input())
+
+        s = input()
+
+        result = countingValleys(n, s)
+
+        fptr.write(str(result) + '\n')
+
+        fptr.close()
