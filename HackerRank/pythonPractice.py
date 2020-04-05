@@ -467,3 +467,20 @@ def sort_phone(l):
 if __name__ == '__main__':
     l = [input() for _ in range(int(input()))]
     sort_phone(l)
+
+
+############################################################################
+# https://www.hackerrank.com/challenges/incorrect-regex/problem
+#
+
+def incorrect_regex():
+    import re
+    N = int(input())
+
+    for _ in range(N):
+        try:
+            val = input()
+            p = re.compile(val)
+            print(True)
+        except Exception:
+            print(False)
