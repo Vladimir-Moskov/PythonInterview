@@ -1,0 +1,28 @@
+#
+# https://www.youtube.com/watch?v=4SD6rWt9wUQ
+
+git project - commands
+
+git status
+git init .
+git add .
+.gitignore
+
+
+git config --global user.name "Vladimir-Moskov"
+git config --global user.email "boba.mockob@gmail.com"
+
+git commit -m "Hello first commit"
+git log
+
+# create github repo - git_base
+git remote add origin https://github.com/Vladimir-Moskov/git_base.git
+git push -u origin master
+
+# create key
+ssh-keygen -t rsa -C "boba.mockob@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "boba.mockob@gmail.com"
+
+# start agent
+ eval $(ssh-agent -s)
+ ssh-add ~/.ssh/id_rsa

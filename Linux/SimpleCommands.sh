@@ -33,6 +33,8 @@ htop -v
 # Linux Sysadmin Basics 02.1 -- More Basic Commands
 # https://www.youtube.com/watch?v=ZeZVkA1zjWg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=5
 
+echo $EDITOR
+
 ########################################
 # Linux Sysadmin Basics 03 -- Text Editors (and review of basic commands)
 # https://www.youtube.com/watch?v=fEGSA68uAR4

@@ -11,6 +11,8 @@
 
 ### Linux playground in to Linux directory
 
+### GIT playground in to GIT directory
+
 # Kubernetes playground
 kubectl version --client
 
