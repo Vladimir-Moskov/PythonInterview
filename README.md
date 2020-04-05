@@ -1,8 +1,17 @@
 # PythonInterview
-Solving Python Interview puzzles
 
 
-#
+### Solving Python Interview puzzles in to Companies directory
+
+### Solving Codding puzzles from https://app.codility.com/programmers/lessons/1-iterations/ in to Codility directory
+
+### Solving Codding puzzles from www.hackerrank.com in to HackerRank directory
+
+### Solving Codding puzzles from https://projecteuler.net/ in to projecteuler directory
+
+### Linux playground in to Linux directory
+
+# Kubernetes playground
 kubectl version --client
 
 kubectl config current-context
