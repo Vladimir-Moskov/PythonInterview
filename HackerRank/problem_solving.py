@@ -1002,34 +1002,74 @@ def nonDivisibleSubsetSolution():
 def contacts_slow(queries):
     from collections import defaultdict
     result = []
-    name_dic = defaultdict(set)
+    name_dic = defaultdict(int)
     for item in queries:
         operation = item[0]
         name = item[1]
         if operation == "add":
-            name_dic[name[0]].add(name)
-        elif  operation == "find":
-            count = 0
-            for sub_name in name_dic[name[0]]:
-                if sub_name.startswith(name):
-                    count += 1
-            result.append(count)
+            key = ''
+            for char_val in name:
+                key += char_val
+                name_dic[key] += 1
+        elif operation == "find":
+
+            result.append(name_dic[name])
     return result
 
 #  tree based solution
+from collections import defaultdict
+
+class NameNode:
+    def __init__(self, val=''):
+        self.counter = 0
+        self.val = val
+        self.dic = defaultdict(NameNode)
+
 def contacts(queries):
-    from collections import defaultdict
+
     result = []
-    name_dic = defaultdict(set)
+    root_node = NameNode()
     for item in queries:
         operation = item[0]
         name = item[1]
+
         if operation == "add":
-            name_dic[name[0]].add(name)
-        elif  operation == "find":
-            count = 0
-            for sub_name in name_dic[name[0]]:
-                if sub_name.startswith(name):
-                    count += 1
-            result.append(count)
+            current_node = root_node
+            for char_val in name:
+                current_node = current_node.dic[char_val]
+                current_node.val = char_val
+                current_node.counter += 1
+
+        elif operation == "find":
+            current_node = root_node
+            current_val = 0
+            for char_val in name:
+                current_node = current_node.dic[char_val]
+                current_val = current_node.counter
+
+            result.append(current_val)
     return result
+
+# case 1 - 2 0
+queries = [
+["add", "hack"],
+["add", "hackerrank"],
+["find", "hac"],
+["find", "hak"]]
+print(contacts(queries))
+
+ # case 2 -
+queries = [
+["add", 's'],
+["add", "ss"],
+["add", "sss"],
+["add", "ssss"],
+["add", 'sssss'],
+["find", "s"],
+["find", "ss"],
+["find", "sss"],
+["find", "ssss"],
+["find","sssss"],
+["find", "ssssss"]]
+
+print(contacts(queries))
