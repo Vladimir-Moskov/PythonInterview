@@ -47,6 +47,15 @@ powerof
 init 0
 init 6
 
+#######################################
+# Linux Command-Line for Beginners: What's happening on this machine?
+# https://www.youtube.com/watch?v=EbOEqycEFeM&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=6
+
+w
+who
+netstat -tupln
+man netstat
+
 ########################################
 # Linux Sysadmin Basics 03 -- Text Editors (and review of basic commands)
 # https://www.youtube.com/watch?v=fEGSA68uAR4

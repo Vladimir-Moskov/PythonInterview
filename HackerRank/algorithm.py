@@ -386,6 +386,11 @@ def checkBSTRecursive(root, max_val, min_val):
 ############################################################################
 # Queues: A Tale of Two Stacks
 # https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks/problem?h_l=interview&playlist_slugs%5B%5D%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D%5B%5D=stacks-queues
+
+# the same solution works for
+# https://www.hackerrank.com/challenges/queue-using-two-stacks/problem
+# Queue using Two Stacks
+
 from collections import deque
 
 def TaleofTwoStacks():
