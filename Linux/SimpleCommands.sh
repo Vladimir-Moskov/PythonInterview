@@ -61,4 +61,13 @@ man netstat
 # Linux Sysadmin Basics 03 -- Text Editors (and review of basic commands)
 # https://www.youtube.com/watch?v=fEGSA68uAR4
 
+cp
+cat 1 2
+nano
+vi
+man vi
+emacs
 
+########################################
+# Linux Sysadmin Basics 04 -- Shell Features -- Pipes and Redirection
+# https://www.youtube.com/watch?v=-Z5tCri-QlI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=8
