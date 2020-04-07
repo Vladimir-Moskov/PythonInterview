@@ -13,6 +13,7 @@ ls *
 
 mkdir new_dir
 mkdir new_dir/new_subdir
+mkdir -p new_dir2/new_subdir2 # create recursively
 
 touch new_file.txt
 mv new_file.txt new_dir/
