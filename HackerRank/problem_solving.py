@@ -899,42 +899,97 @@ def CountingValley():
 # Forming a Magic Square
 # https://www.hackerrank.com/challenges/magic-square-forming/problem
 
-def formingMagicSquare(s):
-    diffs = []
-    all_possible = [
-        [[8, 1, 6], [3, 5, 7], [4, 9, 2]],
-        [[6, 1, 8], [7, 5, 3], [2, 9, 4]],
-        [[4, 9, 2], [3, 5, 7], [8, 1, 6]],
-        [[2, 9, 4], [7, 5, 3], [6, 1, 8]],
-        [[8, 3, 4], [1, 5, 9], [6, 7, 2]],
-        [[4, 3, 8], [9, 5, 1], [2, 7, 6]],
-        [[6, 7, 2], [1, 5, 9], [8, 3, 4]],
-        [[2, 7, 6], [9, 5, 1], [4, 3, 8]], ]
+def FormingaMagicSquare():
+    def formingMagicSquare(s):
+        diffs = []
+        all_possible = [
+            [[8, 1, 6], [3, 5, 7], [4, 9, 2]],
+            [[6, 1, 8], [7, 5, 3], [2, 9, 4]],
+            [[4, 9, 2], [3, 5, 7], [8, 1, 6]],
+            [[2, 9, 4], [7, 5, 3], [6, 1, 8]],
+            [[8, 3, 4], [1, 5, 9], [6, 7, 2]],
+            [[4, 3, 8], [9, 5, 1], [2, 7, 6]],
+            [[6, 7, 2], [1, 5, 9], [8, 3, 4]],
+            [[2, 7, 6], [9, 5, 1], [4, 3, 8]], ]
 
-    # compare s to each in all possible get number of differences for each to diffs
-    for possiblity in all_possible:
-        cost = 0
-        for p_row, s_row in list(zip(possiblity, s)):
-            for p_num, s_num in (list(zip(p_row, s_row))):
-                if p_num != s_num:
-                    cost += abs(p_num - s_num)
-        diffs.append(cost)
+        # compare s to each in all possible get number of differences for each to diffs
+        for possiblity in all_possible:
+            cost = 0
+            for p_row, s_row in list(zip(possiblity, s)):
+                for p_num, s_num in (list(zip(p_row, s_row))):
+                    if p_num != s_num:
+                        cost += abs(p_num - s_num)
+            diffs.append(cost)
 
-    return min(diffs)
+        return min(diffs)
 
-# case 0 - 7 ???
-M = [[5, 3, 4,],
-[1, 5, 8],
-[6, 4, 2]]
+    # case 0 - 7 ???
+    M = [[5, 3, 4,],
+    [1, 5, 8],
+    [6, 4, 2]]
 
-# case 1 - 1
-M = [[4, 9, 2],
-[3, 5, 7],
-[8, 1, 5]]
+    # case 1 - 1
+    M = [[4, 9, 2],
+    [3, 5, 7],
+    [8, 1, 5]]
 
-# case 2 - 4
-M = [[4, 8, 2],
-[4, 5, 7],
-[6, 1, 6]]
+    # case 2 - 4
+    M = [[4, 8, 2],
+    [4, 5, 7],
+    [6, 1, 6]]
 
-print(formingMagicSquare(M))
+    print(formingMagicSquare(M))
+
+#####################################################################################
+
+from collections import OrderedDict
+
+# Complete the matchingStrings function below.
+def matchingStrings_0(strings, queries):
+    count_dict = OrderedDict()
+    for key in queries:
+        count_dict[key] = 0
+    for key in strings:
+        count_dict[key] += 1
+
+    return count_dict.values()
+
+def matchingStrings(strings, queries):
+    count_dict = {}
+    for key in queries:
+        count_dict[key] = 0
+    for key in strings:
+        if key in count_dict:
+            count_dict[key] += 1
+
+    return [count_dict[val] for val in queries]
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/non-divisible-subset/problem
+# Non-Divisible Subset
+
+
+def nonDivisibleSubset(target_val, int_ar):
+    result = 0
+    div_dic = [0] * target_val
+    int_ar = set(int_ar)
+    for val in int_ar:
+        div_dic[val % target_val] += 1
+    mid = int((target_val - 1) / 2)
+    for i in range(1, mid + 1):
+        result += max(div_dic[i], div_dic[-i])
+    if div_dic[0] > 0:
+        result += 1
+    if (target_val - 1) % 2 > 0 and div_dic[int((target_val - 1)  / 2) + 1] > 0:
+        result += 1
+
+    return result
+
+# Case 1 - 3
+target_val = 3
+int_ar = [1, 7, 2, 4]
+
+# Case 2 - 3
+target_val = 4
+int_ar = [19, 10, 12, 10, 24, 25, 22]
+print(nonDivisibleSubset(target_val, int_ar))

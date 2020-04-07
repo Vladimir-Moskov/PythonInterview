@@ -34,6 +34,18 @@ htop -v
 # https://www.youtube.com/watch?v=ZeZVkA1zjWg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=5
 
 echo $EDITOR
+nano script2.py
+ln -s script2.py linkToScript2
+
+head linkToScript2
+tail -f script2.py
+
+shutdown -r
+shutdown -h now
+shutdown -h +60
+powerof
+init 0
+init 6
 
 ########################################
 # Linux Sysadmin Basics 03 -- Text Editors (and review of basic commands)
