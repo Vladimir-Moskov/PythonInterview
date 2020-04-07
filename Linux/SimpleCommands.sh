@@ -71,3 +71,44 @@ emacs
 ########################################
 # Linux Sysadmin Basics 04 -- Shell Features -- Pipes and Redirection
 # https://www.youtube.com/watch?v=-Z5tCri-QlI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=8
+
+echo "another line stream as override" > next_file.txt
+echo "another line stream as append" >> next_file.txt
+
+ls -alh >> listoutput
+
+ls -alh errortrigername 2>  listoutputerror
+mail -s "subject metter" vova < listoutputerror
+sudo apt-get install mailutils
+
+ps aux
+# pagenation
+ps aux | less
+
+########################################
+# Linux Sysadmin Basics 4.1 -- Filtering Output and Finding Things (&&, cut, sort, uniq, wc, grep)
+# https://www.youtube.com/watch?v=nLa6jAbULe8&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=9
+
+# logical AND = && program run
+ls .. && echo "command .. has been sucsessfully executed"
+
+# cut = split str content, where d - delimiter, f2 - second field
+cat file.txt | cut -d: -f2
+
+# sort file lines, b - ignore white spaces, f - case insensative
+cat file.txt | sort -bf
+
+# uniq only lines
+cat file.txt | uniq
+
+# file info
+wc file.txt
+
+# grep filter/search
+cat file.txt | grep search_word
+grep search_word file.txt
+grep search_word ./* | uniq | cut -d: -f1
+
+########################################
+# https://www.youtube.com/watch?v=8P-Vek7Vtgg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=10
+# Linux Sysadmin Basics 05 -- Package Management with apt-get
