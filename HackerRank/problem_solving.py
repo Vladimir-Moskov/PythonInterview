@@ -1079,43 +1079,79 @@ def contacts_solution():
 # https://www.hackerrank.com/challenges/queens-attack-2/problem?h_r=internal-search
 # Queen's Attack II
 
+def queensAttack_Solution():
+    from collections import defaultdict
+
+    # obstacles = [(x, y)]
+
+    def queensAttack(board_size, obs_count, row_q, col_q, obstacles):
+        result = 0
+        start_point = (row_q, col_q)
+        obstacles_dic = defaultdict(set)
+        for row, col in obstacles:
+            obstacles_dic[row].add(col)
+        delta_ar = [(1, 0), (-1, 0), (0, 1), (0, -1), (-1, 1), (1, 1), (1, -1), (-1, -1)]
+
+        for delta in delta_ar:
+            result += _track_counter(board_size, start_point, delta,obstacles_dic)
+
+        return result
+
+    def _track_counter(board_size, start_point, delta, obstacles_dic):
+        result = 0
+        row = start_point[0]
+        col = start_point[1]
+        while True:
+            row += delta[0]
+            col += delta[1]
+            if row < 1 or row > board_size or col < 1 or col > board_size or col in obstacles_dic[row]:
+                break
+            else:
+                result += 1
+        return result
+
+    board_size = 4
+    obs_count = 0
+    row_q = 4
+    col_q = 4
+    obstacles = []
+    print(queensAttack(board_size, obs_count, row_q, col_q, obstacles))
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/countingsort4/problem
+# The Full Counting Sort
+
 from collections import defaultdict
 
-# obstacles = [(x, y)]
-
-def queensAttack(board_size, obs_count, row_q, col_q, obstacles):
-    result = 0
-    start_point = (row_q, col_q)
-    obstacles_dic = defaultdict(set)
-    for row, col in obstacles:
-        obstacles_dic[row].add(col)
-    delta_ar = [(1, 0), (-1, 0), (0, 1), (0, -1), (-1, 1), (1, 1), (1, -1), (-1, -1)]
-
-    for delta in delta_ar:
-        result += _track_counter(board_size, start_point, delta,obstacles_dic)
-
-    return result
-
-def _track_counter(board_size, start_point, delta, obstacles_dic):
-    result = 0
-    row = start_point[0]
-    col = start_point[1]
-    while True:
-        row += delta[0]
-        col += delta[1]
-        if row < 1 or row > board_size or col < 1 or col > board_size or col in obstacles_dic[row]:
-            break
+def countSort(arr):
+    # max_num = 10
+    # result = [[] for _ in range()]
+    result = []
+    word_dic = defaultdict(list)
+    mid = int(len(arr) / 2)
+    max_key = 0
+    for i, item in enumerate(arr):
+        key, val = item
+        key = int(key)
+        max_key = max(max_key, key)
+        if i < mid:
+            word_dic[key].append('-')
         else:
-            result += 1
-    return result
+            word_dic[key].append(val)
 
-board_size = 4
-obs_count = 0
-row_q = 4
-col_q = 4
-obstacles = []
-print(queensAttack(board_size, obs_count, row_q, col_q, obstacles))
+    result = [" ".join(word_dic[i]) for i in range(max_key + 1) if word_dic[i]]
+    print(" ".join(result))
 
+arr = [
+    ["1","e"],
+    ["2", "a"],
+    ["1", "b"],
+   ["3", "a"],
+   ["4", "f"],
+    ["1", "f"],
+    ["2", "a"],
+    ["1", "e"],
+    ["1", "b"],
+    ["1", "c"]]
 
-
-
+countSort(arr)

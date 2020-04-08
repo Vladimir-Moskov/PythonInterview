@@ -40,6 +40,7 @@ ln -s script2.py linkToScript2
 
 head linkToScript2
 tail -f script2.py
+more
 
 shutdown -r
 shutdown -h now
@@ -112,3 +113,18 @@ grep search_word ./* | uniq | cut -d: -f1
 ########################################
 # https://www.youtube.com/watch?v=8P-Vek7Vtgg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=10
 # Linux Sysadmin Basics 05 -- Package Management with apt-get
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install val
+apt-cache search tmux
+cat /etc/apt/sources.list
+
+sudo apt-get remove
+
+########################################
+# https://www.youtube.com/watch?v=8SkN7UofOww&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=11
+# Linux Sysadmin Basics -- Linux File Permissions
+
+
+
