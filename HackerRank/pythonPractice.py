@@ -194,7 +194,7 @@ test_code = inspect.getsource(max_area_histogram)
 test_code += """
 hist = [6, 2, 5, 4, 5, 1, 6]
 max_area_histogram(hist)"""
-print(timeit.timeit(stmt=test_code, number=100000))
+# print(timeit.timeit(stmt=test_code, number=100000))
 
 ##############################################################
 # Arrays
@@ -484,3 +484,70 @@ def incorrect_regex():
             print(True)
         except Exception:
             print(False)
+
+############################################################################
+# https://www.hackerrank.com/challenges/xml-1-find-the-score/problem
+
+def XML1solution():
+    import sys
+    import xml.etree.ElementTree as etree
+
+    def get_attr_number(node):
+        result = 0
+        result = get_attr_number_recursive(node)
+        return result
+
+    def get_attr_number_recursive(node):
+        result = len(node.attrib)
+        for child in node:
+            result += get_attr_number_recursive(child)
+        return result
+
+    if __name__ == '__main__':
+        sys.stdin.readline()
+        xml = sys.stdin.read()
+        tree = etree.ElementTree(etree.fromstring(xml))
+        root = tree.getroot()
+        print(get_attr_number(root))
+
+############################################################################
+import xml.etree.ElementTree as etree
+
+def XML2solution():
+    maxdepth = 0
+    def depth(elem, level):
+        global maxdepth
+        # your code goes here
+        level += 1
+        for child in elem:
+            next_level = depth(child, level)
+            maxdepth = max(maxdepth, next_level)
+
+        return level
+
+    xml = """
+    <feed xml:lang='en'>
+    
+      <title>HackerRank</title>
+    
+      <subtitle lang='en'>Programming challenges</subtitle>
+    
+      <link rel='alternate' type='text/html' href='http://hackerrank.com/'/>
+    
+      <updated>2013-12-25T12:00:00</updated>
+    
+      <entry>
+    
+        <author gender='male'>Harsh</author>
+    
+        <question type='hard'>XML 1</question>
+    
+        <description type='text'>This is related to XML parsing</description>
+    
+      </entry>
+    
+    </feed>
+    """
+    tree = etree.ElementTree(etree.fromstring(xml))
+    depth(tree.getroot(), -1)
+    print(maxdepth)
