@@ -126,5 +126,39 @@ sudo apt-get remove
 # https://www.youtube.com/watch?v=8SkN7UofOww&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=11
 # Linux Sysadmin Basics -- Linux File Permissions
 
+touch another.txt
+ls -l
+chmod 777 another.txt
+ls -l
+chmod 640 another.txt
+ls -l
+
+
+# apply default mask
+chmod xxx -r dir
+nano /etc/login.defs
+
+#  change owner  user:group
+chown root another.txt
+chown vova:vova another.txt
+
+########################################
+# https://www.youtube.com/watch?v=WhCIuGjhH-0&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=12
+# Basic Linux Access Control
+
+# usr info
+id
+whiami
+
+########################################
+# https://www.youtube.com/watch?v=UN1QB5BIvps&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=13
+# Linux Sysadmin Basics -- User Account Management
+
+sudo -i
+tail /etc/passwd
+
+
+
+
 
 
