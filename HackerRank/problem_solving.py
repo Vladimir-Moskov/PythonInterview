@@ -1175,44 +1175,38 @@ from collections import deque
 
 def solve(arr):
     result = 0
+    result_left = [0] * len(arr)
+    result_right = [0] * len(arr)
 
-    stack_left = deque()
-    stack_left.append(0)
-    stack_right = deque()
-    stack_right.append(len(arr) - 1)
+    stack_max = deque()
+    stack_max.append(0)
 
     for i in range(1, len(arr) - 1):
-        left_val = 0
-        right_val = 0
-        if stack_left or arr[i] < arr[stack_left[-1]]:
-            left_val = stack_left[-1] + 1
-            stack_left.append(i)
+        while stack_max:
+            if arr[i] < arr[stack_max[-1]]:
+                result_left[i] = stack_max[-1] + 1
+                stack_max.append(i)
+                break
+            stack_max.pop()
         else:
-            while stack_left:
-                stack_left.pop()
-                if stack_left and arr[i] < arr[stack_left[-1]]:
-                    left_val = stack_left[-1] + 1
-                    stack_left.append(i)
-                    break
-            else:
-                stack_left.append(i)
+            stack_max.append(i)
+            result_left[i] = 0
 
-        j = len(arr) - 1 - i
-
-        if stack_right and arr[j] < arr[stack_right[-1]]:
-            right_val = stack_right[-1] + 1
-            stack_right.append(j)
+    stack_max = deque()
+    stack_max.append(len(arr) - 1)
+    for i in range(len(arr) - 2, 0, -1):
+        while stack_max:
+            if arr[i] < arr[stack_max[-1]]:
+                result_right[i] = stack_max[-1] + 1
+                stack_max.append(i)
+                break
+            stack_max.pop()
         else:
-            while stack_right:
-                stack_right.pop()
-                if stack_right and arr[j] < arr[stack_right[-1]]:
-                    right_val = stack_right[-1] + 1
-                    stack_right.append(j)
-                    break
-            else:
-                stack_right.append(j)
+            stack_max.append(i)
+            result_right[i] = 0
 
-        result = max(left_val * right_val, result)
+    for i in range(0, len(arr)):
+        result = max(result_right[i] * result_left[i], result)
     return result
 
 # case 1
