@@ -1168,5 +1168,52 @@ def TheFullCountingSortSolution():
 
     countSort(arr)
 #####################################################################################
+# https://www.hackerrank.com/challenges/find-maximum-index-product/problem
+# Find Maximum Index Product
 
+from collections import deque
 
+def solve(arr):
+    result = 0
+    result_left = [0] * len(arr)
+    result_right = [0] * len(arr)
+
+    stack_max = deque()
+    stack_max.append(0)
+    for i in range(1, len(arr) - 1):
+        if stack_max and arr[i] < arr[stack_max[-1]]:
+            result_left[i] = stack_max[-1] + 1
+            stack_max.append(i)
+        else:
+            while stack_max:
+                stack_max.pop()
+                if arr[i] < arr[stack_max[-1]]:
+                    result_left[i] = stack_max[-1] + 1
+                    stack_max.append(i)
+                    break
+            else:
+                result_left[i] = 0
+
+    stack_max = deque()
+    stack_max.append(len(arr) - 1)
+    for i in range(len(arr) - 2, 0, -1):
+        if stack_max and arr[i] < arr[stack_max[-1]]:
+            result_right[i] = stack_max[-1] + 1
+            stack_max.append(i)
+        else:
+            while stack_max:
+                stack_max.pop()
+                if arr[i] < arr[stack_max[-1]]:
+                    result_right[i] = stack_max[-1] + 1
+                    stack_max.append(i)
+                    break
+            else:
+                result_right[i] = 0
+
+    for i in range(0, len(arr)):
+        result = max(result_right[i] * result_left[i], result)
+    return result
+
+# case 1
+arr = [5, 4, 3, 4, 5] # 8
+print(solve(arr))
