@@ -156,9 +156,29 @@ whiami
 
 sudo -i
 tail /etc/passwd
+cat /etc/passwd | wc -l
+tail /etc/shadow
+cat /etc/group
 
+# add user , -m create home dir, -d /home/vavas, -u user id, -g group id, -s /bin/bash - set shell
+# useradd -m -d /home/vavas -u 1044 -g 44
+useradd -m -d /home/vavas  -s /bin/bash vavas
+ls /home
 
+# new user skeleton for file system
+ls /etc/skel
+ls -l /home/
+grep vavas /etc/group
+# set user password
+passwd vavas
 
-
-
+# lock account
+usermod -L vavas
+# unlock account
+usermod -U vavas
+# delete user
+userdel deluser
+rm -rf /home/deluser
+# batch user creation
+man newusers
 
