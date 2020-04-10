@@ -1175,45 +1175,51 @@ from collections import deque
 
 def solve(arr):
     result = 0
-    result_left = [0] * len(arr)
-    result_right = [0] * len(arr)
 
-    stack_max = deque()
-    stack_max.append(0)
+    stack_left = deque()
+    stack_left.append(0)
+    stack_right = deque()
+    stack_right.append(len(arr) - 1)
+
     for i in range(1, len(arr) - 1):
-        if stack_max and arr[i] < arr[stack_max[-1]]:
-            result_left[i] = stack_max[-1] + 1
-            stack_max.append(i)
+        left_val = 0
+        right_val = 0
+        if stack_left or arr[i] < arr[stack_left[-1]]:
+            left_val = stack_left[-1] + 1
+            stack_left.append(i)
         else:
-            while stack_max:
-                stack_max.pop()
-                if arr[i] < arr[stack_max[-1]]:
-                    result_left[i] = stack_max[-1] + 1
-                    stack_max.append(i)
+            while stack_left:
+                stack_left.pop()
+                if stack_left and arr[i] < arr[stack_left[-1]]:
+                    left_val = stack_left[-1] + 1
+                    stack_left.append(i)
                     break
             else:
-                result_left[i] = 0
+                stack_left.append(i)
 
-    stack_max = deque()
-    stack_max.append(len(arr) - 1)
-    for i in range(len(arr) - 2, 0, -1):
-        if stack_max and arr[i] < arr[stack_max[-1]]:
-            result_right[i] = stack_max[-1] + 1
-            stack_max.append(i)
+        j = len(arr) - 1 - i
+
+        if stack_right and arr[j] < arr[stack_right[-1]]:
+            right_val = stack_right[-1] + 1
+            stack_right.append(j)
         else:
-            while stack_max:
-                stack_max.pop()
-                if arr[i] < arr[stack_max[-1]]:
-                    result_right[i] = stack_max[-1] + 1
-                    stack_max.append(i)
+            while stack_right:
+                stack_right.pop()
+                if stack_right and arr[j] < arr[stack_right[-1]]:
+                    right_val = stack_right[-1] + 1
+                    stack_right.append(j)
                     break
             else:
-                result_right[i] = 0
+                stack_right.append(j)
 
-    for i in range(0, len(arr)):
-        result = max(result_right[i] * result_left[i], result)
+        result = max(left_val * right_val, result)
     return result
 
 # case 1
 arr = [5, 4, 3, 4, 5] # 8
 print(solve(arr))
+
+# case 2
+arr = [1, 1, 0, 1, 1] # 8
+print(solve(arr))
+
