@@ -182,3 +182,8 @@ rm -rf /home/deluser
 # batch user creation
 man newusers
 
+#####################################################3
+# Linux Sysadmin Basics -- 6 -- Processes Overview
+# https://www.youtube.com/watch?v=ls5cGi12kGw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=14
+
+
