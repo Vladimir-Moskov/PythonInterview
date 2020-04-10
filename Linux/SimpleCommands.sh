@@ -182,8 +182,34 @@ rm -rf /home/deluser
 # batch user creation
 man newusers
 
-#####################################################3
+#####################################################
 # Linux Sysadmin Basics -- 6 -- Processes Overview
 # https://www.youtube.com/watch?v=ls5cGi12kGw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=14
+
+env
+# disk space
+df -h
+# disk usage
+du
+# go to prev dir
+cd -
+
+# copy text to the clipboard
+cat file.txt | xclip -selection clipboard
+
+#####################################################
+# Linux Sysadmin Basics -- 6.1 Process Signals
+# https://www.youtube.com/watch?v=lP7xoqkqDZQ&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=15
+
+kill pid
+# list kill options
+kill -l
+kill 829 # vi
+
+ps aux | grep nano
+# 15 is default
+kill -15  829
+# 9 is hard kill
+kill -9  829
 
 

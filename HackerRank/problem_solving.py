@@ -1171,49 +1171,145 @@ def TheFullCountingSortSolution():
 # https://www.hackerrank.com/challenges/find-maximum-index-product/problem
 # Find Maximum Index Product
 
+def FindMaximumIndexProduct():
+    from collections import deque
+
+    def solve(arr):
+        result = 0
+        result_left = [0] * len(arr)
+        result_right = [0] * len(arr)
+
+        stack_max = deque()
+        stack_max.append(0)
+
+        for i in range(1, len(arr) - 1):
+            while stack_max:
+                if arr[i] < arr[stack_max[-1]]:
+                    result_left[i] = stack_max[-1] + 1
+                    stack_max.append(i)
+                    break
+                stack_max.pop()
+            else:
+                stack_max.append(i)
+                result_left[i] = 0
+
+        stack_max = deque()
+        stack_max.append(len(arr) - 1)
+        for i in range(len(arr) - 2, 0, -1):
+            while stack_max:
+                if arr[i] < arr[stack_max[-1]]:
+                    result_right[i] = stack_max[-1] + 1
+                    stack_max.append(i)
+                    break
+                stack_max.pop()
+            else:
+                stack_max.append(i)
+                result_right[i] = 0
+
+        for i in range(0, len(arr)):
+            result = max(result_right[i] * result_left[i], result)
+        return result
+
+    # case 1
+    arr = [5, 4, 3, 4, 5] # 8
+    print(solve(arr))
+
+    # case 2
+    arr = [1, 1, 0, 1, 1] # 8
+    print(solve(arr))
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/count-luck/problem
+# Count Luck
+
 from collections import deque
 
-def solve(arr):
+
+def countLuck(matrix, k):
     result = 0
-    result_left = [0] * len(arr)
-    result_right = [0] * len(arr)
+    # delta = [(-1,0), (1,0), (0, -1), (0, 1)]
+    START_POINT = "M"
+    END_POINT = "*"
+    BLOCK_POINT = "X"
 
-    stack_max = deque()
-    stack_max.append(0)
+    start = () # row, col
+    end = ()
+    row_num = len(matrix)
+    col_num = len(matrix[0])
+    for i in range(row_num):
+        for j in range(col_num):
+            if matrix[i][j] == START_POINT:
+                start = (i, j)
 
-    for i in range(1, len(arr) - 1):
-        while stack_max:
-            if arr[i] < arr[stack_max[-1]]:
-                result_left[i] = stack_max[-1] + 1
-                stack_max.append(i)
-                break
-            stack_max.pop()
-        else:
-            stack_max.append(i)
-            result_left[i] = 0
+    path_q = deque([start])
+    while path_q:
+        step_row, step_col = path_q.popleft() # [row, col]
+        matrix[step_row][step_col] = "X"
+        len_before = len(path_q)
 
-    stack_max = deque()
-    stack_max.append(len(arr) - 1)
-    for i in range(len(arr) - 2, 0, -1):
-        while stack_max:
-            if arr[i] < arr[stack_max[-1]]:
-                result_right[i] = stack_max[-1] + 1
-                stack_max.append(i)
-                break
-            stack_max.pop()
-        else:
-            stack_max.append(i)
-            result_right[i] = 0
+        if step_row > 0:
+            top_step = (step_row -1, step_col)
+            val = matrix[top_step[0]][top_step[1]]
+            if val == END_POINT:
+                end = top_step
+                path_q.append(end)
+            elif val != BLOCK_POINT:
+                path_q.append(top_step)
 
-    for i in range(0, len(arr)):
-        result = max(result_right[i] * result_left[i], result)
-    return result
+        if step_row < row_num - 1:
+            down_step = (step_row + 1, step_col)
+            val = matrix[down_step[0]][down_step[1]]
+            if val == END_POINT:
+                end = down_step
+                path_q.append(end)
+            elif val != BLOCK_POINT:
+                path_q.append(down_step)
+
+        if step_col > 0:
+            left_step = (step_row, step_col - 1)
+            val = matrix[left_step[0]][left_step[1]]
+            if val == END_POINT:
+                end = left_step
+                path_q.append(end)
+            elif val != BLOCK_POINT:
+                path_q.append(left_step)
+
+        if step_col < col_num - 1:
+            right_step = (step_row, step_col + 1)
+            val = matrix[right_step[0]][right_step[1]]
+            if val == END_POINT:
+                end = right_step
+                path_q.append(end)
+            elif val != BLOCK_POINT:
+                path_q.append(right_step)
+
+        if (len(path_q) - len_before) > 1:
+            result += 1
+
+        if end:
+            break
+    return "Impressed" if result == k else "Oops!"
 
 # case 1
-arr = [5, 4, 3, 4, 5] # 8
-print(solve(arr))
+matrix = [
+    ["*", ".", "M"],
+    [".", "X", "."]
+]
+# print(countLuck(matrix, 1)) # "Impressed"
 
 # case 2
-arr = [1, 1, 0, 1, 1] # 8
-print(solve(arr))
+matrix = [
+    list(".X.X......X"),
+    list(".X*.X.XXX.X"),
+    list(".XX.X.XM..."),
+    list("......XXXX."),
+]
+# print(countLuck(matrix, 3)) # "Impressed"
 
+# case 3
+matrix2 = [
+     list("*.."),
+     list("X.X"),
+     list("..M")
+ ]
+print(countLuck(matrix2, 1)) # "Oops"
