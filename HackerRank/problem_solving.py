@@ -1222,120 +1222,111 @@ def FindMaximumIndexProduct():
 # https://www.hackerrank.com/challenges/count-luck/problem
 # Count Luck
 
-from collections import deque
+
+def CountLuckSolution():
+    from collections import deque
 
 
-def countLuck(matrix, k):
-    result = 0
-    # delta = [(-1,0), (1,0), (0, -1), (0, 1)]
-    START_POINT = "M"
-    END_POINT = "*"
-    BLOCK_POINT = "X"
+    def countLuck(matrix, k):
+        result = 0
+        # delta = [(-1,0), (1,0), (0, -1), (0, 1)]
+        START_POINT = "M"
+        END_POINT = "*"
+        BLOCK_POINT = "X"
 
-    start = () # row, col
-    end = ()
-    row_num = len(matrix)
-    col_num = len(matrix[0])
-    for i in range(row_num):
-        for j in range(col_num):
-            if matrix[i][j] == START_POINT:
-                start = (i, j)
+        start = () # row, col
+        end = ()
+        row_num = len(matrix)
+        col_num = len(matrix[0])
+        for i in range(row_num):
+            for j in range(col_num):
+                if matrix[i][j] == START_POINT:
+                    start = (i, j)
 
-    path_q = deque([start])
-    turn_dic = {}
-    turn_dic[start] = 0
-    while path_q:
-        top_step = None
-        down_step = None
-        right_step = None
-        left_step = None
-        current_step = path_q.popleft()
-        step_row, step_col = current_step# [row, col]
-        matrix[step_row][step_col] = "X"
-        len_before = len(path_q)
+        path_q = deque([start])
+        turn_dic = {}
+        turn_dic[start] = 0
+        while not end and path_q:
+            top_step = None
+            down_step = None
+            right_step = None
+            left_step = None
+            current_step = path_q.popleft()
+            step_row, step_col = current_step # [row, col]
+            matrix[step_row][step_col] = "X"
+            len_before = len(path_q)
 
-        if step_row > 0:
-            top_step = (step_row - 1, step_col)
-            val = matrix[top_step[0]][top_step[1]]
-            if val == END_POINT:
-                end = top_step
-                path_q.append(end)
-            elif val != BLOCK_POINT:
-                path_q.append(top_step)
+            if step_row > 0:
+                top_step = (step_row - 1, step_col)
+                val = matrix[top_step[0]][top_step[1]]
+                if val == END_POINT:
+                    end = top_step
+                    path_q.append(end)
+                elif val != BLOCK_POINT:
+                    path_q.append(top_step)
 
-        if step_row < row_num - 1:
-            down_step = (step_row + 1, step_col)
-            val = matrix[down_step[0]][down_step[1]]
-            if val == END_POINT:
-                end = down_step
-                path_q.append(end)
-            elif val != BLOCK_POINT:
-                path_q.append(down_step)
+            if step_row < row_num - 1:
+                down_step = (step_row + 1, step_col)
+                val = matrix[down_step[0]][down_step[1]]
+                if val == END_POINT:
+                    end = down_step
+                    path_q.append(end)
+                elif val != BLOCK_POINT:
+                    path_q.append(down_step)
 
-        if step_col > 0:
-            left_step = (step_row, step_col - 1)
-            val = matrix[left_step[0]][left_step[1]]
-            if val == END_POINT:
-                end = left_step
-                path_q.append(end)
-            elif val != BLOCK_POINT:
-                path_q.append(left_step)
+            if step_col > 0:
+                left_step = (step_row, step_col - 1)
+                val = matrix[left_step[0]][left_step[1]]
+                if val == END_POINT:
+                    end = left_step
+                    path_q.append(end)
+                elif val != BLOCK_POINT:
+                    path_q.append(left_step)
 
-        if step_col < col_num - 1:
-            right_step = (step_row, step_col + 1)
-            val = matrix[right_step[0]][right_step[1]]
-            if val == END_POINT:
-                end = right_step
-                path_q.append(end)
-            elif val != BLOCK_POINT:
-                path_q.append(right_step)
+            if step_col < col_num - 1:
+                right_step = (step_row, step_col + 1)
+                val = matrix[right_step[0]][right_step[1]]
+                if val == END_POINT:
+                    end = right_step
+                    path_q.append(end)
+                elif val != BLOCK_POINT:
+                    path_q.append(right_step)
 
-        if (len(path_q) - len_before) > 1:
-            #result += 1
+            turn = 1 if (len(path_q) - len_before) > 1 else 0
+
             if down_step:
-                turn_dic[down_step] = turn_dic[current_step] + 1
+                turn_dic[down_step] = turn_dic[current_step] + turn
             if top_step:
-                turn_dic[top_step] = turn_dic[current_step] + 1
+                turn_dic[top_step] = turn_dic[current_step] + turn
             if right_step:
-                turn_dic[right_step] = turn_dic[current_step] + 1
+                turn_dic[right_step] = turn_dic[current_step] + turn
             if left_step:
-                turn_dic[left_step] = turn_dic[current_step] + 1
-        else:
-            if down_step:
-                turn_dic[down_step] = turn_dic[current_step]
-            if top_step:
-                turn_dic[top_step] = turn_dic[current_step]
-            if right_step:
-                turn_dic[right_step] = turn_dic[current_step]
-            if left_step:
-                turn_dic[left_step] = turn_dic[current_step]
+                turn_dic[left_step] = turn_dic[current_step] + turn
 
-        if end:
-            break
-    result = turn_dic[end]
+        result = turn_dic[end]
 
-    return "Impressed" if result == k else "Oops!"
+        return "Impressed" if result == k else "Oops!"
 
-# case 1
-matrix = [
-    ["*", ".", "M"],
-    [".", "X", "."]
-]
-print(countLuck(matrix, 1)) # "Impressed"
+    # case 1
+    matrix = [
+        ["*", ".", "M"],
+        [".", "X", "."]
+    ]
+    print(countLuck(matrix, 1)) # "Impressed"
 
-# case 2
-matrix = [
-    list(".X.X......X"),
-    list(".X*.X.XXX.X"),
-    list(".XX.X.XM..."),
-    list("......XXXX."),
-]
-print(countLuck(matrix, 3)) # "Impressed"
+    # case 2
+    matrix = [
+        list(".X.X......X"),
+        list(".X*.X.XXX.X"),
+        list(".XX.X.XM..."),
+        list("......XXXX."),
+    ]
+    print(countLuck(matrix, 3)) # "Impressed"
 
-# case 3
-matrix2 = [
-     list("*.."),
-     list("X.X"),
-     list("..M")
- ]
-print(countLuck(matrix2, 1)) # "Oops"
+    # case 3
+    matrix2 = [
+         list("*.."),
+         list("X.X"),
+         list("..M")
+     ]
+    print(countLuck(matrix2, 1)) # "Oops"
