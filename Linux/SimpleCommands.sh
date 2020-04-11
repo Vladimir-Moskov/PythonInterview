@@ -240,6 +240,36 @@ renice -5 789
 # https://www.youtube.com/watch?v=0XdjODvsRN8&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=17
 
 
+ls /proc -la
+# virtual file systtem - report file system disk space usage
+df -ah
+ls /proc -lah
+ls -lah /proc/1/
+cd  /proc
+cd 1
+# comand line command name
+cat cmdline
+cat cwd
+ls -al cwd
+ls fd
+# memoty map info
+ls maps
+# env variables
+ls envos
+
+cat statm
+
+# strace - trace system calls and signals
+man strace
+
+#####################################################
+# Linux Sysadmin Basics -- Filesystem Purpose and Absolute/Relative Pathnames
+# https://www.youtube.com/watch?v=ar37viZGQwk&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=18
+
+
+
+
+
 
 
 
