@@ -113,138 +113,142 @@ def Zipped():
 # Python3 program to find maximum
 # rectangular area in linear time
 
-def max_area_histogram(histogram):
+def histogrammSolution():
+    def max_area_histogram(histogram):
 
-    # This function calulates maximum
-    # rectangular area under given
-    # histogram with n bars
+        # This function calulates maximum
+        # rectangular area under given
+        # histogram with n bars
 
-    # Create an empty stack. The stack
-    # holds indexes of histogram[] list.
-    # The bars stored in the stack are
-    # always in increasing order of
-    # their heights.
-    stack = list()
+        # Create an empty stack. The stack
+        # holds indexes of histogram[] list.
+        # The bars stored in the stack are
+        # always in increasing order of
+        # their heights.
+        stack = list()
 
-    max_area = 0 # Initialize max area
+        max_area = 0 # Initialize max area
 
-    # Run through all bars of
-    # given histogram
-    index = 0
-    while index < len(histogram):
+        # Run through all bars of
+        # given histogram
+        index = 0
+        while index < len(histogram):
 
-        # If this bar is higher
-        # than the bar on top
-        # stack, push it to stack
+            # If this bar is higher
+            # than the bar on top
+            # stack, push it to stack
 
-        if (not stack) or (histogram[stack[-1]] <= histogram[index]):
-            stack.append(index)
-            index += 1
+            if (not stack) or (histogram[stack[-1]] <= histogram[index]):
+                stack.append(index)
+                index += 1
 
-        # If this bar is lower than top of stack,
-        # then calculate area of rectangle with
-        # stack top as the smallest (or minimum
-        # height) bar.'i' is 'right index' for
-        # the top and element before top in stack
-        # is 'left index'
-        else:
+            # If this bar is lower than top of stack,
+            # then calculate area of rectangle with
+            # stack top as the smallest (or minimum
+            # height) bar.'i' is 'right index' for
+            # the top and element before top in stack
+            # is 'left index'
+            else:
+                # pop the top
+                top_of_stack = stack.pop()
+
+                # Calculate the area with
+                # histogram[top_of_stack] stack
+                # as smallest bar
+                area = (histogram[top_of_stack] *
+                       ((index - stack[-1] - 1)
+                       if stack else index))
+
+                # update max area, if needed
+                max_area = max(max_area, area)
+
+        # Now pop the remaining bars from
+        # stack and calculate area with
+        # every popped bar as the smallest bar
+        while stack:
+
             # pop the top
             top_of_stack = stack.pop()
 
             # Calculate the area with
-            # histogram[top_of_stack] stack
-            # as smallest bar
+            # histogram[top_of_stack]
+            # stack as smallest bar
             area = (histogram[top_of_stack] *
-                   ((index - stack[-1] - 1)
-                   if stack else index))
+                  ((index - stack[-1] - 1)
+                    if stack else index))
 
             # update max area, if needed
             max_area = max(max_area, area)
 
-    # Now pop the remaining bars from
-    # stack and calculate area with
-    # every popped bar as the smallest bar
-    while stack:
+        # Return maximum area under
+        # the given histogram
+        return max_area
+    import timeit
+    import inspect
 
-        # pop the top
-        top_of_stack = stack.pop()
+    # Driver Code
+    hist = [6, 2, 5, 4, 5, 1, 6]
+    print("Maximum area is",
+           max_area_histogram(hist))
 
-        # Calculate the area with
-        # histogram[top_of_stack]
-        # stack as smallest bar
-        area = (histogram[top_of_stack] *
-              ((index - stack[-1] - 1)
-                if stack else index))
-
-        # update max area, if needed
-        max_area = max(max_area, area)
-
-    # Return maximum area under
-    # the given histogram
-    return max_area
-import timeit
-import inspect
-
-# Driver Code
-hist = [6, 2, 5, 4, 5, 1, 6]
-print("Maximum area is",
-       max_area_histogram(hist))
-
-test_code = inspect.getsource(max_area_histogram)
-test_code += """
-hist = [6, 2, 5, 4, 5, 1, 6]
-max_area_histogram(hist)"""
-# print(timeit.timeit(stmt=test_code, number=100000))
+    test_code = inspect.getsource(max_area_histogram)
+    test_code += """
+    hist = [6, 2, 5, 4, 5, 1, 6]
+    max_area_histogram(hist)"""
+    # print(timeit.timeit(stmt=test_code, number=100000))
 
 ##############################################################
 # Arrays
 # https://www.hackerrank.com/challenges/np-arrays/problem
 
-import numpy
+def ArraysSolution():
+    import numpy
 
-def arrays(arr):
-    # complete this function
-    # use numpy.array
-    arr1d = numpy.array(arr, float)
-    reversed_arr = numpy.flipud(arr1d)
-    return reversed_arr
+    def arrays(arr):
+        # complete this function
+        # use numpy.array
+        arr1d = numpy.array(arr, float)
+        reversed_arr = numpy.flipud(arr1d)
+        return reversed_arr
 
-arr = input().strip().split(' ')
-result = arrays(arr)
-print(result)
+    arr = input().strip().split(' ')
+    result = arrays(arr)
+    print(result)
 
 ####################################################################
 # https://www.hackerrank.com/challenges/input/problem
 # Input()
 
-x, k = list(map(int, input().split()))
-expression = input()
-result = eval(expression) == k
-print(result)
+def InputSolution():
+    x, k = list(map(int, input().split()))
+    expression = input()
+    result = eval(expression) == k
+    print(result)
 
 ####################################################################
 # Decorators 2 - Name Directory
 # https://www.hackerrank.com/challenges/decorators-2-name-directory/problem
 
-import operator
+def Decorators2():
+    import operator
 
 
-def person_lister(f):
-    def inner(people):
-        people = sorted(people, key=lambda person: int(person[2]))
-        return map(f, people)
+    def person_lister(f):
+        def inner(people):
+            people = sorted(people, key=lambda person: int(person[2]))
+            return map(f, people)
 
-    return inner
-
-
-@person_lister
-def name_format(person):
-    return ("Mr. " if person[3] == "M" else "Ms. ") + person[0] + " " + person[1]
+        return inner
 
 
-if __name__ == '__main__':
-    people = [input().split() for i in range(int(input()))]
-    print(*name_format(people), sep='\n')
+    @person_lister
+    def name_format(person):
+        return ("Mr. " if person[3] == "M" else "Ms. ") + person[0] + " " + person[1]
+
+
+    if __name__ == '__main__':
+        people = [input().split() for i in range(int(input()))]
+        print(*name_format(people), sep='\n')
 
 ###################################################################
 # Classes: Dealing with Complex Numbers
@@ -312,37 +316,38 @@ def DotandCross():
 # Inner and Outer
 # https://www.hackerrank.com/challenges/np-inner-and-outer/problem
 
-import numpy
+def InnerOuter():
+    import numpy
 
-A = list(map(int , input().rstrip().split()))
-B= list(map(int , input().rstrip().split()))
+    A = list(map(int , input().rstrip().split()))
+    B= list(map(int , input().rstrip().split()))
 
-A = numpy.array(A)
-B = numpy.array(B)
-print(numpy.inner(A, B))
-print(numpy.outer(A, B))
+    A = numpy.array(A)
+    B = numpy.array(B)
+    print(numpy.inner(A, B))
+    print(numpy.outer(A, B))
 
 ############################################################################
 # Map and Lambda Function
 # https://www.hackerrank.com/challenges/map-and-lambda-expression/problem
 
+def LambdaFunction():
+    cube = lambda x: x**3# complete the lambda function
 
-cube = lambda x: x**3# complete the lambda function
+    def fibonacci(n):
+        result = [0] * n
 
-def fibonacci(n):
-    result = [0] * n
-
-    for i in range(n):
-        if i < 2:
-          result[i] = i
-        else:
-            result[i] = result[i-1] + result[i-2]
-    return result
+        for i in range(n):
+            if i < 2:
+              result[i] = i
+            else:
+                result[i] = result[i-1] + result[i-2]
+        return result
 
 
-if __name__ == '__main__':
-    n = int(input())
-    print(list(map(cube, fibonacci(n))))
+    if __name__ == '__main__':
+        n = int(input())
+        print(list(map(cube, fibonacci(n))))
 
 ############################################################################
 # ginortS
@@ -370,103 +375,109 @@ def ginortS():
 # https://www.hackerrank.com/challenges/reduce-function/problem
 # Reduce Function
 
-from fractions import Fraction
-from functools import reduce
+def ReduceFunction():
+    from fractions import Fraction
+    from functools import reduce
 
-def product(fracs):
-    t = reduce(lambda x, y : x * y, fracs)
-    return t.numerator, t.denominator
+    def product(fracs):
+        t = reduce(lambda x, y : x * y, fracs)
+        return t.numerator, t.denominator
 
-if __name__ == '__main__':
-    fracs = []
-    for _ in range(int(input())):
-        fracs.append(Fraction(*map(int, input().split())))
-    result = product(fracs)
-    print(*result)
+    if __name__ == '__main__':
+        fracs = []
+        for _ in range(int(input())):
+            fracs.append(Fraction(*map(int, input().split())))
+        result = product(fracs)
+        print(*result)
 
 ############################################################################
 # https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem
 # Validating Email Addresses With a Filter
 
+def ValidatingEmail():
+    def fun(email):
+        try:
+            username, url = email.split("@")
+            website, extension = url.split(".")
+        except ValueError:
+            return False
 
-def fun(email):
-    try:
-        username, url = email.split("@")
-        website, extension = url.split(".")
-    except ValueError:
-        return False
-
-    if not username.replace("-", "").replace("_", "").isalnum():
-        return False
-    if not website.isalnum():
-        return False
-    if len(extension) > 3:
-        return False
-    return True
-
-
-def filter_mail(emails):
-    return list(filter(fun, emails))
+        if not username.replace("-", "").replace("_", "").isalnum():
+            return False
+        if not website.isalnum():
+            return False
+        if len(extension) > 3:
+            return False
+        return True
 
 
-if __name__ == '__main__':
-    n = int(input())
-    emails = []
-    for _ in range(n):
-        emails.append(input())
+    def filter_mail(emails):
+        return list(filter(fun, emails))
 
-filtered_emails = filter_mail(emails)
-filtered_emails.sort()
-print(filtered_emails)
+
+    if __name__ == '__main__':
+        n = int(input())
+        emails = []
+        for _ in range(n):
+            emails.append(input())
+
+    filtered_emails = filter_mail(emails)
+    filtered_emails.sort()
+    print(filtered_emails)
+
 ############################################################################
 # Linear Algebra
 
-import numpy
+def LinearAlgebra():
+    import numpy
 
-N = int(input())
-A = [0] * N
-for i in range(N):
-    A[i] = list(map(float, input().split()))
+    N = int(input())
+    A = [0] * N
+    for i in range(N):
+        A[i] = list(map(float, input().split()))
 
-A = numpy.array(A)
-print(round(numpy.linalg.det(A), 2))
+    A = numpy.array(A)
+    print(round(numpy.linalg.det(A), 2))
 
 ############################################################################
 # Polynomials
 
-A = list(map(float, input().split()))
-x = float(input())
-A = numpy.array(A)
-print(numpy.polyval(A, x))
+def Polynomials():
+    import numpy
+    A = list(map(float, input().split()))
+    x = float(input())
+    A = numpy.array(A)
+    print(numpy.polyval(A, x))
 
 ############################################################################
 # Standardize Mobile Number Using Decorators
 
-pref = '+91 '
-def wrapper(f):
-    def fun(l):
-        new_l = []
-        for phone in l:
-            if phone[0] == '0':
-               phone = pref + phone[1:6] + ' ' + phone[6:]
-            elif phone[0] == '+':
-               phone = pref + phone[3:8] + ' ' + phone[8:]
-            else:
-               if len(phone) == 10:
-                    phone = pref + phone[0:5] + ' ' + phone[5:]
-               else:
-                    phone = pref + phone[2:7] + ' ' + phone[7:]
-            new_l.append(phone)
-        return f(new_l)
-    return fun
+def StandardizeMobile():
+    pref = '+91 '
+    def wrapper(f):
+        def fun(l):
+            new_l = []
+            for phone in l:
+                if phone[0] == '0':
+                   phone = pref + phone[1:6] + ' ' + phone[6:]
+                elif phone[0] == '+':
+                   phone = pref + phone[3:8] + ' ' + phone[8:]
+                else:
+                   if len(phone) == 10:
+                        phone = pref + phone[0:5] + ' ' + phone[5:]
+                   else:
+                        phone = pref + phone[2:7] + ' ' + phone[7:]
+                new_l.append(phone)
+            return f(new_l)
+        return fun
 
-@wrapper
-def sort_phone(l):
-    print(*sorted(l), sep='\n')
+    @wrapper
+    def sort_phone(l):
+        print(*sorted(l), sep='\n')
 
-if __name__ == '__main__':
-    l = [input() for _ in range(int(input()))]
-    sort_phone(l)
+    if __name__ == '__main__':
+        l = [input() for _ in range(int(input()))]
+        sort_phone(l)
 
 
 ############################################################################
@@ -551,3 +562,50 @@ def XML2solution():
     tree = etree.ElementTree(etree.fromstring(xml))
     depth(tree.getroot(), -1)
     print(maxdepth)
+
+
+######################################################################
+# https://www.hackerrank.com/challenges/simple-text-editor/problem
+# Simple Text Editor
+
+def SimpleTextEditor():
+
+    from collections import deque
+    # comands_ar = [(comand, str)]
+
+    def runCommands(comands_ar):
+        comands_deq = deque()
+        current_str = ''
+        for comand, *str_val in comands_ar:
+            str_val = str_val[0] if str_val else None
+            if comand == "1":
+                comands_deq.append(current_str)
+                current_str += str_val
+            elif comand == "2":
+                comands_deq.append(current_str)
+                val_int = min(int(str_val), len(current_str))
+                current_str = current_str[: -val_int]
+            elif comand == "3":
+                val_int = int(str_val) - 1
+                print(current_str[val_int])
+            elif comand == "4":
+                val = comands_deq.pop()
+                current_str = val
+
+    comands_ar = [
+    ["1", "ewcgpjfh"],
+    ["1", "igqsbqyp"],
+    ["1", "qsdliigcj"],
+    ["4"],
+    ["3", "15"],
+    ["1", "iilmgp"],
+    ["2", "8"],
+    ["4"],
+    ["2", "18"],
+    ["1", "scwhors"]]
+
+    runCommands(comands_ar)
+
+######################################################################
+#
+#

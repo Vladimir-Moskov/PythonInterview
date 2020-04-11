@@ -266,6 +266,17 @@ man strace
 # Linux Sysadmin Basics -- Filesystem Purpose and Absolute/Relative Pathnames
 # https://www.youtube.com/watch?v=ar37viZGQwk&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=18
 
+ls /dev
+ps -aux | grep udevd
+df -ah
+ifconfig
+/sbin/ifconfig
+
+#####################################################
+# Linux Sysadmin Basics -- 7 -- Filesystem Layout Overview
+# https://www.youtube.com/watch?v=svh8sSuz5BI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=19
+
+
 
 
 

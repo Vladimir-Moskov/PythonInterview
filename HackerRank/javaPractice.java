@@ -67,3 +67,24 @@ public static String getSmallestAndLargest(String s, int k) {
     }
 
 ////////////////////////////////////////////////////////////////////////////////
+//
+//
+public class Solution {
+
+    public static void main(String[] args) {
+
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        /* Enter your code here. Print output to STDOUT. */
+         String Ar = new StringBuilder(A).reverse().toString();
+
+         if (A.equals(Ar)){
+             System.out.print("Yes");
+         }
+         else{
+              System.out.print("No");
+         }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
