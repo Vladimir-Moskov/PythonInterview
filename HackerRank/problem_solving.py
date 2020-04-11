@@ -1242,13 +1242,20 @@ def countLuck(matrix, k):
                 start = (i, j)
 
     path_q = deque([start])
+    turn_dic = {}
+    turn_dic[start] = 0
     while path_q:
-        step_row, step_col = path_q.popleft() # [row, col]
+        top_step = None
+        down_step = None
+        right_step = None
+        left_step = None
+        current_step = path_q.popleft()
+        step_row, step_col = current_step# [row, col]
         matrix[step_row][step_col] = "X"
         len_before = len(path_q)
 
         if step_row > 0:
-            top_step = (step_row -1, step_col)
+            top_step = (step_row - 1, step_col)
             val = matrix[top_step[0]][top_step[1]]
             if val == END_POINT:
                 end = top_step
@@ -1284,10 +1291,29 @@ def countLuck(matrix, k):
                 path_q.append(right_step)
 
         if (len(path_q) - len_before) > 1:
-            result += 1
+            #result += 1
+            if down_step:
+                turn_dic[down_step] = turn_dic[current_step] + 1
+            if top_step:
+                turn_dic[top_step] = turn_dic[current_step] + 1
+            if right_step:
+                turn_dic[right_step] = turn_dic[current_step] + 1
+            if left_step:
+                turn_dic[left_step] = turn_dic[current_step] + 1
+        else:
+            if down_step:
+                turn_dic[down_step] = turn_dic[current_step]
+            if top_step:
+                turn_dic[top_step] = turn_dic[current_step]
+            if right_step:
+                turn_dic[right_step] = turn_dic[current_step]
+            if left_step:
+                turn_dic[left_step] = turn_dic[current_step]
 
         if end:
             break
+    result = turn_dic[end]
+
     return "Impressed" if result == k else "Oops!"
 
 # case 1
@@ -1295,7 +1321,7 @@ matrix = [
     ["*", ".", "M"],
     [".", "X", "."]
 ]
-# print(countLuck(matrix, 1)) # "Impressed"
+print(countLuck(matrix, 1)) # "Impressed"
 
 # case 2
 matrix = [
@@ -1304,7 +1330,7 @@ matrix = [
     list(".XX.X.XM..."),
     list("......XXXX."),
 ]
-# print(countLuck(matrix, 3)) # "Impressed"
+print(countLuck(matrix, 3)) # "Impressed"
 
 # case 3
 matrix2 = [

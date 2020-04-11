@@ -148,7 +148,7 @@ chown vova:vova another.txt
 
 # usr info
 id
-whiami
+whoami
 
 ########################################
 # https://www.youtube.com/watch?v=UN1QB5BIvps&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=13
@@ -211,5 +211,35 @@ ps aux | grep nano
 kill -15  829
 # 9 is hard kill
 kill -9  829
+
+ps aux | grep cups
+sudo killall cupsd
+
+#
+man pgrep
+man pkill
+man signal
+
+
+#####################################################
+# Linux Sysadmin Basics -- 6.2 State, Niceness, and How to Monitor Processes
+# https://www.youtube.com/watch?v=vsEJz9aKGKU&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=16
+
+# dafault order by cpu
+top
+
+#  nice - run a program with modified scheduling priority
+man nice
+nice -n 15 run_process
+
+# renice - alter priority of running processe by PID
+renice -5 789
+
+#####################################################
+# Linux Sysadmin Basics -- 6.3 The /proc Filesystem
+# https://www.youtube.com/watch?v=0XdjODvsRN8&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=17
+
+
+
 
 
