@@ -316,7 +316,28 @@ ls /var
 # Linux Sysadmin Basics -- Linux File Types
 # https://www.youtube.com/watch?v=EDgkcvOoY8A&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=21
 
+#####################################################
+# Linux Basics -- Scheduling Tasks with Cron
+# https://www.youtube.com/watch?v=8j0SWYNglcw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=22
+
+crontab -l
+login vova
+# edit cron jobs
+crontab -e
+
+# 15 10 * * 3-5   echo "$(date): checking in." >> /var/log/mycheckin
+# (m)(h)(dom)(moy)(wd)   (cmd)
+# * * * * *  echo "hi there" >> ~/hi.txt
+ls /var/spool/cron/crontabs
+cat /var/spool/cron/crontabs/vova
+ls /etc/cron.d/
+# system tasks
+sudo /etc/crontab
+cat /etc/cron.allow
+# edit user cron tasks
+crontab -e -u vova
 
 
+#####################################################
 
 
