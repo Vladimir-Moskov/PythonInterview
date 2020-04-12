@@ -276,9 +276,45 @@ ifconfig
 # Linux Sysadmin Basics -- 7 -- Filesystem Layout Overview
 # https://www.youtube.com/watch?v=svh8sSuz5BI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=19
 
+ls -lah /
 
+# place for configs
+ls -lah /etc
+ls -lah /etc/shh
 
+# secure sys bin
+ls /sbin | less
+# all other binaries
+ls /bin | less
+# temp files
+ls /tmp
+# users home
+ls /home
+# shared libs under lib and lib64
+ls /lib | ls /lib64
+# file system description
+man hier
 
+#####################################################
+# Linux Sysadmin Basics -- 7.1 Filesystem Layout
+# https://www.youtube.com/watch?v=TG5YJe9camA&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=20
+
+ls /
+# kernel and boot loader
+ls /boot -lah
+# all devices in
+ls -lah /dev
+# mounted devises or filesystems
+ls /media
+ls /mnt
+# optional soft
+ls /opt
+# logs, variables
+ls /var
+
+#####################################################
+# Linux Sysadmin Basics -- Linux File Types
+# https://www.youtube.com/watch?v=EDgkcvOoY8A&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=21
 
 
 
