@@ -88,3 +88,63 @@ public class Solution {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// https://www.hackerrank.com/challenges/java-anagrams/problem
+// Java Anagrams
+
+static boolean isAnagram(String a, String b) {
+        // Complete the function
+        HashMap<String, Integer> dict_A = new HashMap<String, Integer>();
+        HashMap<String, Integer> dict_B = new HashMap<String, Integer>();
+
+        if (a.lenght() != b.lenght()){
+            return false;
+        }
+
+        for(int i = 0; i < a.lenght(); i++){
+            String val = Character.toLowerCase(a.charAt(i));
+            if(dict_A.get(val)){
+                dict_A.put(val, dict_A.get(val) + 1);
+            }
+            else{
+                 dict_A.put(val, 1);
+            }
+        }
+
+       for(int i = 0; i < b.lenght(); i++){
+           String val = Character.toLowerCase(b.charAt(i));
+            if(dict_B.get(val)){
+                dict_B.put(val, dict_B.get(val) + 1);
+            }
+            else{
+                 dict_B.put(val, 1);
+            }
+        }
+
+        dict_A.forEach((k, v) -> {
+            if(!dict_B.get(k) || dict_B.get(k) != v){
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    // really good one
+     static boolean isAnagram(String a, String b) {
+        // Complete the function
+
+        if(a.length() != b.length())
+            return false;
+        int c[] = new int[26];
+        int d[] = new int[26] ;
+        a = a.toUpperCase();
+        b = b.toUpperCase();
+        for(int i=0; i<a.length(); i++){
+            c[a.charAt(i) - 'A']++;
+            d[b.charAt(i) - 'A']++;
+        }
+        for(int i =0;i<26; i++)
+            if(c[i] != d[i] ) return false;
+        return true;
+
+    }

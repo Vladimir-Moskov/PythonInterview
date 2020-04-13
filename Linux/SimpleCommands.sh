@@ -339,5 +339,8 @@ crontab -e -u vova
 
 
 #####################################################
+# Basic tmux Tutorial - Windows, Panes, and Sessions over SSH
+# https://www.youtube.com/watch?v=BHhA_ZKjyxo&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=25
+
 
 
