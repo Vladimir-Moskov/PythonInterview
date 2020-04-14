@@ -341,6 +341,8 @@ crontab -e -u vova
 #####################################################
 # Basic tmux Tutorial - Windows, Panes, and Sessions over SSH
 # https://www.youtube.com/watch?v=BHhA_ZKjyxo&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=25
+# Basic tmux Tutorial, Part 2 -- Shared Sessions
+# https://www.youtube.com/watch?v=norO25P7xHg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=26
 
 # session management
 tmux ls (or tmux list-sessions)
@@ -370,7 +372,7 @@ default bindings are from 0 -- 9)
 
 # Tiling commands
 Ctrl-b % (Split the window vertically)
-CTRL-b " (Split window horizontally)
+CTRL-b " (Split window horizontally)"
 Ctrl-b o (Goto next pane)
 Ctrl-b q (Show pane numbers, when the numbers show up type the key to go to that pane)
 Ctrl-b { (Move the current pane left)
@@ -385,4 +387,48 @@ bind | split-window -h
 bind - split-window -v
 
 ##########################
+# Open SSH for windows ubuntu subsystem
+"
+    sudo apt-get purge openssh-server
+    sudo apt-get install openssh-server
+    sudo nano /etc/ssh/sshd_config and disallow root login by setting PermitRootLogin no
+
+    Then add a line beneath it that says:
+
+    AllowUsers yourusername
+
+    and make sure PasswordAuthentication is set to yes if you want to login using a password.
+
+    Disable privilege separation by adding/modifying : UsePrivilegeSeparation no
+
+    sudo service ssh --full-restart
+
+    Connect to your Linux subsystem from Windows using a ssh client like PuTTY.
+"
+
+#####################################################
+# Archiving and Compression on Linux - Basic tar Commands
+# https://www.youtube.com/watch?v=tSRlNwaUgPQ&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=27
+
+tree .
+# archive
+tar -zcvf gitProj.tar.gz vova/git_project/
+mv gitProj.tar.gz decompresion_chamber/
+# dearchive
+tar -zxf gitProj.tar.gz
+# tar bomb
+cd git_project/
+tar -zcvf ../tarbomb.tar.gz .
+
+#####################################################
+# Bash Scripting 2 -- Bash Basics
+# https://www.youtube.com/watch?v=4-hw6DPBlsw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=29
+
+
+
+
+
+
+
+
 
