@@ -53,6 +53,10 @@ str_val = " :^)"
 str_val = "a@b." # 131107009
 str_val = "foo"
 str_val = "boba"
+
+str_val = "taco" # [267487694]
+print(encode_4twist(str_val))
+str_val = "cat" # [ 125043731]
 print(encode_4twist(str_val))
 
 # "foo" 124807030
