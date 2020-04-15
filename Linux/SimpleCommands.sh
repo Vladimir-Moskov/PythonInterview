@@ -425,8 +425,25 @@ tar -zcvf ../tarbomb.tar.gz .
 # https://www.youtube.com/watch?v=4-hw6DPBlsw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=29
 
 
+echo "hellow Linux man" > hello.txt
+cat  hello.txt
+echo "What!!! Linux man!!!" >> hello.txt
+wc -l < hello.txt
+(cat  hello.txt |  wc -l) && echo "Done" >>  hello.txt
+ls "wrong_file" && echo "sucsess"
+ls "wrong_file" || echo "sucsess?"
+ls "wrong_file" 2>>  hello.txt
 
+#####################################################
+# https://www.youtube.com/watch?v=MYWvVgIL_Ys&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=30
+# Bash Scripting 3 -- Variables and Quoting
 
+# varables
+echo $HOME
+my_var="the best variable"
+echo $my_var
+new_number=7
+echo $new_number
 
 
 
