@@ -11,4 +11,14 @@ message="Very important message"
 echo $message
 echo "I have message for you ${message}"
 
-# exit $?
+
+# what's our file name?
+echo "file name: ${0}"
+
+# how many arguments script has
+echo "Script has been called with $# arguments"
+
+# what were the arguments
+echo "argument 1 = $1, arument 2 = $2, argument 3 = $3 ...."
+
+# exit 0

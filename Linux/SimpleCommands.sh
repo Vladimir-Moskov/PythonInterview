@@ -485,6 +485,10 @@ echo $message
 #  $0 -- the filename of our script
 #  $1..$n -- script arguments
 
+#####################################################
+# https://www.youtube.com/watch?v=VMZBFjYgjR4&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=33
+# Bash Scripting 6 -- 'If' and Testing
+
 
 
 
