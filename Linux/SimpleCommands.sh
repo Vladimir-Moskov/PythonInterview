@@ -96,6 +96,27 @@ ls .. && echo "command .. has been sucsessfully executed"
 # cut = split str content, where d - delimiter, f2 - second field
 cat file.txt | cut -d: -f2
 
+# Hacker rank CUT chalanges
+# get 3rd char from line
+cut -c3
+# The output should contain lines. Each line should contain just two characters at the and
+# the position of the corresponding input line.
+cut -c2,7
+# Each line should contain the range of characters starting at
+# the position of a string and ending at the position (both positions included).
+cut -c2-7
+# The output should contain N lines. Each line should contain just the
+# first four characters of the corresponding input line.
+cut -c1-4
+# Given a tab delimited file with several columns (tsv format) print the first three fields.
+cut -f-3
+# Print the characters from thirteenth position to the end.
+cut -c13-
+# fron 3rd word to the end
+cut -d" " -f4-
+
+
+
 # sort file lines, b - ignore white spaces, f - case insensative
 cat file.txt | sort -bf
 
@@ -489,7 +510,8 @@ echo $message
 # https://www.youtube.com/watch?v=VMZBFjYgjR4&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=33
 # Bash Scripting 6 -- 'If' and Testing
 
-
+# https://www.youtube.com/watch?v=9EfN5clA710&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=34
+# Bash Scripting 7: Functions and Course Review
 
 
 
