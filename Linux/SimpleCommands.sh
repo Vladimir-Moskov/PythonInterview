@@ -444,6 +444,50 @@ my_var="the best variable"
 echo $my_var
 new_number=7
 echo $new_number
+echo "The very rundom number = $new_number, ;)"
+old_number=482
+echo "The value ${old_number}th"
+echo "Ther are X lines in the /etc/shadow"
+wc -l < /etc/shadow
+echo "Ther are X lines in the /etc/group"
+wc -l < /etc/group
+echo "Ther are `wc -l < /etc/group` lines in the /etc/group"
+num_lines=`wc -l < /etc/shadow`
+echo "Ther are ${num_lines} lines in the /etc/shadow"
+
+
+#####################################################
+# https://www.youtube.com/watch?v=U2_MvxnqLRE&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=31
+# Bash Scripting 4 -- How Bash Scripts Work
+
+# which - locate a command
+which bash
+
+# bashScript.sh
+chmod +x bashScript.sh
+./bashScript.sh
+bash bashScript.sh
+# execute script in current login shell / inline execution
+source bashScript.sh
+. bashScript.sh
+
+echo $message
+
+#####################################################
+# https://www.youtube.com/watch?v=Vbu8rfVaABw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=32
+# Bash Scripting 5 -- Arguments
+
+
+#  In real life, this is something like 'tar zcf filename.tar.gz directory'
+#  ('zcf', 'filename.tar.gz', and 'directory' are the arguments in this example).
+#
+#  $# -- number of args that our script was run with
+#  $0 -- the filename of our script
+#  $1..$n -- script arguments
+
+
+
+
 
 
 
