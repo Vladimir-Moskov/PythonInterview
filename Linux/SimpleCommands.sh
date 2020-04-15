@@ -513,7 +513,9 @@ echo $message
 # https://www.youtube.com/watch?v=9EfN5clA710&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=34
 # Bash Scripting 7: Functions and Course Review
 
-
+#####################################################
+# https://www.youtube.com/watch?v=rJMFxIbDe-g&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=35
+# Everything You Need to Know About $PATH in Bash
 
 
 

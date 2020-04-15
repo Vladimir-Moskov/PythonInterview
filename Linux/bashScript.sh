@@ -59,4 +59,48 @@ if [ -z "$NULL_VALUE" ]; then
     echo "null/zeroo"
 fi
 
+# loop
+echo "Please, see script arguments below:"
+for arg in "$@"; do
+    echo "$arg"
+done
+
+number=$1
+
+# function declaration 1
+spaced() {
+    echo "$@"
+    echo "#####################"
+    echo "$1"
+    echo "#####################"
+    echo
+
+}
+
+
+# fancy functions
+function javatest() {
+    # testing and conditionals
+    if [[ $number -eq 99 ]]; then
+        spaced "You win! You guessed the secret number!"
+    elif (( $number < 10 )); then
+        spaced "You have a bad luck!!"
+
+        # set a variable interactively
+        echo "Hi ${name}, please enter your password:"
+        read password
+
+        if [[ "$password" != "Java" ]]; then
+            spaced "Well. at least you are not Java Programmer. You can go"
+        else
+            spaced "Prepare to DIE! Or wait, just leave."
+        fi
+     fi
+}
+
+javatest $number
+
+exit 0
+
+
 # exit 0
