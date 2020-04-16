@@ -518,6 +518,15 @@ echo $message
 # Everything You Need to Know About $PATH in Bash
 
 
-
+# How does Linux know where to look for the commands that you type at the command-line? In this video you'll
+# learn how the $PATH variable works in Linux. Specifically, we'll look at how this value is looked up in bash,
+# and how you can modify it.
+#
+# I'll also introduce you to the `which` command, which you can use to check which filepath bash is using for a
+# given name (executable).
+#
+# To modify PATH for
+# -a single user (normal or root): /home/username/.bash_profile
+# -all users except root: /etc/profile
 
 
