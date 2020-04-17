@@ -529,4 +529,57 @@ echo $message
 # -a single user (normal or root): /home/username/.bash_profile
 # -all users except root: /etc/profile
 
+which sudo
+echo $PATH
+# update $PATH - normal way, append
+PATH=$PATH:/some/dir
+# redirect lookup order - prepend
+PATH=/root:$PATH
+
+# that is way - use full path in bash scripts
+ls -lah /etc/
+cat  /etc/profile
+
+# change path on user level
+ls /home/vova/.bash_profile
+
+#####################################################
+# https://www.youtube.com/watch?v=tweyWNr6X18&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=36
+# The Linux 'script' Command: Record Your Shell Sessions
+
+# Simplest Way to Log Shell Sessions
+script simplescript.log
+
+# A single command
+script -c 'netstat -tupln' netstat.log
+
+# Add timing information, so you can replay the shell session later
+script myscript.log --timing=time.log
+
+# Replay a captured shell session (with timing info)
+scriptreplay -s myscript.log --timing=time.log
+scriptreplay -s myscript.log -t time.log
+
+# to start record shell session
+script
+# to end session
+Ctrl+D
+# or just
+exit
+# specify file name
+script myscript.log
+# add timing log
+script myscript.log --timing=time.log
+
+# view recording
+scriptreplay -s myscript.log -t time.log
+
+#####################################################
+# https://www.youtube.com/watch?v=vz2DGSBBpXg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=37
+# Linux Shell Aliases: What You Need to Know
+
+
+
+
+
 
