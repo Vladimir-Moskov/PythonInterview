@@ -578,8 +578,71 @@ scriptreplay -s myscript.log -t time.log
 # https://www.youtube.com/watch?v=vz2DGSBBpXg&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=37
 # Linux Shell Aliases: What You Need to Know
 
+# always on shell session level until has not saved in .bash_aliases on root or user level
+# to see all alias
+alias
+# as helper
+alias lr="ls -lrc"
+# as shawing
+alias ls="ls -a --color"
+# or redirecting
+alias vim="nvim"
+alias lr="ls -lrah"
+# but do not forget check first
+alias | grep "lr"
+# unset/delete alias
+unalias lr
 
+#####################################################
+# 8 Basic lsof Commands Every Sysadmin Needs to Know
+# https://www.youtube.com/watch?v=rLgRkjM7amo&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=38
 
+# sof basics - list open files on Linux and Unix (expand for timestamps and details).
+#
+# In this video I introduce the 'lsof' command, found on Linux and Unix systems.
+# I'll show you some practical examples and teach you how to explore what's
+# happening with the filesytem in a system or process.
 
+# Which files are open?
+lsof
+# Which processes have this file open?
+lsof /var/log/nginx-error.log
+# Which files does process X have open?
+lsof -p 1
+lsof -p `pgrep ABC`
+# Where is the binary for this process?
+lsof -p ABC | grep bin
+#  Which shared libraries is this program using? (manually upgrading software, i.e. openssl)
+lsof -p PID | grep .so
+# Where is this thing logging to?
+lsof -p ABC | grep log
+# Which processes still have this old library open?
+lsof grep libname.so
+# Which files does user XYZ have open?
+lsof -u XYZ
+lsof -u XYZ -i # network only
+# Which process is listening on Port X (or using Protocol Y)?
+lsof -i :80
+lsof -i tcp
+lsof -i udp
+# Super lsof Story Time!
 
+lsof | head
+netstat -tupln
+# curl - transfer a URL
+curl localhost
+ps aux
+
+#####################################################
+# https://www.youtube.com/watch?v=wiRt3mY7Rrw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=39
+# Monitoring Linux Systems and Services with Monit (Hands-On Linux Course Preview)
+
+apt-get install monit
+# start monit at boot
+systemctl enable monit
+# start it
+systemctl start monit
+nano /etc/monit/monitrc
+cd /etc/monit/
+mv monitrc monitrc-old
 
