@@ -636,6 +636,7 @@ ps aux
 #####################################################
 # https://www.youtube.com/watch?v=wiRt3mY7Rrw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=39
 # Monitoring Linux Systems and Services with Monit (Hands-On Linux Course Preview)
+# !!! retry
 
 apt-get install monit
 # start monit at boot
@@ -646,3 +647,47 @@ nano /etc/monit/monitrc
 cd /etc/monit/
 mv monitrc monitrc-old
 
+# Linux System Monitoring with Monit, part 2: SSH Local Forwarding for our Web Dashboard
+# https://www.youtube.com/watch?v=ThcaW4MVGLY&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=40
+
+#You can use this same SSH feature (local forwarding) to access services that are hidden from the public Internet by a
+#firewall, local network, etc. If you can get to a server with SSH, you can 'see from its perspective'
+# on your local machine, by mapping individual ports on the server to your local machine.
+
+#####################################################
+# https://www.youtube.com/watch?v=JX2lxKJC6yI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=41
+# Service Management with systemd (Hands-On Linux Course Preview)
+
+systemd
+systemctl status mysql
+journalctl
+
+#####################################################
+#
+# Top 10 Linux Job Interview Questions
+
+# How to check the kernel version of a Linux system?
+uname
+uname -a
+# How to see the current IP address on Linux?
+ifconfig -a # -v
+ip addr show
+# How to check for free disk space in Linux?
+df -ah
+# How to see if a Linux service is running?
+systemd
+service udev (servicename) status/start/status pid
+systemctl status udev (servicename)
+# How to check the size of a directory in Linux?
+du -sh /home
+# How to check for open ports in Linux?
+netstat -tulpn
+# How to check Linux process information (CPU usage, memory, user information, etc.)?
+ps aux | processname
+top
+# How to deal with mounts in Linux
+ls /mnt
+mount /dev/dsa2 mnt
+cat /etc/fstab
+# Man pages
+# Other resources
