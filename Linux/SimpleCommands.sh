@@ -691,3 +691,50 @@ mount /dev/dsa2 mnt
 cat /etc/fstab
 # Man pages
 # Other resources
+
+#####################################################
+# https://www.youtube.com/watch?v=59jnWX_EzTY&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=45
+# Linux Documentation In
+
+man
+info
+whatis ls
+apropos python
+#  recreate man
+sudo mandb
+ls /usr/share/doc
+A list of Linux resources (and the context/info you need to use them) that will help you troubleshoot, learn new things, and find answers to questions you have while using Linux.
+
+1:09 Man pages: man $COMMAND
+4:09 Info pages: info $COMMAND
+
+5:39 whatis $command
+6:31 apropos $searchterm
+
+whatis and apropos require 'sudo mandb' to be run before they work.
+
+8:14 /usr/share/doc -- package-provided documentation
+
+9:18 - Reddit
+https://www.reddit.com/r/sysadmin/
+https://www.reddit.com/r/linux/
+https://www.reddit.com/r/freebsd/
+
+10:11 - The Arch Linux Wiki
+https://wiki.archlinux.org/index.php/...
+https://wiki.archlinux.org/index.php/...
+
+12:03 Bash Docs: http://www.tldp.org/LDP/abs/html/abs-...
+13:07 Serverfault (sysadmin): http://serverfault.com
+13:51 Stack overflow (programming): http://stackoverflow.com/
+
+14:22 Official Documentation!
+15:13 Use a search engine: Google, Duckduckgo, etc.
+
+15:42 IRC: https://webchat.freenode.net/
+
+18:50 Tech News/Article Aggregators:
+news.ycombinator.com
+https://lobste.rs/
+
+
