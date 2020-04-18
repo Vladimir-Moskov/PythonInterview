@@ -707,34 +707,85 @@ A list of Linux resources (and the context/info you need to use them) that will 
 
 1:09 Man pages: man $COMMAND
 4:09 Info pages: info $COMMAND
-
 5:39 whatis $command
 6:31 apropos $searchterm
-
 whatis and apropos require 'sudo mandb' to be run before they work.
-
 8:14 /usr/share/doc -- package-provided documentation
-
 9:18 - Reddit
 https://www.reddit.com/r/sysadmin/
 https://www.reddit.com/r/linux/
 https://www.reddit.com/r/freebsd/
-
 10:11 - The Arch Linux Wiki
 https://wiki.archlinux.org/index.php/...
 https://wiki.archlinux.org/index.php/...
-
 12:03 Bash Docs: http://www.tldp.org/LDP/abs/html/abs-...
 13:07 Serverfault (sysadmin): http://serverfault.com
 13:51 Stack overflow (programming): http://stackoverflow.com/
-
 14:22 Official Documentation!
 15:13 Use a search engine: Google, Duckduckgo, etc.
-
 15:42 IRC: https://webchat.freenode.net/
-
 18:50 Tech News/Article Aggregators:
 news.ycombinator.com
 https://lobste.rs/
 
+#####################################################
+# https://www.youtube.com/watch?v=09v8vDOpdYo&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=47
+# Linux Command: 'tee' - Watch & Log Command Output
 
+man tee
+touch mylog.log
+echo $(date) >> mylog.log
+echo DATE >> mylog.log
+# override
+date | tee mylog.log
+# append
+date | tee -a mylog.log
+
+#####################################################
+# https://www.youtube.com/watch?v=dnDhxv148Gc
+# Linux Sysadmin Basics -- Useful Commands -- which, whereis, and locate
+
+# locate software/bin/command
+which htop
+# more details - include depended files/doc/source
+whereis bash
+# locate - from db of filesystem-for this bin
+locate bash
+
+#####################################################
+# How to Install the i3 Window Manager in Ubuntu Linux
+apt-get install i3
+# uninstall it
+sudo apt-get --purge remove i3
+
+#####################################################
+# https://www.youtube.com/watch?v=p3impnyQeTc
+# Fun with SSH: Setting Up a SSH Server on Linux/FreeBSD
+
+cat /etc/ssh/ssh_config
+nano /etc/ssh/ssh_config
+apt-get install openssh-server
+netstat -tupln
+ssh vova@localhost
+cat /etc/ssh/sshd_config
+sudo service ssh restart
+ssh-keygen -t rsa -b 4096
+nano .ssh/authorized_keys
+
+
+#####################################################
+# https://www.youtube.com/watch?v=zyOlGRxUUmc
+# Linux Sysadmin Basics -- LXC 1: Overview
+
+# Overview of LXC, a set of tools that you can use for linux
+# operating-system virtualization. This video gives an overview of LXC's
+# features compared to FreeBSD jails, Solaris Zones, and other OS-Virtualization tools.
+#
+#
+# Overview of different OS-virtualization technologies:
+# https://en.wikipedia.org/wiki/Operati...
+#
+# Other Useful Links:
+# https://help.ubuntu.com/12.04/serverg...
+# https://en.wikipedia.org/wiki/LXC
+# https://www.kernel.org/doc/Documentat... (the kernel tech that this is based on)

@@ -1428,3 +1428,30 @@ def another_solusion():
     print(len([1 for key in tree_weight if tree_weight[key] % 2 == 0]))
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/truck-tour/problem
+# Truck Tour
+# good one, simple beautiful solution
+
+from collections import deque
+
+
+def truckTour(petrolpumps):
+    if len(petrolpumps) == 1:
+        return 0
+    start = 0
+    current_ind = 0
+    current_sum = 0
+    while current_ind > start - 1:
+        if current_sum >= 0:
+            next_val = petrolpumps[current_ind][0] - petrolpumps[current_ind][1]
+            current_ind = current_ind + 1 if current_ind < len(petrolpumps) - 1 else 0
+            current_sum += next_val
+        else:
+            current_sum = current_sum - petrolpumps[start][0] + petrolpumps[start][1]
+            start += 1
+
+    return start
+
+
+petrolpumps = [[1, 5], [10, 3], [3, 4]]
+print(truckTour(petrolpumps))
