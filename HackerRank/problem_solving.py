@@ -1330,3 +1330,101 @@ def CountLuckSolution():
          list("..M")
      ]
     print(countLuck(matrix2, 1)) # "Oops"
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/even-tree/problem
+# Even Tree
+
+def EvenTree():
+    from collections import deque
+
+    class TreeNode:
+        def __init__(self, value):
+            self.value = value
+            self.parent = None
+            self.childs = deque()
+            self.childCount = 0
+            self.parentCount = 0
+
+
+    def calc_child_count(node):
+        if len(node.childs) > 0:
+            sum = 0
+            for child in node.childs:
+                sum += calc_child_count(child)
+            node.childCount = sum + len(node.childs)
+            return node.childCount
+        else:
+            node.childCount = 0
+            return 0
+
+
+    def evenForest(t_nodes, t_edges, t_from, t_to):
+        result = 0
+        all_nodes = [None] * t_nodes
+
+        for i in range(t_nodes):
+            all_nodes[i] = TreeNode(i + 1)
+
+        for i in range(t_edges):
+            from_val = t_from[i] - 1
+            to_val = t_to[i] - 1
+            all_nodes[from_val].parent = all_nodes[to_val]
+            all_nodes[to_val].childs.append(all_nodes[from_val])
+
+        calc_child_count(all_nodes[0])
+        result = len([node for node in all_nodes if (len(node.childs) + 1) % 2 == 0 and node.parent])
+        # all_childs = [node for node in all_nodes if len(node.childs) == 0]
+        # all_parents = set([node.parent for node in all_childs])
+        #
+        # while all_parents:
+        #     for parent in all_parents:
+        #         if (parent.childCount + 1) % 2 == 0:
+        #             result += 1
+        #     all_parents = set([node.parent for node in all_parents if node.parent and node.parent.parent])
+
+        return result
+
+
+    # case 1
+    t_nodes = 10
+    t_edges = 9
+    t_from = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    t_to = [1, 1, 3, 2, 1, 2, 6, 8, 8]
+    print(evenForest(t_nodes, t_edges, t_from, t_to))
+
+    # case 2 = 4
+    t_nodes = 20
+    t_edges = 19
+    t_from = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    t_to =   [1, 1, 3, 2, 5, 1, 1, 2, 7, 10, 3, 7, 8, 12, 6, 6, 10, 1, 8]
+    print(evenForest(t_nodes, t_edges, t_from, t_to))
+
+import os
+import sys
+
+
+# it wont work for random order of nodes edges
+def another_solusion():
+    tree_nodes, tree_edges = map(int, input().split())
+
+    tree_from = [0] * tree_edges
+    tree_to = [0] * tree_edges
+
+    for tree_itr in range(tree_edges):
+        tree_from[tree_itr], tree_to[tree_itr] = map(int, input().split())
+
+    tree_weight = {}
+    for tree_itr in range(tree_edges - 1, -1, -1):
+        if tree_from[tree_itr] in tree_weight:
+            tree_weight[tree_from[tree_itr]] += 1
+        else:
+            tree_weight[tree_from[tree_itr]] = 1
+        if tree_to[tree_itr] in tree_weight:
+            tree_weight[tree_to[tree_itr]] += tree_weight[tree_from[tree_itr]]
+        else:
+            tree_weight[tree_to[tree_itr]] = tree_weight[tree_from[tree_itr]]
+    # print(tree_weight)
+    print(len([1 for key in tree_weight if tree_weight[key] % 2 == 0]))
+
+#####################################################################################
