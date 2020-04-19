@@ -833,3 +833,9 @@ man ssh_config
 # https://help.ubuntu.com/12.04/serverg...
 # https://en.wikipedia.org/wiki/LXC
 # https://www.kernel.org/doc/Documentat... (the kernel tech that this is based on)
+
+
+
+#####################################################
+# https://www.youtube.com/watch?v=vIIRuDtG1yI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=48
+# How to Backup and Restore a MySQL/MariaDB Database

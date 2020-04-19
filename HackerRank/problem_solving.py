@@ -1488,6 +1488,7 @@ def BinarySearchTree():
 # https://www.hackerrank.com/challenges/bigger-is-greater/problem
 #  Bigger is Greater
 
+# TODO
 def biggerIsGreater(w):
     last = len(w) - 2
     while last >= 0:
@@ -1498,7 +1499,7 @@ def biggerIsGreater(w):
             last = len(w) - 1
             while w[last] < w[first]:
                 last -= 1
-            result = list(w)
+            result = [0] * len(w)
             result[first], result[last] = result[last], result[first]
             return "".join(result)
     return "no answer"
@@ -1508,11 +1509,16 @@ print(biggerIsGreater("abdc"))
 print(biggerIsGreater("dkhc"))
 
 def biggerIsGreater0(s):
-    for i in range(0, len(s)-1, -1):
+    for i in range(len(s)-2, -1, -1):
         if s[i] < s[i+1]:
-            for j in range(len(s) - 1, i + 1, -1):
+            for j in range(len(s) - 1, i, -1):
                 if s[i] < s[j]:
                     lis = list(s)
                     lis[i], lis[j] = lis[j], lis[i]
+                    print(lis[:i+1])
+                    print(lis[i+1:][::-1])
                     return "".join(lis[:i+1]+lis[i+1:][::-1])
     return 'no answer'
+print(biggerIsGreater0("abdc"))
+print(biggerIsGreater0("dkhc"))
+#####################################################################################
