@@ -633,6 +633,23 @@ netstat -tupln
 curl localhost
 ps aux
 
+# https://www.youtube.com/watch?v=GdrjTVDelI0
+# Popular Linux Interview Questions for DevOps Interviews
+1:11 - Basic Linux Interview Questions (ssh, ls, cd, cp, pwd, rsync, systemctl, df, du, ip addr, ip route)
+4:55 - Slightly more advanced Linux (init, systemd, systemctl, journalctl, some linux philosophy, /proc filesystem)
+8:01 - open-ended questions and troubleshooting (top/atop/htop/glances, lsof, /proc, ss or netstat, inodes)
+11:05 - discussing past projects, planning a hypothetical implementation/project
+# copy file to remote host
+rsync
+# service manager
+srvice --status-all
+systemctl status ssh
+#  curl - transfer a URL
+df -h
+df -i
+du -sh /var/log/*
+ip addr show
+ip addr show dev eth0
 #####################################################
 # https://www.youtube.com/watch?v=wiRt3mY7Rrw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=39
 # Monitoring Linux Systems and Services with Monit (Hands-On Linux Course Preview)
@@ -794,9 +811,11 @@ ssh -N -D 8080 vova@192.168.2.11 -p 443
 # https://www.youtube.com/watch?v=6MqWFnm79uY
 # SSH Aliases and the Almighty Config File
 
-
-
-
+# ssh system level config
+cat /etc/ssh/ssh_config
+# user level confid
+nano .ssh/config
+man ssh_config
 
 #####################################################
 # https://www.youtube.com/watch?v=zyOlGRxUUmc
