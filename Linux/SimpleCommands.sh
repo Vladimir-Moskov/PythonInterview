@@ -772,6 +772,31 @@ sudo service ssh restart
 ssh-keygen -t rsa -b 4096
 nano .ssh/authorized_keys
 
+# add key
+ exec ssh-agent bash
+  ssh-add
+
+# https://www.youtube.com/watch?v=n9QBoXKot40
+# SSH on the Command Line -- 2: Setting up SSH
+ service --status-all
+ ps -ef --forest
+
+scp localubuntu.pub vova@192.168.2.11:/home/vova/
+scp localubuntu.pub vova@192.168.2.11:/home/vova/
+# https://www.youtube.com/watch?v=__VASPeU82Q
+# SSH on the Command Line -- 3: Using SSH to Browse the Web Safely
+
+# open port 443
+nano /etc/ssh/sshd_config
+# set browser proxy as follows
+ssh -N -D 8080 vova@192.168.2.11 -p 443
+
+# https://www.youtube.com/watch?v=6MqWFnm79uY
+# SSH Aliases and the Almighty Config File
+
+
+
+
 
 #####################################################
 # https://www.youtube.com/watch?v=zyOlGRxUUmc

@@ -1434,24 +1434,54 @@ def another_solusion():
 
 from collections import deque
 
+def TruckTour():
+    def truckTour(petrolpumps):
+        if len(petrolpumps) == 1:
+            return 0
+        start = 0
+        current_ind = 0
+        current_sum = 0
+        while current_ind > start - 1:
+            if current_sum >= 0:
+                next_val = petrolpumps[current_ind][0] - petrolpumps[current_ind][1]
+                current_ind = current_ind + 1 if current_ind < len(petrolpumps) - 1 else 0
+                current_sum += next_val
+            else:
+                current_sum = current_sum - petrolpumps[start][0] + petrolpumps[start][1]
+                start += 1
 
-def truckTour(petrolpumps):
-    if len(petrolpumps) == 1:
-        return 0
-    start = 0
-    current_ind = 0
-    current_sum = 0
-    while current_ind > start - 1:
-        if current_sum >= 0:
-            next_val = petrolpumps[current_ind][0] - petrolpumps[current_ind][1]
-            current_ind = current_ind + 1 if current_ind < len(petrolpumps) - 1 else 0
-            current_sum += next_val
+        return start
+
+
+    petrolpumps = [[1, 5], [10, 3], [3, 4]]
+    print(truckTour(petrolpumps))
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/is-binary-search-tree/problem
+# Is This a Binary Search Tree?
+
+
+def BinarySearchTree():
+    """ Node is defined as
+    class node:
+      def __init__(self, data):
+          self.data = data
+          self.left = None
+          self.right = None
+    """
+    def check_binary_search_tree_(root):
+        result = True
+        result = result and __check_binary_recursive(root.left, -1, root.data)
+        result = result and __check_binary_recursive(root.right, root.data, 10**5)
+        return result
+
+    def __check_binary_recursive(root, min_val, max_val):
+        if not root:
+            return True
+        if root.data > min_val and root.data < max_val:
+            return __check_binary_recursive(root.left, min_val, root.data) and \
+                   __check_binary_recursive(root.right, root.data, max_val)
         else:
-            current_sum = current_sum - petrolpumps[start][0] + petrolpumps[start][1]
-            start += 1
+            return False
 
-    return start
-
-
-petrolpumps = [[1, 5], [10, 3], [3, 4]]
-print(truckTour(petrolpumps))
+#####################################################################################
