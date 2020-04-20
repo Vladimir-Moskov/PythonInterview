@@ -1488,37 +1488,39 @@ def BinarySearchTree():
 # https://www.hackerrank.com/challenges/bigger-is-greater/problem
 #  Bigger is Greater
 
-# TODO
-def biggerIsGreater(w):
-    last = len(w) - 2
-    while last >= 0:
-        if w[last] >= w[last + 1]:
-            last -= 1
-        else:
-            first = last
-            last = len(w) - 1
-            while w[last] < w[first]:
+def BiggerGreater():
+    def biggerIsGreater(w):
+        last = len(w) - 2
+        while last >= 0:
+            if w[last] >= w[last + 1]:
                 last -= 1
-            result = [0] * len(w)
-            result[first], result[last] = result[last], result[first]
-            return "".join(result)
-    return "no answer"
+            else:
+                first = last
+                last = len(w) - 1
+                while w[last] < w[first]:
+                    last -= 1
+                result = list(w)
+                result[first], result[last] = result[last], result[first]
+                result = result[:first] + reversed(result[first + 1])
+                return "".join(result)
+        return "no answer"
 
 
-print(biggerIsGreater("abdc"))
-print(biggerIsGreater("dkhc"))
+    print(biggerIsGreater("abdc"))
+    print(biggerIsGreater("dkhc"))
 
-def biggerIsGreater0(s):
-    for i in range(len(s)-2, -1, -1):
-        if s[i] < s[i+1]:
-            for j in range(len(s) - 1, i, -1):
-                if s[i] < s[j]:
-                    lis = list(s)
-                    lis[i], lis[j] = lis[j], lis[i]
-                    print(lis[:i+1])
-                    print(lis[i+1:][::-1])
-                    return "".join(lis[:i+1]+lis[i+1:][::-1])
-    return 'no answer'
-print(biggerIsGreater0("abdc"))
-print(biggerIsGreater0("dkhc"))
+    def biggerIsGreater0(s):
+        for i in range(len(s)-2, -1, -1):
+            if s[i] < s[i+1]:
+                for j in range(len(s) - 1, i, -1):
+                    if s[i] < s[j]:
+                        lis = list(s)
+                        lis[i], lis[j] = lis[j], lis[i]
+                        print(lis[:i+1])
+                        print(lis[i+1:][::-1])
+                        return "".join(lis[:i+1]+lis[i+1:][::-1])
+        return 'no answer'
+    print(biggerIsGreater0("abdc"))
+    print(biggerIsGreater0("dkhc"))
 #####################################################################################
+

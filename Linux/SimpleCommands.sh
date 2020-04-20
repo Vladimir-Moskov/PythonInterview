@@ -839,3 +839,34 @@ man ssh_config
 #####################################################
 # https://www.youtube.com/watch?v=vIIRuDtG1yI&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=48
 # How to Backup and Restore a MySQL/MariaDB Database
+
+# TODO
+
+
+#####################################################
+# https://www.youtube.com/watch?v=9VkswePNh80&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=51
+# VPNs for Privacy - The Basics
+#
+#1:23 - Private information about you that your ISP (comcast, verizon) can sell
+#2:54 - What is a VPN? Common uses for a VPN, how a VPN works
+#5:00 - How proxying works
+#5:54 - How ISPs throttle bandwidth (QoS - quality of service)
+#6:40 - Net Neutrality is Dead
+#7:00 - How VPN tunnels preserve your privacy
+#7:40 - Limitations of using a VPN to protect your privacy
+#8:30 - Important: Tunnel ALL DNS through the VPN
+#9:28 - How to choose the right VPN provider for your needs
+#11:05 - VPN Comparison Chart ( https://thatoneprivacysite.net/vpn-co... )
+#11:37 - Why you shouldn't run your own VPN server (if your goal is privacy)
+#12:54 - Conclusion
+
+
+#####################################################
+# https://www.youtube.com/watch?v=lbMsFXMnqNY
+# Linting Your Bash Scripts with Shellcheck
+
+
+
+
+
+
