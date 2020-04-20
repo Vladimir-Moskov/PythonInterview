@@ -865,6 +865,44 @@ man ssh_config
 # https://www.youtube.com/watch?v=lbMsFXMnqNY
 # Linting Your Bash Scripts with Shellcheck
 
+#####################################################
+# https://www.youtube.com/watch?v=C-AQAJXdoS8&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=52
+# 8 Bash Shortcuts Every Linux User Should Know
+
+#A gentle introduction to moving around in the Linux CLI (Bash/Shell).
+#These keyboard shortcuts will boost your speed, save you time, and allow you to quickly edit commands and move around.
+#
+#2:22 Terminate a running command that's attached to your shell session (ctrl-c)
+#2:31 Exit shell session (ctrl-d)
+#3:25 Tab Completion
+#4:51 Clearing your terminal (ctrl-L)
+#5:10 Cursor Movement
+#5:44 Move to beginning or end of line (ctrl-a, ctrl-e)
+#6:10 Move forward or back one word (alt-f, alt-b)
+#7:10 Searching through shell history (ctrl-r)
+#Very nice, didn't know ctrl-r search!  I'd add:
+#ctrl-u delete everything to the left of the cursor, and
+#ctrl-k delete everything to the right (including under the cursor)
+#How to use vi shortcuts in Bash, instead of the default (emacs): set -o vim
+
+echo $SHELL
+# ping google
+ping 8.8.8.8
+# get shell history
+history
+
+#####################################################
+# https://www.youtube.com/watch?v=E3Ioopzt8ko
+# Linux Tools: Monitoring & Troubleshooting Basics with Glances
+
+apt-get install glances
+# or
+pip install glances
+man watch
+
+
+
+
 
 
 

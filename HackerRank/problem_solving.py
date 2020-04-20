@@ -1523,4 +1523,53 @@ def BiggerGreater():
     print(biggerIsGreater0("abdc"))
     print(biggerIsGreater0("dkhc"))
 #####################################################################################
+# Down to Zero II
 
+def DowntoZero():
+    # greedy solution does not work
+    def downToZero0(n):
+        result = 0
+
+        while n > 3:
+            for i in range(int(n**1/2) + 1, 1, -1):
+                if n % i == 0:
+                    n = max(n / i, i)
+                    break
+            else:
+                n -= 1
+            result += 1
+
+        result += n
+        return result
+
+    from collections import deque
+
+    global_q = deque([0, 1, 2, 3, 3, 4, 4, 5, 4, 4])
+
+
+    def downToZero(n):
+        global moves
+        return moves[n]
+
+    def downToZero_fill(n):
+        N = 10**6
+
+        moves = [0] + N * [N]
+        for i in range(N):
+            moves[i+1] = min(moves[i+1], moves[i] + 1)
+            j = 2
+            while j <= i and j * i <= N:
+                moves[i * j] = min(moves[i * j], moves[i] + 1)
+                j += 1
+
+        return moves
+
+    moves = downToZero_fill(0)
+    print(downToZero(3))
+    print(downToZero(4))
+    print(downToZero(966514))  # 8
+    print(downToZero(812849)) # 10
+
+    print(downToZero(266574)) # 8
+
+#####################################################################################
