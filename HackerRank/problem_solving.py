@@ -1646,3 +1646,50 @@ def fibonacciModified(t1, t2, n):
         t1, t2 = t2, next_val
 
     return next_val
+
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/knightl-on-chessboard/problem
+# knightlOnAChessboard
+
+def knightlOnAChessboard():
+    def _path_finder(n, x, y):
+        matrix = [[0] * n for _ in range(n)]
+        start = (0, 0)
+        de_q = deque()
+        de_q.append(start)
+        result = 0
+        delta = set([(-1*x, y), (-1*x, -1*y), (x, y), (x, -1*y), (y, -1*x), (-1*y, -1*x), (y, x), (-1 *y, x)])
+        while de_q:
+            result += 1
+            points = list(de_q)
+            de_q.clear()
+            for current_point in points:
+                for delta_x, delta_y in delta:
+                    next_x, next_y = current_point
+                    next_x += delta_x
+                    next_y += delta_y
+                    if next_x == n - 1 and next_y == n - 1:
+                        return result
+                    if next_x >= 0 and next_x < n and next_y >= 0 and next_y < n:
+                        if matrix[next_x][next_y] == 0:
+                            de_q.append((next_x, next_y))
+                            matrix[next_x][next_y] = 1
+
+        else:
+            result = -1
+        return result
+
+
+    def knightlOnAChessboard(n):
+        result = [[0] * (n - 1) for _ in range(n -1 )]
+
+        for i in range(1, n):
+            for j in range(i, n):
+                result[i - 1][j - 1] = _path_finder(n, i, j)
+            for j in range(1, i):
+                result[i - 1][j - 1] = result[j - 1][i - 1]
+        return result
+
+    print(knightlOnAChessboard(5))
+
