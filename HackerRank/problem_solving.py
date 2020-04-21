@@ -1593,3 +1593,41 @@ def organizingContainers(container):
             break
 
     return "Possible" if result else "Impossible"
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/x-and-his-shots/problem
+# Mr. X and His Shots
+
+def solve_brute_force(shots, players):
+    result = 0
+    for player in players:
+        for shot in shots:
+            if (player[0] >= shot[0] and player[0] <= shot[1]) or \
+               (player[1] >= shot[0] and player[1] <= shot[1]) or \
+               (player[0] < shot[0] and player[1] > shot[1]):
+                result += 1
+
+    return result
+
+from bisect import bisect_left, bisect_right
+
+# Complete the solve function below.
+def solve(shots, players):
+    """interval tree... or binary search...
+    """
+    start = [0] * len(shots)
+    end = [0] * len(shots)
+    # separate starts and ends points...
+    for k in range(len(shots)):
+        i, j = shots[k]
+        start[k] = i
+        end[k] = j
+    # sort...
+    start.sort()
+    end.sort()
+    res = 0
+    # find with binary search how many intervals to consider...
+    for player in players:
+        i, j = player
+        res += bisect_right(start, j) - bisect_left(end, i)
+    return res

@@ -890,7 +890,12 @@ echo $SHELL
 ping 8.8.8.8
 # get shell history
 history
+# see all disk/usb
+sudo fdisk -l
+# format flashh drive
+sudo mkfs.vfat /dev/sda1
 
+sudo parted /dev/sdx
 #####################################################
 # https://www.youtube.com/watch?v=E3Ioopzt8ko
 # Linux Tools: Monitoring & Troubleshooting Basics with Glances
