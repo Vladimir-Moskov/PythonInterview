@@ -908,6 +908,26 @@ apt-get install glances
 pip install glances
 man watch
 
+#####################################################
+# https://www.youtube.com/watch?v=ggSyF1SVFr4&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=53
+#Learn all the basics you need to start editing text in vi or vim.
+#
+#0:00 - Introduction
+#0:53 - edit a file in vim (vim filename.txt || vi filename.txt)
+#1:12 - how to quit vim (:q)
+# :w - wrire
+# :wq - write and quit
+# :!q - quit without save
+# :set number - add lines
+#1:50 - saving files in vim, and other ways of exiting
+#2:12 - what are vim modes (ESC/i)
+#3:14 - how to delete a single line with vim (dd)
+#3:30 - how to delete multiple lines with vim (#dd, e.g. 5dd)
+#3:47 - how to undo changes in vim (u)
+#4:06 - how to 'redo' changes (ctrl-r)
+#4:32 - searching text in vim ( /yourtext + ENTER)
+#5:52 - how to find and replace text in vim ( :%s/yourtext/replacetext/g (+c))
+#7:23 - Conclusion
 
 #####################################################
 # see all usb divices
@@ -916,6 +936,10 @@ lsusb
 # hardware integrated t mather board
 lspci
 
+
+#####################################################
+# https://www.youtube.com/watch?v=-VbQIgtecic
+# Introduction to Configuration Management
 
 
 
