@@ -896,6 +896,9 @@ sudo fdisk -l
 sudo mkfs.vfat /dev/sda1
 
 sudo parted /dev/sdx
+
+sudo apt-get install smartmontools
+lsblk
 #####################################################
 # https://www.youtube.com/watch?v=E3Ioopzt8ko
 # Linux Tools: Monitoring & Troubleshooting Basics with Glances
@@ -906,8 +909,12 @@ pip install glances
 man watch
 
 
+#####################################################
+# see all usb divices
+lsusb
 
-
+# hardware integrated t mather board
+lspci
 
 
 
