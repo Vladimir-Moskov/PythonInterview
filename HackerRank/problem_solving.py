@@ -1573,3 +1573,23 @@ def DowntoZero():
     print(downToZero(266574)) # 8
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/organizing-containers-of-balls/problem
+# Organizing Containers of Balls
+
+
+def organizingContainers(container):
+    result = True
+    count_basket = [0] * len(container)
+    count_type = [0] * len(container)
+    for i in range(len(container)):
+       for j in range(len(container)):
+          count_basket[i] += container[i][j]
+          count_type[j] += container[i][j]
+    count_basket.sort()
+    count_type.sort()
+    for i in range(len(container)):
+        if count_basket[i] != count_type[i]:
+            result = False
+            break
+
+    return "Possible" if result else "Impossible"
