@@ -1697,55 +1697,69 @@ def knightlOnAChessboard():
 # https://www.hackerrank.com/challenges/merging-communities/problem
 # Merging Communities
 
-from collections import deque
+def MergingCommunitiesSolution():
+    def MergingCommunities(N, data_list):
+        network = [[i] for i in range(N+1)]
 
-def MergingCommunities(N, data_list):
-    network = [[i] for i in range(N+1)]
+        for data_val in data_list:
+            if data_val[0] == "M":
+                person1, person2 = int(data_val[1]), int(data_val[2])
+                if network[person1] != network[person2]:
+                    if len(network[person1]) < len(network[person2]):
+                        person1, person2 = person2, person1
+                    network[person1].extend(network[person2])
+                    for p in network[person2]:
+                        network[p] = network[person1]
 
-    for data_val in data_list:
-        if data_val[0] == "M":
-            person1, person2 = int(data_val[1]), int(data_val[2])
-            if network[person1] != network[person2]:
-                if len(network[person1]) < len(network[person2]):
-                    person1, person2 = person2, person1
-                network[person1].extend(network[person2])
-                for p in network[person2]:
-                    network[p] = network[person1]
+                #network[person1].add(person2)
+                #network[person2].add(person1)
+            else:
+                person = int(data_val[1])
+                #result = recursiveNetwork(network, set(), set(network[person]))
+                #fptr.write(str(len(result)))
+                # fptr.write(str(len(network[person])))
+                # fptr.write('\n')
+                print(len(network[person]))
 
-            #network[person1].add(person2)
-            #network[person2].add(person1)
-        else:
-            person = int(data_val[1])
-            #result = recursiveNetwork(network, set(), set(network[person]))
-            #fptr.write(str(len(result)))
-            # fptr.write(str(len(network[person])))
-            # fptr.write('\n')
-            print(len(network[person]))
+    def recursiveNetwork(network, extend_set, set_add):
+        dif_set = set_add.difference(extend_set)
+        if len(dif_set) > 0:
+            new_set = set()
+            for val in dif_set:
+                new_set.update(network[val])
 
-def recursiveNetwork(network, extend_set, set_add):
-    dif_set = set_add.difference(extend_set)
-    if len(dif_set) > 0:
-        new_set = set()
-        for val in dif_set:
-            new_set.update(network[val])
+            extend_set.update(dif_set)
+            recursiveNetwork(network, extend_set, new_set)
+        return extend_set
 
-        extend_set.update(dif_set)
-        recursiveNetwork(network, extend_set, new_set)
-    return extend_set
+    if __name__ == '__main__':
+        fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-data_list = [['Q', '1'], ['M', '1', '2'], ['Q', '2'], ['M', '2', '3'], ['Q', '3'], ['Q', '2']]
-MergingCommunities(3, data_list)
+        N, Q = map(int, input().split())
+        data_list = [None] * Q
+        for i in range(Q):
+            data_list[i] = input().split()
 
-ar = [set([i]) for i in range(5)]
+        MergingCommunities(N, data_list)
+        fptr.write('\n')
 
-ar[0].update(ar[1])
-ar[1] = ar[0]
+        fptr.close()
+    data_list = [['Q', '1'], ['M', '1', '2'], ['Q', '2'], ['M', '2', '3'], ['Q', '3'], ['Q', '2']]
+    MergingCommunities(3, data_list)
 
-ar[2].update(ar[3])
-ar[3] = ar[2]
-ar[2].add(4)
+    ar = [set([i]) for i in range(5)]
 
-ar[1].update(ar[2])
-ar[2] = ar[0]
+    ar[0].update(ar[1])
+    ar[1] = ar[0]
 
-pass
+    ar[2].update(ar[3])
+    ar[3] = ar[2]
+    ar[2].add(4)
+
+    ar[1].update(ar[2])
+    ar[2] = ar[0]
+
+#####################################################################################
+
+
+

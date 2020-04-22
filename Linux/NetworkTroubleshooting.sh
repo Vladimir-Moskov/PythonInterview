@@ -38,7 +38,34 @@ lsof -i
 lsof -u
 
 cat /proc/cpuinfo
+cat /proc/meminfo
+df -h
+du -sh /
+du -sh /boot
+# list block device
+lsblk
+fdisk -l
 
+# mount usb
+mkdir /media/usb_32/
+mount /dev/sda1 /media/usb_32/
+mkfs.ext4 /dev/sdb1
 
+mount /dev/sda1 /media/dick_a1/
+mount /dev/sda2 /media/dick_a2/
+umount /media/dick_a1/
+umount /media/dick_a2/
 
+sudo apt-get install smartmontools
+sudo smartctl --scan
+sudo smartctl --all /dev/sdb1
 
+fsck.ext4 -f -C0 /dev/sdb1
+e2fsck -b 8193 /dev/sdb1
+e2fsck -b 32768 /dev/sdb1
+
+ps aux
+man -k pam.conf
+
+apt-get install rpm
+rpm -qa hhtpd

@@ -896,6 +896,9 @@ sudo fdisk -l
 sudo mkfs.vfat /dev/sda1
 
 sudo parted /dev/sdx
+sudo parted -s -a optimal -- /dev/sdb mklabel msdos
+sudo parted -s -a optimal -- /dev/sdb mkpart primary fat32 1MiB 100%
+sudo dd if=/dev/zero of=/dev/sdc bs=1024 count=1
 
 sudo apt-get install smartmontools
 lsblk
@@ -940,7 +943,16 @@ lspci
 #####################################################
 # https://www.youtube.com/watch?v=-VbQIgtecic
 # Introduction to Configuration Management
+# https://www.youtube.com/watch?v=fYd_KQpfBs8
+# Configuration Management With Ansible: A Whirlwind Tour
 
-
-
-
+#
+#
+#Why choose Ansible vs Chef or Puppet?
+# -easiest to get started with
+# -no agents, no client/server
+# -done over SSH
+# -Ansible can scale to thousands of hosts
+# -Ansible uses Python, yay!
+#
+#Code snippets on Github: https://github.com/groovemonkey/tutor...
