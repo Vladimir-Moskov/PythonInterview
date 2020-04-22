@@ -69,3 +69,7 @@ man -k pam.conf
 
 apt-get install rpm
 rpm -qa hhtpd
+
+btrfs fi df /device/
+
+watch -n1 vcgencmd measure_clock arm

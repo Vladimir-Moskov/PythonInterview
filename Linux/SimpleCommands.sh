@@ -45,7 +45,7 @@ more
 shutdown -r
 shutdown -h now
 shutdown -h +60
-powerof
+poweroff
 init 0
 init 6
 
@@ -124,6 +124,7 @@ cat file.txt | sort -bf
 cat file.txt | uniq
 
 # file info
+#  wc - print newline, word, and byte counts for each file
 wc file.txt
 
 # grep filter/search
