@@ -73,3 +73,7 @@ rpm -qa hhtpd
 btrfs fi df /device/
 
 watch -n1 vcgencmd measure_clock arm
+
+#####################################################
+# https://www.youtube.com/watch?v=yACI110TJYc
+

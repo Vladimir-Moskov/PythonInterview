@@ -72,13 +72,15 @@ emacs
 ########################################
 # https://www.youtube.com/watch?v=V8EUdia_kOE
 # My 5 Favorite Linux Shell Tricks for SPEEEEEED (and efficiency)
-1:04 - sudo !! - re-run previous command with 'sudo' prepended
-1:53 - ctrl-k, ctrl-u, ctrl-w, ctrl-y - cutting and pasting text in the command line
-3:24 - practical kill/yank example
-4:04 - use 'less +F' to view logfiles, instead of 'tail' (ctrl-c, shift-f, q to quit)
-6:25 - ctrl-x-e - continue editing your current shell line in a text editor (uses $EDITOR)
-7:54 - alt-. - paste previous command's argument (useful for running multiple commands on the same resource)
-9:18 - reset - resets/unborks your terminal
+#1:04 - sudo !! - re-run previous command with 'sudo' prepended
+#1:53 - ctrl-k, ctrl-u, ctrl-w, ctrl-y - cutting and pasting text in the command line
+#3:24 - practical kill/yank example
+#4:04 - use 'less +F' to view logfiles, instead of 'tail' (ctrl-c, shift-f, q to quit)
+#6:25 - ctrl-x-e - continue editing your current shell line in a text editor (uses $EDITOR)
+#7:54 - alt-. - paste previous command's argument (useful for running multiple commands on the same resource)
+#9:18 - reset - resets/unborks your terminal
+#  mtr - a network diagnostic tool
+mtr --curses 8.8.8.8
 
 ########################################
 # Linux Sysadmin Basics 04 -- Shell Features -- Pipes and Redirection
@@ -93,6 +95,7 @@ ls -alh errortrigername 2>  listoutputerror
 mail -s "subject metter" vova < listoutputerror
 sudo apt-get install mailutils
 
+#   ps - report a snapshot of the current processes.
 ps aux
 # pagenation
 ps aux | less
@@ -212,7 +215,7 @@ usermod -U vavas
 # delete user
 userdel deluser
 rm -rf /home/deluser
-# batch user creation
+# newusers - update and create new users in batch
 man newusers
 
 #####################################################
