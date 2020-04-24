@@ -222,6 +222,7 @@ man newusers
 # Linux Sysadmin Basics -- 6 -- Processes Overview
 # https://www.youtube.com/watch?v=ls5cGi12kGw&list=PLtK75qxsQaMLZSo7KL-PmiRarU7hrpnwK&index=14
 
+# env - run a program in a modified environment
 env
 # disk space
 df -h

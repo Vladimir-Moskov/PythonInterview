@@ -32,6 +32,7 @@ ifquery - parse interface configuration
 
 cat /etc/*-release
 uptime -p
+# free - Display amount of free and used memory in the system
 free -m
 # list of open files
 lsof -i
@@ -39,11 +40,13 @@ lsof -u
 
 cat /proc/cpuinfo
 cat /proc/meminfo
+# df - report file system disk space usage
 df -h
 du -sh /
 du -sh /boot
 # list block device
 lsblk
+#  fdisk - manipulate disk partition table
 fdisk -l
 
 # mount usb
