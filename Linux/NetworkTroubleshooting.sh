@@ -80,3 +80,6 @@ watch -n1 vcgencmd measure_clock arm
 #####################################################
 # https://www.youtube.com/watch?v=yACI110TJYc
 
+# sudo apt install speedtest-cli
+#  speedtest-cli - Command line interface for testing internet bandwidth using speedtest.net
+speedtest

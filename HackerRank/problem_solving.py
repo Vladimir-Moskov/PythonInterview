@@ -1760,6 +1760,17 @@ def MergingCommunitiesSolution():
     ar[2] = ar[0]
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/the-grid-search/problem
+# The Grid Search
 
 
-
+def gridSearch_0(G, P):
+    for row in range(len(G)-len(P)+1):
+        for col in range(len(G[0])-len(P[0])+1):
+            if G[row][col:col+len(P[0])] == P[0]:
+                for i in range(1, len(P)):
+                    if not G[row+i][col:col+len(P[0])] == P[i]:
+                        break       # Found a mismatch
+                else:
+                    return "YES"    # Found full pattern
+    return "NO"
