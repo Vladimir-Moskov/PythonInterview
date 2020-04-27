@@ -25,3 +25,10 @@
   ls -lah /usr/src/
   # delete existing images states
   docker container prune
+
+  # --rm - remove image state file after close
+   docker run --rm -it ubuntu top
+
+  docker run hello-world-gcc
+  docker build -t hello-world-gcc .
+  docker run --rm -it -p 4000:80 simple-node-webserver

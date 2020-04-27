@@ -1764,6 +1764,24 @@ def MergingCommunitiesSolution():
 # The Grid Search
 
 
+def gridSearch(G, P):
+    for i in range(len(G) - len(P) + 1):
+        for j in range(len(G[0]) - len(P[0]) + 1):
+            if G[i][j] == P[0][0]:
+                for n in range(len(P)):
+                    is_break = False
+                    for k in range(len(P[0])):
+                        if G[i+n][j+k] != P[n][k]:
+                            is_break = True
+                            break
+                    if is_break:
+                        break
+                else:
+                   return "YES"
+    else:
+        return "NO"
+
+
 def gridSearch_0(G, P):
     for row in range(len(G)-len(P)+1):
         for col in range(len(G[0])-len(P[0])+1):
@@ -1774,3 +1792,5 @@ def gridSearch_0(G, P):
                 else:
                     return "YES"    # Found full pattern
     return "NO"
+
+#####################################################################################
