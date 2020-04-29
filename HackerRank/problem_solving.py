@@ -1794,3 +1794,12 @@ def gridSearch_0(G, P):
     return "NO"
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/components-in-graph/problem
+# Components in a graph
+
+
+def componentsInGraph(gb):
+    result = 0
+
+    return result
+

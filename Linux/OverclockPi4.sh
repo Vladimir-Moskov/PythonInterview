@@ -34,3 +34,8 @@ sysbench --num-threads=8 --test=cpu --cpu-max-prime=2000 run
 
 #  Checking the default speed of CPU
 cat /sys/devices/system/cpu/cpu0/cpufreq/
+
+# or even
+over_voltage=6
+arm_freq=2100
+gpu_freq=700

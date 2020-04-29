@@ -32,3 +32,41 @@
   docker run hello-world-gcc
   docker build -t hello-world-gcc .
   docker run --rm -it -p 4000:80 simple-node-webserver
+
+# https://github.com/btholt/complete-intro-to-containers
+# https://btholt.github.io/complete-intro-to-containers/
+
+# chroot - use to be kernel / Linux jail
+docker pull ubuntu:bionic
+docker pull node:12-stretch
+docker pull node:12-alpine
+docker pull nginx:1.17
+docker pull mongo:3
+docker pull jguyomard/hugo-builder:0.55
+
+# https://github.com/btholt/complete-intro-to-containers/blob/master/lessons/chroot.md
+docker run -it --name docker-host --rm --privileged ubuntu:bionic
+
+mkdir my-new-root
+cat /etc/issue/
+cd my-new-root
+cd ..
+mkdir my-new-root/bin
+# see all bash dependency libs
+ldd bin/bash
+# smart way to create 2 dirs lib and lib64
+mkdir my-new-root/lib{, 64}
+# copy nash related libs into local env
+cp /lib/arm-linux-gnueabihf/libtinfo.so.5  /lib/arm-linux-gnueabihf/libdl.so.2 /lib/arm-linux-gnueabihf/libc.so.6 /my-new-root/lib
+cp /lib/ld-linux-armhf.so.3 /my-new-root/lib
+cp /lib/ld-linux-armhf.so.1 /my-new-root/lib
+
+chroot /my-new-root bash
+pwd
+exit
+cp /bin/ls  /my-new-root/bin/
+ldd /bin/ls
+cp  /lib/arm-linux-gnueabihf/libselinux.so.1 /lib/arm-linux-gnueabihf/libc.so.6 /lib/ld-linux-armhf.so.3 /lib/arm-linux-gnueabihf/libpcre.so.3 /lib/arm-linux-gnueabihf/libdl.so.2 /lib/arm-linux-gnueabihf/libpthread.so.0 /my-new-root/lib
+
+chroot /my-new-root bash
+

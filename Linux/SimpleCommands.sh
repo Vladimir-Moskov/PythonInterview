@@ -972,3 +972,5 @@ lspci
 # -Ansible uses Python, yay!
 #
 #Code snippets on Github: https://github.com/groovemonkey/tutor...
+
+# chroot - run command or interactive shell with special root directory
