@@ -55,7 +55,8 @@ mkdir my-new-root/bin
 # see all bash dependency libs
 ldd bin/bash
 # smart way to create 2 dirs lib and lib64
-mkdir my-new-root/lib{, 64}
+cp /bin/bash  /my-new-root/bin/
+mkdir my-new-root/lib{,64}
 # copy nash related libs into local env
 cp /lib/arm-linux-gnueabihf/libtinfo.so.5  /lib/arm-linux-gnueabihf/libdl.so.2 /lib/arm-linux-gnueabihf/libc.so.6 /my-new-root/lib
 cp /lib/ld-linux-armhf.so.3 /my-new-root/lib
@@ -69,4 +70,29 @@ ldd /bin/ls
 cp  /lib/arm-linux-gnueabihf/libselinux.so.1 /lib/arm-linux-gnueabihf/libc.so.6 /lib/ld-linux-armhf.so.3 /lib/arm-linux-gnueabihf/libpcre.so.3 /lib/arm-linux-gnueabihf/libdl.so.2 /lib/arm-linux-gnueabihf/libpthread.so.0 /my-new-root/lib
 
 chroot /my-new-root bash
+echo "very confidential message" > secret.txt
+cp /lib/arm-linux-gnueabihf/libc.so.6 /lib/ld-linux-armhf.so.3 /my-new-root/lib
+cp /bin/cat  /my-new-root/bin/
+
+# namespaces
+# https://btholt.github.io/complete-intro-to-containers/namespaces
+tail -f /my-new-root/secret.txt
+# connect to existing docker image
+docker exec -it docker-host bash
+# update image from inside
+exit # from our chroot'd environment if you're still running it, if not skip this
+
+# install debootstrap
+apt-get update -y
+apt-get install debootstrap -y
+debootstrap --variant=minbase bionic /better-root
+
+# head into the new namespace'd, chroot'd environment
+unshare --mount --uts --ipc --net --pid --fork --user --map-root-user chroot /better-root bash # this also chroot's for us
+mount -t proc none /proc # process namespace
+mount -t sysfs none /sys # filesystem
+mount -t tmpfs none /tmp # filesystem
+
+# cgroups
+# https://btholt.github.io/complete-intro-to-containers/cgroups
 

@@ -1797,9 +1797,61 @@ def gridSearch_0(G, P):
 # https://www.hackerrank.com/challenges/components-in-graph/problem
 # Components in a graph
 
+from collections import defaultdict
+
+
+def componentsInGraph_(gb):
+    point_maper = defaultdict(list)
+    for a, b in gb:
+        if not point_maper[a]:
+            point_maper[a].append(a)
+        if not point_maper[b]:
+            point_maper[b].append(b)
+
+        if a != b:
+            if len(point_maper[a]) < len(point_maper[b]):
+                a, b = b, a
+            point_maper[a].extend(point_maper[b])
+            for p in point_maper[b]:
+                point_maper[p] = point_maper[a]
+    mix_size = len(gb) + 1
+    max_size = 1
+
+    for connection in point_maper.values():
+        lel_val = len(connection)
+        mix_size = min(lel_val, mix_size)
+        max_size = max(lel_val, max_size)
+    return mix_size, max_size
+
+from collections import Counter
+
+def parent(parents, i):
+    if parents[i] != i:
+        parents[i] = parent(parents, parents[i])
+    return parents[i]
 
 def componentsInGraph(gb):
-    result = 0
+    parents = list(range(len(gb)*2+1))
+    for a, b in gb:
+        p1, p2 = parent(parents, a), parent(parents, b)
+        parents[p1] = parents[p2] = parents[a] = parents[b] = min(p1, p2)
+    counter = Counter()
+    for p in parents:
+        counter[parent(parents, p)]+=1
+    counts = [c for c in counter.values() if c > 1]
+    return min(counts), max(counts)
 
-    return result
+gb = [[1, 6], [2, 7], [3, 8], [4, 9], [2, 6]]
+gb = [[1, 17],
+[5, 13],
+[7, 12],
+[5, 17],
+[5, 12],
+[2, 17],
+[1, 18],
+[8, 13],
+[2, 15],
+[5, 20]]
+print(componentsInGraph(gb))
 
+#####################################################################################
