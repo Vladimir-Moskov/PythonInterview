@@ -1841,17 +1841,62 @@ def componentsInGraph(gb):
     counts = [c for c in counter.values() if c > 1]
     return min(counts), max(counts)
 
-gb = [[1, 6], [2, 7], [3, 8], [4, 9], [2, 6]]
-gb = [[1, 17],
-[5, 13],
-[7, 12],
-[5, 17],
-[5, 12],
-[2, 17],
-[1, 18],
-[8, 13],
-[2, 15],
-[5, 20]]
-print(componentsInGraph(gb))
+def componentsInGraphSolutionTest():
+    gb = [[1, 6], [2, 7], [3, 8], [4, 9], [2, 6]]
+    gb = [[1, 17],
+    [5, 13],
+    [7, 12],
+    [5, 17],
+    [5, 12],
+    [2, 17],
+    [1, 18],
+    [8, 13],
+    [2, 15],
+    [5, 20]]
+    print(componentsInGraph(gb))
+
+#####################################################################################
+# https://www.hackerrank.com/challenges/connected-cell-in-a-grid/problem
+# Connected Cells in a Grid
+
+# just another BFS
+
+def ConnectedCellsGrid():
+    from collections import deque
+
+
+    deltas = [(-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
+
+    def connectedCell(matrix):
+        result = 0
+        bf_deque = deque()
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                current_val = matrix[i][j]
+                if current_val == 1:
+                    new_result = 1
+                    matrix[i][j] = 0
+                    bf_deque.append((i, j))
+                    while bf_deque:
+                        sub_i, sub_j = bf_deque.popleft()
+                        matrix[sub_i][sub_j] = 0
+                        for d_i, d_j in deltas:
+                            nex_i = sub_i + d_i
+                            nex_j = sub_j + d_j
+                            if nex_i >= 0 and nex_j >= 0 and nex_i < len(matrix) and nex_j < len(matrix[0]):
+                                if matrix[nex_i][nex_j] == 1:
+                                    new_result += 1
+                                    bf_deque.append((nex_i, nex_j))
+                                    matrix[nex_i][nex_j] = 0
+                    result = max(result, new_result)
+        return result
+
+
+    # case 1 => 5
+    matrix = [[1, 1, 0, 0, 0], [0, 1, 1, 0, 0], [0, 0, 1, 0, 1], [1, 0, 0, 0, 1], [0, 1, 0, 1, 1]]
+    print(connectedCell(matrix))
+    # case 2 => 5
+    matrix = [[1, 1, 0, 0], [0, 1, 1, 0], [0, 0, 1, 0], [1, 0, 0, 0]]
+    print(connectedCell(matrix))
 
 #####################################################################################
