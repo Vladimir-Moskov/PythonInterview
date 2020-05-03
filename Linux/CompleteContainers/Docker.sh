@@ -47,3 +47,19 @@ docker kill my-ubuntu
 
 # https://btholt.github.io/complete-intro-to-containers/nodejs-on-docker
 # Node.js on Docker
+
+docker run -it node:12-stretch
+
+docker run -it node:12-stretch bash
+cat /etc/issue
+
+docker run ubuntu:bionic cat /etc/issue # hopefully this shouldn't surprise you
+docker run node:12-stretch cat /etc/issue # ????
+
+# https://btholt.github.io/complete-intro-to-containers/tags
+# Tags
+docker run -it node:8 bash
+docker run node:12-alpine cat /etc/issue
+
+# https://btholt.github.io/complete-intro-to-containers/docker-cli
+# Docker CLI

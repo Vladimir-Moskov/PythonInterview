@@ -2013,21 +2013,22 @@ def ConnectedCellsGrid():
 #     return result
 
 # real solution
-def runningMedian(given_set):
-    import bisect
-    heap = []
-    result = [0] * len(given_set)
-    for i, val in enumerate(given_set):
-        bisect.insort(heap, val)
-        mid = (i + 1) // 2
-        if i % 2 == 1:
-            result[i] = (heap[mid-1] + heap[mid])/2
-        else:
-            result[i] = heap[mid] * 10 / 10
-    return result
+def runningMedianSolution():
+    def runningMedian(given_set):
+        import bisect
+        heap = []
+        result = [0] * len(given_set)
+        for i, val in enumerate(given_set):
+            bisect.insort(heap, val)
+            mid = (i + 1) // 2
+            if i % 2 == 1:
+                result[i] = (heap[mid-1] + heap[mid])/2
+            else:
+                result[i] = heap[mid] * 10 / 10
+        return result
 
-given_set = [12, 4, 5, 3, 8, 7]
-print(runningMedian(given_set))
+    given_set = [12, 4, 5, 3, 8, 7]
+    print(runningMedian(given_set))
 
 #####################################################################################
 
