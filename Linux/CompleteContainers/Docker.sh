@@ -63,3 +63,40 @@ docker run node:12-alpine cat /etc/issue
 
 # https://btholt.github.io/complete-intro-to-containers/docker-cli
 # Docker CLI
+docker pull jturpin/hollywood
+docker run -it jturpin/hollywood hollywood # notice it's already loaded and cached here; it doesn't redownload it
+docker inspect node:12-strech
+
+# pause / unpause
+# As it looks, these pauses or unpause all the processes in a container. Feel free to try
+
+docker run -dit jturpin/hollywood hollywood
+docker ps # see container running
+docker pause <ID or name>
+docker ps # see container paused
+docker unpause <ID or name>
+docker ps # see container running again
+docker kill <ID or name> # see container is gone
+
+# exec
+# This allows you to execute a command against a running container. This is different from docker run because docker run will start a new container whereas docker exec runs the command in an already-running container.
+
+docker run -dit jturpin/hollywood hollywood
+docker ps # grab the name or ID
+docker exec <ID or name> ps aux # see it output all the running processes of the container
+
+docker history node
+docker info
+
+docker run mongo
+docker top <ID outputted by previous command> # you should see MongoDB running
+
+docker ps --all
+docker logs id or name>
+# delete image state
+docker rm <id or name>
+# delete imas\ge
+docker rmi <id or name>
+
+docker restart compassionate_rubin
+docker search python

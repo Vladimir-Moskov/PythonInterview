@@ -974,3 +974,11 @@ lspci
 #Code snippets on Github: https://github.com/groovemonkey/tutor...
 
 # chroot - run command or interactive shell with special root directory
+
+# https://ohmyz.sh/#install
+# https://www.youtube.com/watch?v=ADytC9a2g2Y
+# zsh: Getting Started with the Z Shell (and oh-my-zsh)
+which zsh
+# change shell
+chsh -s /usr/bin/zsh
+tail /etc/passwd
