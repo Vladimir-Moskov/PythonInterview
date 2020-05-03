@@ -21,4 +21,29 @@ mount -t tmpfs none /tmp
 # here's where you'd do all the cgroup rules making with the settings you wanted to
 
 # https://btholt.github.io/complete-intro-to-containers/docker-images-with-docker
+docker run --interactive --tty alpine:3.10
+cat /etc/issue
+docker run -it alpine:3.10
+docker run alpine:3.10 ls
+docker run alpine:3.10 cat /etc/issue
 
+docker run ubuntu:bionic ls
+docker run ubuntu:bionic cat /etc/issue
+# run image in background
+docker run --detach -it ubuntu:bionic
+docker ps
+docker attach <ID or name>
+docker attach funny_shirley
+docker kill <IDs or names of containers>
+
+docker run -it --name my-alpine alpine:3.10
+docker logs my-alpine
+docker kill my-alpine
+docker rm my-alpine
+
+docker run -dit --name my-ubuntu ubuntu:bionic
+docker kill my-ubuntu
+
+
+# https://btholt.github.io/complete-intro-to-containers/nodejs-on-docker
+# Node.js on Docker

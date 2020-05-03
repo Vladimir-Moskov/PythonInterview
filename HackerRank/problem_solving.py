@@ -1900,3 +1900,136 @@ def ConnectedCellsGrid():
     print(connectedCell(matrix))
 
 #####################################################################################
+# https://www.hackerrank.com/challenges/find-the-running-median/problem
+# Find the Running Median
+
+# class HeapNode:
+#     def __init__(self, data):
+#         self.data = data
+#         self.left = None
+#         self.right = None
+#         self.counter = 1
+#
+#     def insertNode(self, data, root=None):
+#         self.counter += 1
+#         next_node = None
+#         if not root:
+#             root = self
+#         if data < self.data:
+#             if self.left:
+#                 next_node = self.left
+#             else:
+#                 self.left = HeapNode(data)
+#                 root.shiftRot()
+#         else:
+#             if self.right:
+#                 next_node = self.right
+#             else:
+#                 self.right = HeapNode(data)
+#                 root.shiftRot()
+#         if next_node:
+#             next_node.insertNode(data, root)
+#
+#     # def shift_root(self):
+#     #     if not self.left and self.right:
+#
+#
+#     def median(self):
+#         if self.counter == 1:
+#             return self.data
+#         else:
+#             return (self.data + self.left.data) / 2
+# # naive approach
+# def _runningMedian(given_set):
+#     result = [0] * len(given_set)
+#     heap = HeapNode()
+#     for i, val in enumerate(given_set):
+#         heap.insertNode(val)
+#         result[i] = heap.median()
+#
+#     return result
+#
+#
+# from collections import deque
+# class HeapMid:
+#     def __init__(self, size):
+#         self.size = size
+#         #self.heap = deque()
+#         self.heap = [0] * size
+#         self.right = size // 2
+#         self.left = self.right - 1 if size % 2 == 0 else self.right
+#
+#     def median(self):
+#         half = (self.right - self.left) // 2
+#         if (self.right - self.left) % 2 == 0:
+#             return (self.heap[half] + self.heap[half - 1]) / 2
+#         else:
+#             self.heap[half]
+#
+#     def insert(self, data):
+#         half = self.size // 2
+#
+#         if self.left > self.size - self.right:
+#             delta = -1
+#             self.left -= 1
+#         else:
+#             self.right += 1
+#             delta = 1
+#
+#         while half > -1 and half < self.size:
+#             if self.heap[half] == 0:
+#                 self.heap[half] = data
+#                 return
+#
+#             if self.heap[half] > data:
+#                 if half < self.size // 2:
+#                     ind = self.left
+#                     while ind < half:
+#                         self.heap[ind], self.heap[ind + 1] = self.heap[ind + 1], self.heap[ind]
+#                         ind += 1
+#                     self.heap[half] = data
+#                     return
+#                 else:
+#                     half -= 1
+#             else:
+#                 if half > self.size // 2:
+#                     ind = self.right
+#                     while ind > half:
+#                         self.heap[ind], self.heap[ind - 1] = self.heap[ind - 1], self.heap[ind]
+#                         ind -= 1
+#                     self.heap[half] = data
+#                     return
+#                 else:
+#                     half += 1
+#
+#
+# def runningMedian(given_set):
+#     result = [0] * len(given_set)
+#     heap = HeapMid(len(given_set))
+#     for i, val in enumerate(given_set):
+#         heap.insert(val)
+#         result[i] = heap.median()
+#
+#     return result
+
+# real solution
+def runningMedian(given_set):
+    import bisect
+    heap = []
+    result = [0] * len(given_set)
+    for i, val in enumerate(given_set):
+        bisect.insort(heap, val)
+        mid = (i + 1) // 2
+        if i % 2 == 1:
+            result[i] = (heap[mid-1] + heap[mid])/2
+        else:
+            result[i] = heap[mid] * 10 / 10
+    return result
+
+given_set = [12, 4, 5, 3, 8, 7]
+print(runningMedian(given_set))
+
+#####################################################################################
+
+
+
