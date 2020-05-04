@@ -24,3 +24,13 @@ docker run my-node-app:1
 
 # https://btholt.github.io/complete-intro-to-containers/build-a-nodejs-app
 # Build a Node.js App
+docker build -t my-node-app .
+docker run my-node-app
+
+docker run --init --rm --publish 3000:3000 my-node-app # or you can use -p instead of --publish
+
+# https://btholt.github.io/complete-intro-to-containers/more-complicated-nodejs-app
+# A More Complicated Node.js App
+
+npm init -y # this will create a package.json for you without asking any questions
+npm install @hapi/hapi hapi-pino
