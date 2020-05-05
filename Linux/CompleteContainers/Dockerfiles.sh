@@ -34,3 +34,34 @@ docker run --init --rm --publish 3000:3000 my-node-app # or you can use -p inste
 
 npm init -y # this will create a package.json for you without asking any questions
 npm install @hapi/hapi hapi-pino
+
+docker build -t my-node-app .
+docker run --init --rm --publish 3000:3000 my-node-app
+
+# https://btholt.github.io/complete-intro-to-containers/expose
+# A Note on EXPOSE
+
+docker run --init --rm --detach -P my-node-app
+
+# https://btholt.github.io/complete-intro-to-containers/layers
+# Layers
+FROM node:12-stretch
+
+USER node
+
+RUN mkdir /home/node/code
+
+WORKDIR /home/node/code
+
+COPY --chown=node:node package-lock.json package.json ./
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+CMD ["node", "index.js"]
+
+
+
+
+

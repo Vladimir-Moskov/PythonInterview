@@ -1,4 +1,8 @@
-FROM node:12-stretch
+FROM alpine:3.10
+
+RUN apk add --update nodejs npm
+
+RUN addgroup -S node && adduser -S node -G node
 
 USER node
 
@@ -12,8 +16,4 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
-EXPOSE 3000
-
 CMD ["node", "index.js"]
-
-
