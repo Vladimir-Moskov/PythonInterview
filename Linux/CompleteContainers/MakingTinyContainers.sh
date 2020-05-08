@@ -42,12 +42,16 @@ npx --ignore-existing create-react-app static-assets-project --template typescri
 npm install node-sass
 npm run start
 npm run build
+docker build -t static-app .
+docker run -p 8080:80 static-app
 
+docker run -it -p 8080:80 static-app
 # done? If you gave it a shot, your Dockerfile probably shouldn't very long. Let's see what I came up with
 
-FROM node:latest
+FROM node:12-stretch
 WORKDIR /app
 COPY . .
+RUN npm install -g typescript@~3.7.5
 RUN npm ci && npm run build
 
 # you could totally use nginx:alpine here too

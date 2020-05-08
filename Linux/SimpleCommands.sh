@@ -982,3 +982,6 @@ which zsh
 # change shell
 chsh -s /usr/bin/zsh
 tail /etc/passwd
+
+# see memory pages per process
+/proc/1/smaps

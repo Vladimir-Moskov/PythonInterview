@@ -25,6 +25,13 @@
   ls -lah /usr/src/
   # delete existing images states
   docker container prune
+  # Purging All Unused or Dangling Images, Containers, Volumes, and Networks
+  docker system prune -a
+  # Remove images only
+   docker rmi Image Image
+  # Remove dangling images
+   docker images purge
+
 
   # --rm - remove image state file after close
    docker run --rm -it ubuntu top
