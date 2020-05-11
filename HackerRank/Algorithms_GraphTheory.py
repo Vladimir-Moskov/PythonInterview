@@ -47,6 +47,45 @@ def solutionShortestReach():
     print(bfs(n, m, edges, s))
 
 ##################################################################################
+# https://www.hackerrank.com/challenges/primsmstsub/problem
+# Prim's (MST) : Special Subtree
 
 
+def solutionSpecialSubtree():
+    def prims(nodes_num, edges, start):
+        """
+            simple burt not 100% optimized, functional approach
+            :param nodes_num: nodes number
+            :param edges: graph edge
+            :param start: start point
+            :return:
+        """
+        edges_dic = [[] for _ in range(nodes_num + 1)]
 
+        for x, y, w in edges:
+            edges_dic[x].append((y, w))
+            edges_dic[y].append((x, w))
+
+        in_set = set([start])
+        out_set = set([x for x in range(1, nodes_num + 1) if x != start])
+        min_w = [10**6] * (nodes_num + 1)
+        min_w[start] = 0
+        while len(in_set) < nodes_num:
+            next_min = 10**6
+            next_node = 0
+            for node in out_set:
+                for n, w in edges_dic[node]:
+                   if next_min > w and n in in_set:
+                       next_min = w
+                       next_node = node
+
+            in_set.add(next_node)
+            out_set.remove(next_node)
+            min_w[next_node] = next_min
+        result = min_w[1:]
+        return sum(result)
+
+    n = 5
+    edges = [[1, 2, 3], [1, 3, 4], [4, 2, 6], [5, 2, 2], [2, 3, 5], [3, 5, 7]]
+    start = 1
+    print(prims(n, edges, start))
