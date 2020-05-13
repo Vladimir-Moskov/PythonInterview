@@ -1,3 +1,6 @@
+# https://blog.alexellis.io/raspberry-pi-homelab-with-k3sup/
+# Kubernetus for Raspbery pi4
+
 # https://www.youtube.com/watch?v=FufPIABXdTw
 # Real-Life Kubernetes 2: How to Install kubectl
 
@@ -13,3 +16,5 @@ kubectl help
 
 # https://www.youtube.com/watch?v=68yKslO2Pz0&list=PLtK75qxsQaMIZ2hZhBbnvNZNFQHGUPrvV&index=4
 # The Kubernetes Master-Node Architecture
+
+sudo apt install cpu-checker && sudo kvm-ok

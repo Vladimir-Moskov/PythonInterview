@@ -70,3 +70,74 @@ def solution_Highest_Value_Palindrome():
     print(highestValuePalindrome(str_val, str_len, shifts_num))
 
 ####################################################################################################
+# https://www.hackerrank.com/challenges/maximum-palindromes/problem
+# Maximum Palindromes
+
+def solutionMaximumPalindromes1():
+    def initialize(s):
+        global arr, fac, mod, M
+        M = 1000000007
+        n = len(s)
+        arr = [[0 for _ in range(n + 1)] for _ in range(26)]
+        for i in range(n):
+            for j in range(26):
+                arr[j][i + 1] = arr[j][i] + ((ord(s[i]) - 97) == j)
+        fac = [1] * (n + 1)
+        mod = [1] * (n + 1)
+        for i in range(1, n + 1):
+            fac[i] = (fac[i - 1] * i) % M
+            mod[i] = pow(fac[i], M - 2, M)
+
+    def answerQuery(l, r):
+        global arr, fac, mod, M
+        odd = 0
+        even = 0
+        divs = 1
+        for i in range(26):
+            value = arr[i][r] - arr[i][l - 1]
+            odd += (value & 1)
+            even += (value // 2)
+            divs = (divs * mod[value // 2]) % M
+        result = (fac[even] * divs) % M
+        if (odd > 0):
+            result = (result * odd) % M
+        return result
+
+
+def solutionMaximumPalindromes():
+    from collections import defaultdict
+    result_matrix = None
+
+
+    def initialize(given_str):
+        global result_matrix
+        result_matrix = [[0] * len(given_str) for _ in range(len(given_str))]
+        factorial = [1] * len(given_str)
+        for i in range(1, len(given_str)):
+            factorial[i] = i * factorial[i-1]
+        for i in range(len(given_str)):
+            counter = defaultdict(int)
+            counter[given_str[i]] = 1
+            pairs_num = 0
+            not_pairs_num = 1
+            result_matrix[i][i] = 1
+            for j in range(i, len(given_str)):
+                counter[given_str[j]] += 1
+                if counter[given_str[j]] % 2 == 0:
+                    pairs_num += 1
+                    not_pairs_num -= 1
+                else:
+                    not_pairs_num += 1
+
+                result_matrix[i][j] = not_pairs_num * factorial[pairs_num]
+
+    def answerQuery(start_ind, end_ind):
+        global result_matrix
+        result = result_matrix[start_ind - 1][end_ind - 1]
+        return result
+
+
+    initialize('week')
+
+    print(answerQuery(1, 4))  # 2
+    print(answerQuery(2, 3))  # 1
