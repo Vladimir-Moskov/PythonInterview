@@ -147,10 +147,10 @@ def solutionMaximumPalindromes():
 # Bear and Steady Gene
 
 
-# O(n**2) solution
+# O(n**2) solution -> refactored to O(n) solution
 def solutionBearSteadyGene():
 
-    def steadyGene_(gene):
+    def _steadyGene(gene):
         result = len(gene)
         map_ind = {"A": 0, "C": 1, "G": 2, "T": 3}
         max_count = len(gene) / 4
@@ -167,7 +167,6 @@ def solutionBearSteadyGene():
             overflow_ar[i] = overflow_ar[i - 1]
             if calc_matrix[i][map_ind[gene[i]]] > max_count:
                 overflow_ar[i] += 1
-               #overflow_ar[i] = max(calc_matrix[i]) - max_count
             overflow_ar2[i] = max(calc_matrix[i]) - min(calc_matrix[i])
 
         count_replace = overflow_ar[-1]
@@ -175,20 +174,40 @@ def solutionBearSteadyGene():
         for i, ch_count in enumerate(calc_matrix[-1]):
             if ch_count > max_count:
                 over_dic[i] = ch_count - max_count
+        # O(n^2) search
+        # for i in range(len(gene) - count_replace):
+        #     for j in range(i, len(gene)):
+        #         start = calc_matrix[i]
+        #         end = calc_matrix[j]
+        #         flag = True
+        #         for n, k in over_dic.items():
+        #             if end[n] - start[n] < over_dic[n]:
+        #                 flag = False
+        #                 break
+        #         if flag:
+        #             result = min(result, (j - i))
+        #         if result == count_replace:
+        #             return result
 
-        for i in range(len(gene) - count_replace):
-            for j in range(i, len(gene)):
-                start = calc_matrix[i]
-                end = calc_matrix[j]
-                flag = True
-                for n, k in over_dic.items():
-                    if end[n] - start[n] < over_dic[n]:
-                        flag = False
-                        break
-                if flag:
-                    result = min(result, (j - i))
-                if result == count_replace:
-                    return result
+        # O(n) search - "moving window" approach
+        start = 0
+        end = count_replace
+        while end < len(gene) and (start < len(gene) - count_replace):
+            start_val = calc_matrix[start]
+            end_val = calc_matrix[end]
+            flag = True
+            for n, k in over_dic.items():
+                if end_val[n] - start_val[n] < over_dic[n]:
+                    flag = False
+                    break
+            if flag:
+                result = min(result, (end - start))
+                start += 1
+            else:
+                end += 1
+            if result == count_replace:
+                return result
+
         return result
 
     from collections import Counter
@@ -224,3 +243,7 @@ def solutionBearSteadyGene():
     print(steadyGene(gene))
     gene = "TGATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTGC" # 5
     print(steadyGene(gene))
+
+# solutionBearSteadyGene()
+
+####################################################################################################
