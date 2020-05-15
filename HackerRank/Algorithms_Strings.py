@@ -141,3 +141,30 @@ def solutionMaximumPalindromes():
 
     print(answerQuery(1, 4))  # 2
     print(answerQuery(2, 3))  # 1
+
+####################################################################################################
+# https://www.hackerrank.com/challenges/bear-and-steady-gene/problem
+# Bear and Steady Gene
+
+
+def steadyGene(gene):
+    result = 0
+    map_ind = {"A": 0, "C": 1, "G": 2, "T": 3}
+    max_count = len(gene) / 4
+    calc_matrix = [[0]*4 for _ in range(len(gene))]
+    calc_matrix[0][map_ind[gene[0]]] = 1
+    oveerflow_ar = [0] * len(gene)
+    for i in range(1, len(gene)):
+        calc_matrix[i][0] = calc_matrix[i - 1][0]
+        calc_matrix[i][1] = calc_matrix[i - 1][1]
+        calc_matrix[i][2] = calc_matrix[i - 1][2]
+        calc_matrix[i][3] = calc_matrix[i - 1][3]
+        calc_matrix[i][map_ind[gene[i]]] += 1
+        oveerflow_ar[i] = oveerflow_ar[i - 1]
+        if calc_matrix[i][map_ind[gene[i]]] > max_count:
+            oveerflow_ar[i] += 1
+    return result
+
+gene = "GAAATAAA" # 5
+gene = "TGATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTGC"
+print(steadyGene(gene))
