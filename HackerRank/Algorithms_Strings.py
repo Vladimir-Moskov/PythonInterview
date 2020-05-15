@@ -147,24 +147,80 @@ def solutionMaximumPalindromes():
 # Bear and Steady Gene
 
 
-def steadyGene(gene):
-    result = 0
-    map_ind = {"A": 0, "C": 1, "G": 2, "T": 3}
-    max_count = len(gene) / 4
-    calc_matrix = [[0]*4 for _ in range(len(gene))]
-    calc_matrix[0][map_ind[gene[0]]] = 1
-    oveerflow_ar = [0] * len(gene)
-    for i in range(1, len(gene)):
-        calc_matrix[i][0] = calc_matrix[i - 1][0]
-        calc_matrix[i][1] = calc_matrix[i - 1][1]
-        calc_matrix[i][2] = calc_matrix[i - 1][2]
-        calc_matrix[i][3] = calc_matrix[i - 1][3]
-        calc_matrix[i][map_ind[gene[i]]] += 1
-        oveerflow_ar[i] = oveerflow_ar[i - 1]
-        if calc_matrix[i][map_ind[gene[i]]] > max_count:
-            oveerflow_ar[i] += 1
-    return result
+# O(n**2) solution
+def solutionBearSteadyGene():
 
-gene = "GAAATAAA" # 5
-gene = "TGATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTGC"
-print(steadyGene(gene))
+    def steadyGene_(gene):
+        result = len(gene)
+        map_ind = {"A": 0, "C": 1, "G": 2, "T": 3}
+        max_count = len(gene) / 4
+        calc_matrix = [[0]*4 for _ in range(len(gene))]
+        calc_matrix[0][map_ind[gene[0]]] = 1
+        overflow_ar = [0] * len(gene)
+        overflow_ar2 = [1] * len(gene)
+        for i in range(1, len(gene)):
+            calc_matrix[i][0] = calc_matrix[i - 1][0]
+            calc_matrix[i][1] = calc_matrix[i - 1][1]
+            calc_matrix[i][2] = calc_matrix[i - 1][2]
+            calc_matrix[i][3] = calc_matrix[i - 1][3]
+            calc_matrix[i][map_ind[gene[i]]] += 1
+            overflow_ar[i] = overflow_ar[i - 1]
+            if calc_matrix[i][map_ind[gene[i]]] > max_count:
+                overflow_ar[i] += 1
+               #overflow_ar[i] = max(calc_matrix[i]) - max_count
+            overflow_ar2[i] = max(calc_matrix[i]) - min(calc_matrix[i])
+
+        count_replace = overflow_ar[-1]
+        over_dic = {}
+        for i, ch_count in enumerate(calc_matrix[-1]):
+            if ch_count > max_count:
+                over_dic[i] = ch_count - max_count
+
+        for i in range(len(gene) - count_replace):
+            for j in range(i, len(gene)):
+                start = calc_matrix[i]
+                end = calc_matrix[j]
+                flag = True
+                for n, k in over_dic.items():
+                    if end[n] - start[n] < over_dic[n]:
+                        flag = False
+                        break
+                if flag:
+                    result = min(result, (j - i))
+                if result == count_replace:
+                    return result
+        return result
+
+    from collections import Counter
+
+    def balanced(n, dic):
+        bal = True
+        for k, v in dic.items():
+            if v > n:
+                    bal = False
+                    break
+        return bal
+
+    # O(n) solution
+    def steadyGene(gene):
+        N = len(gene)
+        g_n = N/4
+        gene_freq = Counter(gene)
+
+        min_ans = 10**9
+        right = left = 0
+        while right < N and left < N:
+            if not balanced(g_n, gene_freq):
+                gene_freq[gene[right]] -= 1
+                right += 1
+            else:
+                min_ans = min(min_ans,  right - left)
+                gene_freq[gene[left]] += 1
+                left += 1
+
+        return min_ans
+
+    gene = "GAAATAAA" # 5
+    print(steadyGene(gene))
+    gene = "TGATGCCGTCCCCTCAACTTGAGTGCTCCTAATGCGTTGC" # 5
+    print(steadyGene(gene))
