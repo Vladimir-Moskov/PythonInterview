@@ -71,3 +71,26 @@ def topView(root):
     print(" ".join(map(lambda x: str(m[x]), sorted(m))))
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/tree-inorder-traversal/problem
+# Tree: Inorder Traversal
+
+"""
+Node is defined as
+self.left (the left child of the node)
+self.right (the right child of the node)
+self.info (the value of the node)
+"""
+from collections import deque
+
+def inOrder(root):
+    result = []
+    result = inOrderRecursive(root, [])
+    print(" ".join(map(str, result)))
+
+
+def inOrderRecursive(root, result):
+    if root:
+       result = inOrderRecursive(root.left, result) + [root] + inOrderRecursive(root.right, result)
+    return result
+
+############################################################################################
