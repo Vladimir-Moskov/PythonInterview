@@ -1,0 +1,33 @@
+Linux System Maintenance and Troubleshooting
+by David Clinton
+
+Linux servers will only perform to standard if they're run by admins who can understand and control their processes and resources. Learn how to monitor, troubleshoot, recover, and plan for optimal server performance.
+
+
+Course Overview 1m 4s
+	Course Overview 1m 4s
+Monitoring and Troubleshooting Linux System Performance 23m 24s
+	Introduction 1m 52s
+	Identifying System Resource Usage 5m 34s
+	Storage and Network Bandwidth Metrics 3m 47s
+	System Monitoring Solutions 4m 58s
+	Controlling System Resource Usage 2m 15s
+	Defining a Capacity Planning Strategy 4m 57s
+Building a Disaster Recovery Plan 11m 27s
+	Introduction 2m 32s
+	Developing an Incident Management Protocol 2m 20s
+	Developing a Disaster Recovery Plan 6m 34s
+Maintaining System Integrity 15m 24s
+	Understanding Your System Profile 4m 56s
+	Testing Your Hardware Integrity 4m 43s
+	Controlling Linux Kernels 5m 44s
+Building Software Packages for Linux 19m 41s
+	Creating a Debian Software Package 5m 33s
+	Creating an RPM Software Package 3m 57s
+	Packaging Software as Snaps 4m 34s
+	Packaging Software as AppImages 4m 0s
+	Course Review 1m 35s
+
+Level Intermediate
+Duration 1h 11m
+Released 23 Mar 2020
