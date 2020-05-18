@@ -29,3 +29,22 @@ def kangaroo(x1, v1, x2, v2):
     return "NO"
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/divisible-sum-pairs/problem
+# Divisible Sum Pairs
+
+def divisibleSumPairs(n, k, ar):
+    from collections import defaultdict
+    import math
+    result = 0
+    dic_count = defaultdict(int)
+    for i in ar:
+        dic_count[i % k] += 1
+    for i in range(int(k / 2) + 1):
+        if i == 0 or i == k / 2:
+            result += (dic_count[i] * (dic_count[i] - 1)) / 2
+        else:
+            result += dic_count[i] * dic_count[k-i]
+    print(divisibleSumPairs(6, 3, [1, 3, 2, 6, 1, 2]))
+    return result
+
+############################################################################################

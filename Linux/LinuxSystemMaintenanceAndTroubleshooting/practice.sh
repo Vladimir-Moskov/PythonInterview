@@ -23,6 +23,26 @@ free -k
 free -h
 
 # 2. Storage and Network Bandwidth Metrics
+df -lah
+df -t ext4
+df -h | grep -v sys
+# see inodes - amount free/used files count
+df -ih
+top
+# network monitoring
+apt-get install iftop
+iftop
+ip a
+# from outside of the system
+iftop -i eth0
+
+# from inside of the system
+apt-get install nethogs
+nethogs eth0
+curl https://www.pluralsight.com/
+
+# 3. System Monitoring Solutions
+
 
 
 
