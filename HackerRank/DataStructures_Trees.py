@@ -82,15 +82,48 @@ self.info (the value of the node)
 """
 from collections import deque
 
+
 def inOrder(root):
-    result = []
     result = inOrderRecursive(root, [])
     print(" ".join(map(str, result)))
 
 
 def inOrderRecursive(root, result):
     if root:
-       result = inOrderRecursive(root.left, result) + [root] + inOrderRecursive(root.right, result)
+        result = inOrderRecursive(root.left, result) + [root] + inOrderRecursive(root.right, result)
     return result
+
+############################################################################################
+# https://www.hackerrank.com/challenges/tree-postorder-traversal/problem
+#
+
+from collections import deque
+
+
+def postOrderIterative(root):
+    result = [root]
+    current_q = deque([root])
+    while current_q:
+        next_q = []
+        while current_q:
+            next_node = current_q.pop()
+            if next_node.left:
+                next_q.append(next_node.left)
+            if next_node.right:
+                next_q.append(next_node.right)
+
+        reversed(next_q)
+        result = next_q + result
+        current_q = deque(next_q)
+
+    print(" ".join(map(lambda x: str(x.info), result)))
+
+def postOrder(root):
+    #Write your code here
+
+    if root:
+        postOrder(root.left)
+        postOrder(root.right)
+        print(root.info, end=" ")
 
 ############################################################################################
