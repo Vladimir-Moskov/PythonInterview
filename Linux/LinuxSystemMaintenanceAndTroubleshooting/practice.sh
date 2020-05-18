@@ -42,7 +42,17 @@ nethogs eth0
 curl https://www.pluralsight.com/
 
 # 3. System Monitoring Solutions
+apt-get install collectd
+# collectd
+# Nagios
+# Munin
+# Nmon
+# cockpit
 
+apt-get install cockpit
+systemctl start cockpit
+https://192.168.2.21:9090/dashboard
 
+# 4. Controlling System Resource Usage
 
 
