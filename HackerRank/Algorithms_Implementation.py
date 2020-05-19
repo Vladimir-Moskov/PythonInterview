@@ -156,3 +156,23 @@ def angryProfessor(k, arrival_times):
     return "YES"
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/beautiful-days-at-the-movies/problem
+# Beautiful Days at the Movies
+
+
+def beautifulDays(i, j, k):
+    result = 0
+    while i <= j:
+        original = i
+        reversed_num = 0
+        num = original
+        while num:
+            rest = num % 10
+            reversed_num = (reversed_num * 10) + rest
+            num = num // 10
+        print(reversed_num)
+        if (original - reversed_num) % k == 0:
+            result += 1
+        i += 1
+
+    return result
