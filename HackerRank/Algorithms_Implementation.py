@@ -143,4 +143,16 @@ def pickingNumbers(given_ar):
     return result
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/angry-professor/problem
+# Angry Professor
 
+
+def angryProfessor(k, arrival_times):
+    for arrival_time in arrival_times:
+        if arrival_time < 1:
+            k -= 1
+            if k == 0:
+                return "NO"
+    return "YES"
+
+############################################################################################

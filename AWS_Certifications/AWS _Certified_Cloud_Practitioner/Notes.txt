@@ -1,0 +1,9 @@
+aws.amazon.com/certification
+aws.amazon.com/documentation
+aws.amazon.com/whitepapers
+aws.amazon.com/products
+aws.amazon.com/new
+
+
+create new S3
+volodymyr-s3-bucket-001-v1
