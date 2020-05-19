@@ -109,3 +109,38 @@ def getMoneySpentNoSort(keyboards, drives, b):
 # print(getMoneySpent([4], [5], 5))
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/bon-appetit/problem
+# Bon Appétit
+
+
+def bonAppetit(bill, k, b):
+    dif = b - (sum(bill) - bill[k]) // 2
+    if dif == 0:
+        print("Bon Appetit")
+    else:
+        print(dif)
+
+
+############################################################################################
+# https://www.hackerrank.com/challenges/picking-numbers/problem
+# Picking Numbers
+
+
+def pickingNumbers(given_ar):
+    given_ar.sort()
+    result = 0
+    i = 0
+    j = 1
+    while j < len(given_ar):
+        if given_ar[j] - given_ar[i] < 2:
+            j += 1
+        else:
+            result = max(result, j - i)
+            i += 1
+    result = max(result, j - i)
+
+    print(pickingNumbers([4, 6, 5, 3, 3, 1]))  # 3
+    return result
+
+############################################################################################
+
