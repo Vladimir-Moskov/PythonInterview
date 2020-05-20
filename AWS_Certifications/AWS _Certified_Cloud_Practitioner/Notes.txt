@@ -21,3 +21,9 @@ db_rds_vavas_v1
  show databases;
  \use mysql
  show tables;
+
+# EC2
+
+# SES
+
+# Analytics
