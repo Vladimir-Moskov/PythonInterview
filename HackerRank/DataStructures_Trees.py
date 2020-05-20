@@ -246,7 +246,7 @@ def search(root, value):
         return []
 
 
-def lca(root, v1, v2):
+def lca_bad(root, v1, v2):
     path1 = search(root, v1)
     path2 = search(root, v2)
 
@@ -255,4 +255,17 @@ def lca(root, v1, v2):
         i += 1
     return path1[i - 1]
 
+# optimal solution
+def lca(root, v1, v2):
+    current = root
+    while current:
+        if current.info == v1 or current.info == v2:
+            return current
+        else:
+            if current.info > v1 and current.info > v2:
+                current = current.left
+            elif current.info < v1 and current.info < v2:
+                current = current.right
+            else:
+                return current
 ############################################################################################
