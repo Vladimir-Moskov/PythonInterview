@@ -9,3 +9,15 @@ create new S3
 volodymyr-s3-bucket-001-v1
 
 # RDS
+My-Sql
+# db name
+database-rds-vavas-v1
+# New VPC security group name
+rds-vavas-group
+# Initial database name
+db_rds_vavas_v1
+ MySQL  JS > \connect vavas@database-rds-vavas-v1.cdyebgqeson2.us-east-1.rds.amazonaws.com
+ \sql
+ show databases;
+ \use mysql
+ show tables;

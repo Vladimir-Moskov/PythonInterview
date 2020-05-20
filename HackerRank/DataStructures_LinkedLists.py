@@ -83,3 +83,19 @@ def getNode(head, positionFromTail):
 
     return result.data
 
+
+###########################################################################################################
+# https://www.hackerrank.com/challenges/delete-duplicate-value-nodes-from-a-sorted-linked-list/problem
+# Delete duplicate-value nodes from a sorted linked list
+
+def removeDuplicates(head):
+    current = head
+    while current and current.next:
+        if current.data == current.next.data:
+            current.next = current.next.next
+        else:
+            current = current.next
+    return head
+
+###########################################################################################################
+

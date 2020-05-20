@@ -128,7 +128,9 @@ def postOrder(root):
 
 ############################################################################################
 # https://www.hackerrank.com/challenges/binary-search-tree-insertion/problem?h_r=next-challenge&h_v=legacy
+# https://www.hackerrank.com/challenges/tree-preorder-traversal/problem
 # Binary Search Tree : Insertion
+# Tree: Preorder Traversal
 
 class Node:
     def __init__(self, info):
@@ -174,5 +176,83 @@ class BinarySearchTree:
                 currentNode.left = Node(val)
             else:
                 self.insert(val, currentNode.left)
+
+############################################################################################
+# https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem
+# Binary Search Tree : Lowest Common Ancestor
+
+class Node:
+    def __init__(self, info):
+        self.info = info
+        self.left = None
+        self.right = None
+        self.level = None
+
+    def __str__(self):
+        return str(self.info)
+
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def create(self, val):
+        if self.root == None:
+            self.root = Node(val)
+        else:
+            current = self.root
+
+            while True:
+                if val < current.info:
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = Node(val)
+                        break
+                elif val > current.info:
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = Node(val)
+                        break
+                else:
+                    break
+
+
+'''
+class Node:
+      def __init__(self,info): 
+          self.info = info  
+          self.left = None  
+          self.right = None 
+
+
+       // this is a node of the tree , which contains info as data, left , right
+'''
+
+def search(root, value):
+    result = [root]
+    current = root
+    while current:
+        result.append(current)
+        if current.info == value:
+            return result
+        else:
+            if current.info > value:
+                current = current.left
+            else:
+                current = current.right
+    else:
+        return []
+
+
+def lca(root, v1, v2):
+    path1 = search(root, v1)
+    path2 = search(root, v2)
+
+    i = 0
+    while i < len(path1) and i < len(path2) and path1[i] == path2[i]:
+        i += 1
+    return path1[i - 1]
 
 ############################################################################################
