@@ -187,23 +187,28 @@ def surfaceArea(A):
     result = len(A) * len(A[0]) * 2
     result += sum(A[0]) + sum(A[-1])
     result += sum(A[i][0] + A[i][-1] for i in range(len(A)))
-    for i in range(len(A) - 1):
-        for j in range(len(A[0]) - 1):
-            if A[i][j] > A[i][j + 1]:
-                result += A[i][j] - A[i][j + 1]
-            else:
-                result += A[i][j + 1] - A[i][j]
-
-            if A[i][j] > A[i + 1][j]:
-                result += A[i][j] - A[i + 1][j]
-            else:
-                result += A[i + 1][j] - A[i][j]
+    for i in range(len(A)):
+        for j in range(len(A[0])):
+            if j < len(A[0]) - 1:
+                if A[i][j] > A[i][j + 1]:
+                    result += A[i][j] - A[i][j + 1]
+                else:
+                    result += A[i][j + 1] - A[i][j]
+            if i < len(A) - 1:
+                if A[i][j] > A[i + 1][j]:
+                    result += A[i][j] - A[i + 1][j]
+                else:
+                    result += A[i + 1][j] - A[i][j]
 
     return result
 
-A = [[1, 3, 4], [2, 2, 3], [1, 2, 4]]
-print(surfaceArea(A))
+# A = [[1, 3, 4], [2, 2, 3], [1, 2, 4]]
+# print(surfaceArea(A))
+#
+# some_list = [[1, 3, 4],
+#              [2, 2, 3],
+#              [1, 2, 4]]
+# another_list = [[1, 3, 4], [2, 2, 3], [1, 2, 4]]
+# print("Result: %s" % (some_list is list))
 
-some_list = [[1, 3, 4], [2, 2, 3], [1, 2, 4]]
-another_list = [[1, 3, 4], [2, 2, 3], [1, 2, 4]]
-print("Result: %s" % (some_list is list))
+############################################################################################
