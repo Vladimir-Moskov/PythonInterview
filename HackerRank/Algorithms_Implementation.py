@@ -212,3 +212,29 @@ def surfaceArea(A):
 # print("Result: %s" % (some_list is list))
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/two-pluses/problem
+# Ema's Supercomputer
+
+GOOD = "G"
+BAD = "B"
+
+def twoPluses(grid):
+    result = 0
+    width = len(grid[0])
+    height = len(grid)
+    result_mtrix =[[0] * width for _ in range(height)]
+    start = 0
+    while start < min(width, height) // 2:
+        for i in range(start, height - start):
+            for j in range(start, width - start):
+                if i == start or j == start or i == height - start - 1 or j == width - start - 1:
+                    if grid[i][j] == GOOD:
+                        result_mtrix[i][j] = start + 1
+                    else:
+                        result_mtrix[i][j] = -1
+        start += 1
+    return result
+
+grid = ['GGGGGG', 'GBBBGB', 'GGGGGG', 'GGBBGB', 'GGGGGG']  # 5
+print(twoPluses(grid))
+grid = ['BGBBGB', 'GGGGGG', 'BGBBGB', 'GGGGGG', 'BGBBGB', 'BGBBGB'] # 25

@@ -27,3 +27,5 @@ db_rds_vavas_v1
 # SES
 
 # Analytics
+
+# Creatingan IAM User
