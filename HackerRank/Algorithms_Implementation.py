@@ -215,27 +215,21 @@ def surfaceArea(A):
 # https://www.hackerrank.com/challenges/two-pluses/problem
 # Ema's Supercomputer
 
-GOOD = "G"
-BAD = "B"
+def solutionEmaSupercomputer():
+    from copy import deepcopy
+    from collections import defaultdict
+    GOOD = "G"
+    BAD = "B"
 
 
+    def find_max_crosses(width, height, matr):
+        result = 0
+        result_dic = defaultdict(list)
+        result_matrix_left = [[0] * width for _ in range(height)]
+        result_matrix_right = [[0] * width for _ in range(height)]
+        result_matrix_top = [[0] * width for _ in range(height)]
+        result_matrix_bottom = [[0] * width for _ in range(height)]
 
-def twoPluses(grid):
-    result = 0
-    width = len(grid[0])
-    height = len(grid)
-    matr = [[0] * width for _ in range(height)]
-    for i in range(height):
-        for j in range(width):
-            if grid[i][j] == GOOD:
-                matr[i][j] = 1
-
-    result_matrix_left = [[0] * width for _ in range(height)]
-    result_matrix_right = [[0] * width for _ in range(height)]
-    result_matrix_top = [[0] * width for _ in range(height)]
-    result_matrix_bottom = [[0] * width for _ in range(height)]
-
-    def reculculate():
         for i in range(height):
             for j in range(width):
                 if matr[i][j] == 1:
@@ -267,73 +261,84 @@ def twoPluses(grid):
                 else:
                     result_matrix_right[i][j] = 0
                     result_matrix_bottom[i][j] = 0
+        for i in range(height):
+                for j in range(width):
+                    cur_min = min(result_matrix_left[i][j],  result_matrix_right[i][j],  result_matrix_top[i][j],  result_matrix_bottom[i][j])
+                    if result < cur_min:
+                        result = cur_min
+                        result_dic[result].append((i, j))
+        return result, result_dic[result]
 
-    reculculate()
-    prev_max = None
-    prev_result = None
-    for k in range(2):
+
+    def twoPluses(grid):
+        width = len(grid[0])
+        height = len(grid)
+        matr = [[0] * width for _ in range(height)]
         for i in range(height):
             for j in range(width):
-                cur_min = min(result_matrix_left[i][j],  result_matrix_right[i][j],  result_matrix_top[i][j],  result_matrix_bottom[i][j])
-                if result < cur_min:
-                    result = cur_min
-                    prev_max = (i, j)
-        if k == 0:
-            i, j = prev_max
-            for n in range(result):
-                matr[i][j - n] = 0
-                matr[i][j + n] = 0
-                matr[i - n][j] = 0
-                matr[i + n][j] = 0
+                if grid[i][j] == GOOD:
+                    matr[i][j] = 1
 
-            reculculate()
-            prev_result = result
-            result = 0
+        prev_max, max_cros = find_max_crosses(width, height, matr)
+        next_max = 0
+        for cros in max_cros:
+            i, j = cros
+            next_matr = deepcopy(matr)
+            for n in range(prev_max):
+                next_matr[i][j - n] = 0
+                next_matr[i][j + n] = 0
+                next_matr[i - n][j] = 0
+                next_matr[i + n][j] = 0
+            temp_max, temp = find_max_crosses(width, height, next_matr)
+            next_max = max(next_max, temp_max)
 
-    return ((result - 1) * 4 + 1) * ((prev_result - 1) * 4 + 1)
 
-grid = ['GGGGGG', 'GBBBGB', 'GGGGGG', 'GGBBGB', 'GGGGGG']  # 5
-#print(twoPluses(grid))
-grid = ['BGBBGB', 'GGGGGG', 'BGBBGB', 'GGGGGG', 'BGBBGB', 'BGBBGB']  # 25
-#print(twoPluses(grid))
-grid = ["GBGBGGB",
-        "GBGBGGB",
-        "GBGBGGB",
-        "GGGGGGG",
-        "GGGGGGG",
-        "GBGBGGB",
-        "GBGBGGB"]
-#print(twoPluses(grid))  # 45
-grid = [
-"GGGGGGGG",
-"GBGBGGBG",
-"GBGBGGBG",
-"GGGGGGGG",
-"GBGBGGBG",
-"GGGGGGGG",
-"GBGBGGBG",
-"GGGGGGGG"]
+        return ((next_max - 1) * 4 + 1) * ((prev_max - 1) * 4 + 1)
 
-print(twoPluses(grid))  # 81
-from itertools import combinations
+    grid = ['GGGGGG', 'GBBBGB', 'GGGGGG', 'GGBBGB', 'GGGGGG']  # 5
+    print(twoPluses(grid))
+    grid = ['BGBBGB', 'GGGGGG', 'BGBBGB', 'GGGGGG', 'BGBBGB', 'BGBBGB']  # 25
+    print(twoPluses(grid))
+    grid = ["GBGBGGB",
+            "GBGBGGB",
+            "GBGBGGB",
+            "GGGGGGG",
+            "GGGGGGG",
+            "GBGBGGB",
+            "GBGBGGB"]
+    print(twoPluses(grid))  # 45
+    grid = [
+    "GGGGGGGG",
+    "GBGBGGBG",
+    "GBGBGGBG",
+    "GGGGGGGG",
+    "GBGBGGBG",
+    "GGGGGGGG",
+    "GBGBGGBG",
+    "GGGGGGGG"]
 
-def twoPluses(grid):
-  h, w = len(grid), len(grid[0])
-  plus = []
-  isGood = lambda r, c: grid[r][c] == 'G'
-  how = lambda x: 2*x-1
-  mm = min(h, w)
-  for step in range(1, mm // 2 + (1 if mm % 2 else 0)):
-    for r in range(step, h-step):
-      for c in range(step, w-step):
-        if isGood(r, c):
-          s1 = {(r2, c) for r2 in range(r-1, r-step-1, -1) if isGood(r2, c)}
-          s2 = {(r2, c) for r2 in range(r+1, r+step+1, +1) if isGood(r2, c)}
-          s3 = {(r, c2) for c2 in range(c-1, c-step-1, -1) if isGood(r, c2)}
-          s4 = {(r, c2) for c2 in range(c+1, c+step+1, +1) if isGood(r, c2)}
-          if len(s1)==step and len(s2)==step and len(s3)==step and len(s4)==step:
-            plus.append((how(2*step+1), {(r, c)}|s1|s2|s3|s4))
-  if not plus: return 1
-  if len(plus) == 1: return plus.pop()[0]
-  combs = [s1*s2 for (s1, a), (s2, b) in combinations(plus, 2) if a.isdisjoint(b)]
-  return max(combs) if combs else plus.pop()[0]
+    print(twoPluses(grid))  # 81
+
+
+    from itertools import combinations
+
+    def twoPluses_simple(grid):
+      h, w = len(grid), len(grid[0])
+      plus = []
+      isGood = lambda r, c: grid[r][c] == 'G'
+      how = lambda x: 2*x-1
+      mm = min(h, w)
+      for step in range(1, mm // 2 + (1 if mm % 2 else 0)):
+        for r in range(step, h-step):
+          for c in range(step, w-step):
+            if isGood(r, c):
+              s1 = {(r2, c) for r2 in range(r-1, r-step-1, -1) if isGood(r2, c)}
+              s2 = {(r2, c) for r2 in range(r+1, r+step+1, +1) if isGood(r2, c)}
+              s3 = {(r, c2) for c2 in range(c-1, c-step-1, -1) if isGood(r, c2)}
+              s4 = {(r, c2) for c2 in range(c+1, c+step+1, +1) if isGood(r, c2)}
+              if len(s1)==step and len(s2)==step and len(s3)==step and len(s4)==step:
+                plus.append((how(2*step+1), {(r, c)}|s1|s2|s3|s4))
+      if not plus: return 1
+      if len(plus) == 1: return plus.pop()[0]
+      combs = [s1*s2 for (s1, a), (s2, b) in combinations(plus, 2) if a.isdisjoint(b)]
+      return max(combs) if combs else plus.pop()[0]
