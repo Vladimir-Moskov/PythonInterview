@@ -342,3 +342,48 @@ def solutionEmaSupercomputer():
       if len(plus) == 1: return plus.pop()[0]
       combs = [s1*s2 for (s1, a), (s2, b) in combinations(plus, 2) if a.isdisjoint(b)]
       return max(combs) if combs else plus.pop()[0]
+
+############################################################################################
+# https://www.hackerrank.com/challenges/between-two-sets/problem
+# Between Two Sets
+
+
+def getTotalX(a, b):
+    result = 0
+    a.sort()
+    b.sort()
+    start = a[-1]
+    end = b[-1]
+    while start <= end:
+        need_add = True
+        for a_val in a:
+            if start % a_val != 0:
+                need_add = False
+                break
+        if need_add:
+            for b_val in b:
+                if b_val % start!= 0:
+                    need_add = False
+                    break
+        if need_add:
+            result += 1
+            # result.append(start)
+        start += 1
+    return result
+
+############################################################################################
+# https://www.hackerrank.com/challenges/drawing-book/problem
+# Drawing Book
+
+
+def pageCount(n, p):
+    n = (n + 2 - n % 2) // 2
+    p = p // 2
+    left = p
+    right = n - p - 1
+    return min(left,  right)
+
+# print(pageCount(6, 2)) # 1
+# print(pageCount(5, 4)) # 0
+
+############################################################################################

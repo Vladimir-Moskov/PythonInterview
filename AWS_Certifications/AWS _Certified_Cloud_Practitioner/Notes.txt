@@ -36,3 +36,18 @@ aws s3 mb s3://vavas-bucket-v2
 aws s3 cp unnamed.jpg  s3://vavas-bucket-v2
 aws s3 rm s3://vavas-bucket-v2/unnamed.jpg
 aws s3 rb s3://vavas-bucket-v2
+
+# Elastic Beanstalk
+vavas-ElasticBeanstalk
+
+https://aws.amazon.com/free
+
+https://aws.amazon.com/architecture/
+https://aws.amazon.com/whitepapers/?whitepapers-main.sort-by=item.additionalFields.sortDate&whitepapers-main.sort-order=desc&awsf.whitepapers-content-type=content-type%23arch-diagram&awsm.page-whitepapers-main=2
+
+https://github.com/aws-samples
+https://github.com/aws-samples?language=python
+https://github.com/aws-samples/aws-serverless-ecommerce-platform
+https://github.com/aws-samples/aws-serverless-airline-booking
+
+
