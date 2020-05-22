@@ -218,48 +218,57 @@ def surfaceArea(A):
 GOOD = "G"
 BAD = "B"
 
-def twoPluses(grid):
+
 
 def twoPluses(grid):
     result = 0
     width = len(grid[0])
     height = len(grid)
+    matr = [[0] * width for _ in range(height)]
+    for i in range(height):
+        for j in range(width):
+            if grid[i][j] == GOOD:
+                matr[i][j] = 1
+
     result_matrix_left = [[0] * width for _ in range(height)]
     result_matrix_right = [[0] * width for _ in range(height)]
     result_matrix_top = [[0] * width for _ in range(height)]
     result_matrix_bottom = [[0] * width for _ in range(height)]
 
-    for i in range(height):
-        for j in range(width):
-            if grid[i][j] == GOOD:
-                if j == 0:
-                    result_matrix_left[i][j] = 1
-                else:
-                    result_matrix_left[i][j] += 1 + result_matrix_left[i][j - 1]
+    def reculculate():
+        for i in range(height):
+            for j in range(width):
+                if matr[i][j] == 1:
+                    if j == 0:
+                        result_matrix_left[i][j] = 1
+                    else:
+                        result_matrix_left[i][j] = 1 + result_matrix_left[i][j - 1]
 
-                if i == 0:
-                    result_matrix_top[i][j] = 1
+                    if i == 0:
+                        result_matrix_top[i][j] = 1
+                    else:
+                        result_matrix_top[i][j] = 1 + result_matrix_top[i - 1][j]
                 else:
-                    result_matrix_top[i][j] += 1 + result_matrix_top[i - 1][j]
-            else:
-                result_matrix_left[i][j] = 0
-                result_matrix_top[i][j] = 0
+                    result_matrix_left[i][j] = 0
+                    result_matrix_top[i][j] = 0
 
-    for i in range(height - 1, -1, -1):
-        for j in range(width - 1, -1, -1):
-            if grid[i][j] == GOOD:
-                if j == width - 1:
-                    result_matrix_right[i][j] = 1
-                else:
-                    result_matrix_right[i][j] = 1 + result_matrix_right[i][j + 1]
+        for i in range(height - 1, -1, -1):
+            for j in range(width - 1, -1, -1):
+                if matr[i][j] == 1:
+                    if j == width - 1:
+                        result_matrix_right[i][j] = 1
+                    else:
+                        result_matrix_right[i][j] = 1 + result_matrix_right[i][j + 1]
 
-                if i == height - 1:
-                    result_matrix_bottom[i][j] = 1
+                    if i == height - 1:
+                        result_matrix_bottom[i][j] = 1
+                    else:
+                        result_matrix_bottom[i][j] = 1 + result_matrix_bottom[i + 1][j]
                 else:
-                    result_matrix_bottom[i][j] = 1 + result_matrix_bottom[i + 1][j]
-            else:
-                result_matrix_right[i][j] = 0
-                result_matrix_bottom[i][j] = 0
+                    result_matrix_right[i][j] = 0
+                    result_matrix_bottom[i][j] = 0
+
+    reculculate()
     prev_max = None
     prev_result = None
     for k in range(2):
@@ -272,35 +281,21 @@ def twoPluses(grid):
         if k == 0:
             i, j = prev_max
             for n in range(result):
-                result_matrix_left[i][j - n] = result_matrix_left[i][j + n] = result_matrix_left[i - n][j] = result_matrix_left[i + n][j] = 0
-                result_matrix_right[i][j - n] = result_matrix_right[i][j + n] = result_matrix_right[i - n][j] = result_matrix_right[i + n][j] = 0
-                result_matrix_top[i][j - n] = result_matrix_top[i][j + n] = result_matrix_top[i - n][j] = result_matrix_top[i + n][j] = 0
-                result_matrix_bottom[i][j - n] = result_matrix_bottom[i][j + n] = result_matrix_bottom[i - n][j] = result_matrix_bottom[i + n][j] = 0
-            n = j + result
-            while n < len(result_matrix_left[i]) and result_matrix_left[i][n] > 0:
-                result_matrix_left[i][n] = result_matrix_left[i][n - 1] + 1
-                n += 1
-            n = j - result
-            while n >= 0 and result_matrix_right[i][n] > 0:
-                result_matrix_right[i][n] = result_matrix_right[i][n + 1] + 1
-                n -= 1
-            n = i - result
-            while n >= 0 and result_matrix_bottom[n][j] > 0:
-                result_matrix_bottom[n][j] = result_matrix_bottom[n + 1][j] + 1
-                n -= 1
-            n = i + result
-            while n < len(result_matrix_top) and result_matrix_top[n][j] > 0:
-                result_matrix_top[n][j] = result_matrix_top[n - 1][j] + 1
-                n += 1
+                matr[i][j - n] = 0
+                matr[i][j + n] = 0
+                matr[i - n][j] = 0
+                matr[i + n][j] = 0
+
+            reculculate()
             prev_result = result
             result = 0
 
     return ((result - 1) * 4 + 1) * ((prev_result - 1) * 4 + 1)
 
 grid = ['GGGGGG', 'GBBBGB', 'GGGGGG', 'GGBBGB', 'GGGGGG']  # 5
-# print(twoPluses(grid))
+#print(twoPluses(grid))
 grid = ['BGBBGB', 'GGGGGG', 'BGBBGB', 'GGGGGG', 'BGBBGB', 'BGBBGB']  # 25
-# print(twoPluses(grid))
+#print(twoPluses(grid))
 grid = ["GBGBGGB",
         "GBGBGGB",
         "GBGBGGB",
@@ -308,5 +303,37 @@ grid = ["GBGBGGB",
         "GGGGGGG",
         "GBGBGGB",
         "GBGBGGB"]
+#print(twoPluses(grid))  # 45
+grid = [
+"GGGGGGGG",
+"GBGBGGBG",
+"GBGBGGBG",
+"GGGGGGGG",
+"GBGBGGBG",
+"GGGGGGGG",
+"GBGBGGBG",
+"GGGGGGGG"]
 
-print(twoPluses(grid))  # 45
+print(twoPluses(grid))  # 81
+from itertools import combinations
+
+def twoPluses(grid):
+  h, w = len(grid), len(grid[0])
+  plus = []
+  isGood = lambda r, c: grid[r][c] == 'G'
+  how = lambda x: 2*x-1
+  mm = min(h, w)
+  for step in range(1, mm // 2 + (1 if mm % 2 else 0)):
+    for r in range(step, h-step):
+      for c in range(step, w-step):
+        if isGood(r, c):
+          s1 = {(r2, c) for r2 in range(r-1, r-step-1, -1) if isGood(r2, c)}
+          s2 = {(r2, c) for r2 in range(r+1, r+step+1, +1) if isGood(r2, c)}
+          s3 = {(r, c2) for c2 in range(c-1, c-step-1, -1) if isGood(r, c2)}
+          s4 = {(r, c2) for c2 in range(c+1, c+step+1, +1) if isGood(r, c2)}
+          if len(s1)==step and len(s2)==step and len(s3)==step and len(s4)==step:
+            plus.append((how(2*step+1), {(r, c)}|s1|s2|s3|s4))
+  if not plus: return 1
+  if len(plus) == 1: return plus.pop()[0]
+  combs = [s1*s2 for (s1, a), (s2, b) in combinations(plus, 2) if a.isdisjoint(b)]
+  return max(combs) if combs else plus.pop()[0]
