@@ -219,22 +219,94 @@ GOOD = "G"
 BAD = "B"
 
 def twoPluses(grid):
+
+def twoPluses(grid):
     result = 0
     width = len(grid[0])
     height = len(grid)
-    result_mtrix =[[0] * width for _ in range(height)]
-    start = 0
-    while start < min(width, height) // 2:
-        for i in range(start, height - start):
-            for j in range(start, width - start):
-                if i == start or j == start or i == height - start - 1 or j == width - start - 1:
-                    if grid[i][j] == GOOD:
-                        result_mtrix[i][j] = start + 1
-                    else:
-                        result_mtrix[i][j] = -1
-        start += 1
-    return result
+    result_matrix_left = [[0] * width for _ in range(height)]
+    result_matrix_right = [[0] * width for _ in range(height)]
+    result_matrix_top = [[0] * width for _ in range(height)]
+    result_matrix_bottom = [[0] * width for _ in range(height)]
+
+    for i in range(height):
+        for j in range(width):
+            if grid[i][j] == GOOD:
+                if j == 0:
+                    result_matrix_left[i][j] = 1
+                else:
+                    result_matrix_left[i][j] += 1 + result_matrix_left[i][j - 1]
+
+                if i == 0:
+                    result_matrix_top[i][j] = 1
+                else:
+                    result_matrix_top[i][j] += 1 + result_matrix_top[i - 1][j]
+            else:
+                result_matrix_left[i][j] = 0
+                result_matrix_top[i][j] = 0
+
+    for i in range(height - 1, -1, -1):
+        for j in range(width - 1, -1, -1):
+            if grid[i][j] == GOOD:
+                if j == width - 1:
+                    result_matrix_right[i][j] = 1
+                else:
+                    result_matrix_right[i][j] = 1 + result_matrix_right[i][j + 1]
+
+                if i == height - 1:
+                    result_matrix_bottom[i][j] = 1
+                else:
+                    result_matrix_bottom[i][j] = 1 + result_matrix_bottom[i + 1][j]
+            else:
+                result_matrix_right[i][j] = 0
+                result_matrix_bottom[i][j] = 0
+    prev_max = None
+    prev_result = None
+    for k in range(2):
+        for i in range(height):
+            for j in range(width):
+                cur_min = min(result_matrix_left[i][j],  result_matrix_right[i][j],  result_matrix_top[i][j],  result_matrix_bottom[i][j])
+                if result < cur_min:
+                    result = cur_min
+                    prev_max = (i, j)
+        if k == 0:
+            i, j = prev_max
+            for n in range(result):
+                result_matrix_left[i][j - n] = result_matrix_left[i][j + n] = result_matrix_left[i - n][j] = result_matrix_left[i + n][j] = 0
+                result_matrix_right[i][j - n] = result_matrix_right[i][j + n] = result_matrix_right[i - n][j] = result_matrix_right[i + n][j] = 0
+                result_matrix_top[i][j - n] = result_matrix_top[i][j + n] = result_matrix_top[i - n][j] = result_matrix_top[i + n][j] = 0
+                result_matrix_bottom[i][j - n] = result_matrix_bottom[i][j + n] = result_matrix_bottom[i - n][j] = result_matrix_bottom[i + n][j] = 0
+            n = j + result
+            while n < len(result_matrix_left[i]) and result_matrix_left[i][n] > 0:
+                result_matrix_left[i][n] = result_matrix_left[i][n - 1] + 1
+                n += 1
+            n = j - result
+            while n >= 0 and result_matrix_right[i][n] > 0:
+                result_matrix_right[i][n] = result_matrix_right[i][n + 1] + 1
+                n -= 1
+            n = i - result
+            while n >= 0 and result_matrix_bottom[n][j] > 0:
+                result_matrix_bottom[n][j] = result_matrix_bottom[n + 1][j] + 1
+                n -= 1
+            n = i + result
+            while n < len(result_matrix_top) and result_matrix_top[n][j] > 0:
+                result_matrix_top[n][j] = result_matrix_top[n - 1][j] + 1
+                n += 1
+            prev_result = result
+            result = 0
+
+    return ((result - 1) * 4 + 1) * ((prev_result - 1) * 4 + 1)
 
 grid = ['GGGGGG', 'GBBBGB', 'GGGGGG', 'GGBBGB', 'GGGGGG']  # 5
-print(twoPluses(grid))
-grid = ['BGBBGB', 'GGGGGG', 'BGBBGB', 'GGGGGG', 'BGBBGB', 'BGBBGB'] # 25
+# print(twoPluses(grid))
+grid = ['BGBBGB', 'GGGGGG', 'BGBBGB', 'GGGGGG', 'BGBBGB', 'BGBBGB']  # 25
+# print(twoPluses(grid))
+grid = ["GBGBGGB",
+        "GBGBGGB",
+        "GBGBGGB",
+        "GGGGGGG",
+        "GGGGGGG",
+        "GBGBGGB",
+        "GBGBGGB"]
+
+print(twoPluses(grid))  # 45

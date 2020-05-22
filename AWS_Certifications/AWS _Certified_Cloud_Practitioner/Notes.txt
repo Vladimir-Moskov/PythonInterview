@@ -29,3 +29,10 @@ db_rds_vavas_v1
 # Analytics
 
 # Creatingan IAM User
+
+# aws cloud9
+aws --version
+aws s3 mb s3://vavas-bucket-v2
+aws s3 cp unnamed.jpg  s3://vavas-bucket-v2
+aws s3 rm s3://vavas-bucket-v2/unnamed.jpg
+aws s3 rb s3://vavas-bucket-v2
