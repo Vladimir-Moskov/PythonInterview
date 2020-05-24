@@ -63,5 +63,5 @@ http://volodymyrmoskov.com.s3-website-us-east-1.amazonaws.com/
 Route 53 - > redirect from https and www
 www.whatsmydns
 
-to refrech static contend
+to refresh static contend
 CloudFront Distributions -> Invalidations

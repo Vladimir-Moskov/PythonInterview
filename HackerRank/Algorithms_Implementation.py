@@ -431,12 +431,15 @@ def beautifulTriplets(d, arr):
 # print(beautifulTriplets(1, [2, 2, 3, 4, 5])) # 3
 # print(beautifulTriplets(3, [1, 2, 4, 5, 7, 8, 10])) # 3
 
-# O(n^2)
+# O(n)
+from collections import defaultdict, Counter
+
 def beautifulTriplets(d, arr):
-    gc = 0
+    result = 0
+    counter = Counter(arr)
+    counter = defaultdict(int, counter)
     for i in range(len(arr)):
-        if arr[i] + d in arr and arr[i] + 2*d in arr:
-            gc += 1
-    print(gc)
+        result += counter[arr[i]] * counter[arr[i] + d] * counter[arr[i] + d + d]
+    return result
 
 ############################################################################################
