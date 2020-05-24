@@ -387,3 +387,56 @@ def pageCount(n, p):
 # print(pageCount(5, 4)) # 0
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/beautiful-triplets/problem
+# Beautiful Triplets
+
+# O(n) solution
+def beautifulTriplets(d, arr):
+    result = 0
+    if len(arr) < 3:
+        return result
+    i = 0
+    j = 1
+    k = 2
+    while j < len(arr) - 1:
+        first = arr[j] - arr[i]
+        if first < d:
+            j += 1
+        elif first > d:
+            if j - i > 1:
+                i += 1
+            else:
+                j += 1
+        else:
+            k = max(k, j + 1)
+            step_back_k = 0
+            while k < len(arr):
+                second = arr[k] - arr[j]
+                if second < d:
+                    k += 1
+                elif second > d:
+                    break
+                else:
+                    result += 1
+                    step_back_k += 1
+                    k += 1
+            k -= step_back_k
+            if j - i > 1:
+                i += 1
+            else:
+                j += 1
+
+    return result
+
+# print(beautifulTriplets(1, [2, 2, 3, 4, 5])) # 3
+# print(beautifulTriplets(3, [1, 2, 4, 5, 7, 8, 10])) # 3
+
+# O(n^2)
+def beautifulTriplets(d, arr):
+    gc = 0
+    for i in range(len(arr)):
+        if arr[i] + d in arr and arr[i] + 2*d in arr:
+            gc += 1
+    print(gc)
+
+############################################################################################
