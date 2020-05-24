@@ -43,5 +43,67 @@ def solutionRedKnightShortestPath():
     print(printShortestPath(6, 5, 1, 0, 5))  # Impossible
     print(printShortestPath(7, 0, 3, 4, 3))  # 2 LR LL
 
+#########################################################################
+# https://www.hackerrank.com/challenges/hackerland-radio-transmitters/problem
+# Hackerland Radio Transmitters
 
 
+def hackerlandRadioTransmitters_to_complecated(sity_map, trans_range):
+    result = 0
+
+    if len(sity_map) < 2:
+        return 1
+    sity_map.sort()
+    left = 0
+    next = 1
+    while next < len(sity_map):
+        first = sity_map[next] - sity_map[left]
+        if first >= trans_range:
+            result += 1
+            next = next if first == trans_range else next - 1
+            right = next + 1
+            while right < len(sity_map):
+                second = sity_map[right] - sity_map[next]
+                if second >= trans_range:
+                    left = right + 1 if second == trans_range else right
+                    next = left + 1
+                    break
+                else:
+                    right += 1
+            if right >= len(sity_map):
+                break
+        else:
+            next += 1
+        if next >= len(sity_map):
+            result += 1
+
+    return result
+
+def hackerlandRadioTransmitters(sity_map, trans_range):
+    sity_map.sort()
+    result = 0
+    start = 0
+
+    while start < len(sity_map):
+        curent = sity_map[start]
+        while start < len(sity_map) and sity_map[start] - curent <= trans_range:
+            start += 1
+
+        result += 1  # build a antenna
+
+        curent = sity_map[start - 1]
+        while start < len(sity_map) and sity_map[start] - curent <= trans_range:
+            start += 1
+    return result
+
+# sity_map = [1, 2, 3, 4, 5]  # 2
+# trans_range = 1
+# print(hackerlandRadioTransmitters(sity_map, trans_range))
+# sity_map = [7, 2, 4, 6, 5, 9, 12, 11] # 3
+# trans_range = 2
+# print(hackerlandRadioTransmitters(sity_map, trans_range))
+# sity_map = [9, 5, 4, 2, 6, 15, 12] # 4
+# trans_range = 2
+# print(hackerlandRadioTransmitters(sity_map, trans_range))
+
+#########################################################################
