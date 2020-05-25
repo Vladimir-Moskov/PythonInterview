@@ -106,6 +106,7 @@ def hackerlandRadioTransmitters(sity_map, trans_range):
 # trans_range = 2
 # print(hackerlandRadioTransmitters(sity_map, trans_range))
 
+
 #########################################################################
 # https://www.hackerrank.com/challenges/short-palindrome/problem
 # Short Palindrome
@@ -145,20 +146,28 @@ def create(n):
 
 # O(n) solution
 def shortPalindrome(s):
-    l1, l2, l3 = create(1), create(2), create(3)
-    ret = 0
+    mod = 10**9 + 7
+    C1 = [0] * 26
+    C2 = [0] * 26 * 26
+    C3 = [0] * 26 * 26
+    count = 0
+    r26 = list(range(26))
     for c in s:
-        n = ord(c) - ord('a')
+        k = ord(c) - 97
+        p = 26 * k - 1
+        q = k - 26
+        for i in r26:
+            q += 26
+            p += 1
+            count += C3[q]
+            C3[p] += C2[p]
+            C2[p] += C1[i]
+        C1[k] += 1
 
-        for i in range(26):
-            ret += l3[n * 26 * 26 + i * 26 + i]
-            l3[i * 26 * 26 + n * 26 + n] += l2[i * 26 + n]
-            l2[i * 26 + n] += l1[i]
-        l1[n] += 1
-
-    return ret % 1000000007
+    return count  %mod
 
 
-print(shortPalindrome("kkkkkkz")) # 15
-print(shortPalindrome("abbaab")) # 4
-print(shortPalindrome("akakak")) # 2
+# print(shortPalindrome("kkkkkkz")) # 15
+# print(shortPalindrome("abbaab")) # 4
+# print(shortPalindrome("akakak")) # 2
+#########################################################################
