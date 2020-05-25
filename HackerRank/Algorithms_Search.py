@@ -107,3 +107,58 @@ def hackerlandRadioTransmitters(sity_map, trans_range):
 # print(hackerlandRadioTransmitters(sity_map, trans_range))
 
 #########################################################################
+# https://www.hackerrank.com/challenges/short-palindrome/problem
+# Short Palindrome
+
+from collections import defaultdict
+
+# solution O(n^2)
+def shortPalindrome_slow(given_str):
+    result = 0
+    pears_dic_left = defaultdict(list)
+    pears_dic_right = defaultdict(list)
+    for i in range(len(given_str) - 1):
+        for j in range(i + 1, len(given_str)):
+            key = given_str[i] + given_str[j]
+            pears_dic_left[key].append(i)
+            pears_dic_right[key].append(j)
+
+    for key, value in pears_dic_right.items():
+        value.sort()
+        revert_key = key[1] + key[0]
+        revert_value = pears_dic_left[revert_key]
+        start = 0
+
+        for i in range(len(value)):
+            while start < len(revert_value) and revert_value[start] <= value[i]:
+                start += 1
+            if start >= len(revert_value):
+                break
+            result += len(revert_value) - start
+
+    return result % (10**9 + 7)
+
+
+def create(n):
+    l = [0] * 26 ** n
+    return l
+
+# O(n) solution
+def shortPalindrome(s):
+    l1, l2, l3 = create(1), create(2), create(3)
+    ret = 0
+    for c in s:
+        n = ord(c) - ord('a')
+
+        for i in range(26):
+            ret += l3[n * 26 * 26 + i * 26 + i]
+            l3[i * 26 * 26 + n * 26 + n] += l2[i * 26 + n]
+            l2[i * 26 + n] += l1[i]
+        l1[n] += 1
+
+    return ret % 1000000007
+
+
+print(shortPalindrome("kkkkkkz")) # 15
+print(shortPalindrome("abbaab")) # 4
+print(shortPalindrome("akakak")) # 2
