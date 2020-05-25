@@ -65,3 +65,19 @@ www.whatsmydns
 
 to refresh static contend
 CloudFront Distributions -> Invalidations
+
+# create user
+vova
+# create group
+Administrators
+# create role
+vova-ec2-role
+# create alias
+vova-iam
+
+# MFA
+https://authy.com/download/
+
+# trustedadvisor
+
+# Cognito
