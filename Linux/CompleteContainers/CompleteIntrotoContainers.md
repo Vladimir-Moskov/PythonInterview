@@ -55,7 +55,7 @@ docker pull jguyomard/hugo-builder:0.55
 docker run -it --name docker-host --rm --privileged ubuntu:bionic
 
 mkdir my-new-root
-cat /etc/issue/
+cat /etc/issue
 cd my-new-root
 cd ..
 mkdir my-new-root/bin

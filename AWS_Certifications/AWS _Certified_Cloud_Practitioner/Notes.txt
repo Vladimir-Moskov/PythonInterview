@@ -4,6 +4,8 @@ aws.amazon.com/whitepapers
 aws.amazon.com/products
 aws.amazon.com/new
 
+# Full overview in 01-010-010-lab-notes.pdf
+
 # Storage
 create new S3
 volodymyr-s3-bucket-001-v1

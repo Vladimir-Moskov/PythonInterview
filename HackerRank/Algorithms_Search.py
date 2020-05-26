@@ -171,3 +171,40 @@ def shortPalindrome(s):
 # print(shortPalindrome("abbaab")) # 4
 # print(shortPalindrome("akakak")) # 2
 #########################################################################
+# https://www.hackerrank.com/challenges/gridland-metro/problem
+# Gridland Metro
+
+def gridlandMetro_bad(n, m, k, track):
+    map_lines = [[1] * m for _ in range(n)]
+    for row, start, end in track:
+        while start <= end:
+            map_lines[row - 1][start - 1] = 0
+            start += 1
+    total = sum(sum(x) for x in map_lines)
+    return total
+
+def gridlandMetro_better(n, m, k, track):
+    total = n * m
+    track_dic = {}
+    for row, start, end in track:
+        if row not in track_dic:
+            track_dic[row] = [1] * m
+        while start <= end:
+            track_dic[row][start - 1] = 0
+            start += 1
+    total -= len(track_dic) * m
+    total += sum(sum(x) for x in track_dic.values())
+    return total
+
+def gridlandMetro(n, m, k, track):
+    track.sort()
+    total = n * m
+    r0 = t1 = t2 = 0
+    for r, c1, c2 in track:
+        if r == r0 and c1 - 1 < t2:
+            t2 = max(t2, c2)
+        else:
+            total -= t2 - t1
+            r0, t1, t2 = r, c1 - 1, c2
+    return total - t2 + t1
+#########################################################################
