@@ -268,4 +268,138 @@ def lca(root, v1, v2):
                 current = current.right
             else:
                 return current
+
+
 ############################################################################################
+# https://www.hackerrank.com/challenges/swap-nodes-algo/problem
+# Swap Nodes [Algo]
+
+def SwapNodesSolution():
+    from collections import deque, defaultdict
+
+    class Node:
+        def __init__(self, data, level):
+            self.data = data
+            self.level = level
+            self.left = None
+            self.right = None
+
+
+    def tree_for_print(root):
+        result = deque()
+        tree_for_print_rec(root, result)
+        return result
+
+    def tree_for_print_rec(root, result):
+        if root:
+            tree_for_print_rec(root.left, result)
+            result.append(root.data)
+            tree_for_print_rec(root.right, result)
+
+    def swapNodes(queries, indexes):
+        tree_dic = {1: Node(1, 1)}
+        level_dic = defaultdict(deque)
+        level_dic[1].append(tree_dic[1])
+        level = deque([tree_dic[1]])
+
+        for left_val, right_val in queries:
+            parent = level.popleft()
+            if left_val != -1:
+                parent.left = Node(left_val, parent.level + 1)
+                level.append(parent.left)
+                tree_dic[left_val] = parent.left
+                level_dic[parent.left.level].append(parent.left)
+            if right_val != -1:
+                parent.right = Node(right_val, parent.level + 1)
+                level.append(parent.right)
+                tree_dic[right_val] = parent.right
+                level_dic[parent.right.level].append(parent.right)
+        result = []
+        for level in indexes:
+            current_level = level
+            while level_dic[current_level]:
+                for node in level_dic[current_level]:
+                    node.left, node.right = node.right, node.left
+                current_level += level
+
+            result.append(list(tree_for_print(tree_dic[1])))
+        return result
+
+    # case 0
+    queries = [[2, 3], [-1, -1], [-1, -1]]
+    indexes = [1, 1]
+    # 3 1 2
+    # 2 1 3
+    #print(swapNodes(queries, indexes)) #
+
+    # case1.0
+    queries = [[2, 3], [-1, 4], [-1, 5], [-1, -1], [-1, -1]]
+    indexes = [2]
+    # 4 2 1 5 3
+    #print(swapNodes(queries, indexes))
+
+    # case1.1
+    # 14 8 5 9 2 4 13 7 12 1 3 10 15 6 17 11 16
+    # 9 5 14 8 2 13 7 12 4 1 3 17 11 16 6 10 15
+    queries = [[2, 3], [4, 5], [6, -1], [-1, 7], [8, 9], [10, 11], [12, 13], [-1, 14], [-1, -1], [15, -1], [16, 17], [-1, -1],
+     [-1, -1], [-1, -1], [-1, -1], [-1, -1], [-1, -1]]
+    indexes = [2, 3]
+    #print(swapNodes(queries, indexes))
+
+
+    # case 2
+    queries = [[2, 3], [4, -1], [5, -1], [6, -1], [7, 8], [-1, 9], [-1, -1], [10, 11], [-1, -1], [-1, -1], [-1, -1]]
+    indexes = [2, 4]
+    # 2 9 6 4 1 3 7 5 11 8 10
+    # 2 6 9 4 1 3 7 5 10 8 11
+    print(swapNodes(queries, indexes))
+
+# ===============================================================
+class Node:
+    def __init__(self, d):
+        self.data = d
+
+
+def build_tree(indexes):
+    f = lambda x: None if x == -1 else Node(x)
+    children = [list(map(f, x)) for x in indexes]
+    nodes = {n.data: n for n in filter(None, sum(children, []))}
+    nodes[1] = Node(1)
+    for idx, child_pair in enumerate(children):
+        nodes[idx + 1].left = child_pair[0]
+        nodes[idx + 1].right = child_pair[1]
+    return nodes[1]
+
+
+def inorder(root):
+    stack = []
+    curr = root
+    while stack or curr:
+        if curr:
+            stack.append(curr)
+            curr = curr.left
+        elif stack:
+            curr = stack.pop()
+            yield curr.data
+            curr = curr.right
+
+
+def swapNodes(indexes, queries):
+    root = build_tree(indexes)
+    for k in queries:
+        h = 1
+        q = deque([root])
+        while q:
+            for _ in range(len(q)):
+                node = q.popleft()
+                if h % k == 0:
+                    node.left, node.right = node.right, node.left
+                q += filter(None, (node.left, node.right))
+            h += 1
+        yield inorder(root)
+# ===============================================================
+
+
+############################################################################################
+
+

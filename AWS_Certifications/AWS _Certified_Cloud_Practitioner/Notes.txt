@@ -81,3 +81,6 @@ https://authy.com/download/
 # trustedadvisor
 
 # Cognito
+React + GraphQL = Serverless Apps, no Lambda required, no dedicated nodejs server
+
+# EC2
