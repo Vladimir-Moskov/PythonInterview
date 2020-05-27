@@ -5,27 +5,35 @@ All what I was able to do in 30 min interview + 15 afterwards bugfixing
 players = {1: "X", 2: "O", 0: ""}
 
 
-def check_is_win(board_matrix, player):
+def check_is_win(board_matrix, player, x, y):
     result = False
 
     # horizontal
     for i in range(3):
-
-        if board_matrix[i] == player * 3:
-            return True
+        if board_matrix[x][i] != player:
+            break
+    else:
+        return True
 
     # vertical
     for i in range(3):
-        if sum([board_matrix[i][j] for j in range(3)]) == player * 3:
+        if board_matrix[i][y] != player:
+            break
+    else:
+        return True
+
+    # check diagonal
+    if x == y:
+        for i in range(3):
+            if board_matrix[i][i] != player:
+                break
+        else:
             return True
-
-    # check left to right diagonal
-    if sum([board_matrix[i][j] for j in range(3)]) == player * 3:
-        return True
-
-    # check right to left diagonal
-    if sum([board_matrix[2 - i][2 - j] for j in range(3)]) == player * 3:
-        return True
+        for i in range(3):
+            if board_matrix[2 - i][i] != player:
+                break
+        else:
+            return True
 
     return result
 
@@ -45,17 +53,22 @@ if __name__ == "__main__":
     while True:
         print_board(board_matrix)
         print(f"Player {current_player} (put X Y of cell): ")
-        x, y = (map(int, input().split()))
-        # validate range
-        is_valid = 0 <= x < 3 and 0 <= y < 3
-        # validate is cell empty
-        is_valid = is_valid and board_matrix[x][y] == 0
+        is_valid = False
+        try:
+            x, y = (map(int, input().split()))
+            # validate range
+            is_valid = 0 <= x < 3 and 0 <= y < 3
+            # validate is cell empty
+            is_valid = is_valid and board_matrix[x][y] == 0
+        except Exception:
+            print("Exception happen please try again")
+
         if not is_valid:
             print(f"Entered values are not valid please try again")
         else:
             board_matrix[x][y] = current_player
             # check is player win
-            is_win = check_is_win(board_matrix, current_player)
+            is_win = check_is_win(board_matrix, current_player, x, y)
             if is_win:
                 print(f"Player {current_player} is winner!!!")
                 print("Game over.")
