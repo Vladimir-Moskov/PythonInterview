@@ -87,3 +87,5 @@ React + GraphQL = Serverless Apps, no Lambda required, no dedicated nodejs serve
 
 # EC2
 # Nodejs server
+SSH with Connect to your instance option
+yum update -y
