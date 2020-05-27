@@ -2,7 +2,7 @@
 All what I was able to do in 30 min interview + 15 afterwards bugfixing
 """
 
-players = {1: "X", 2: "O", 0: ""}
+players = {1: "X", 2: "O", 0: "  "}
 
 
 def check_is_win(board_matrix, player, x, y):
