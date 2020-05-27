@@ -443,3 +443,33 @@ def beautifulTriplets(d, arr):
     return result
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/encryption/problem
+# Encryption
+import math
+
+def encryption(s):
+    L = len(s)
+    s2_from_L = math.sqrt(L)
+    row = int(s2_from_L)
+    col = math.ceil(s2_from_L)
+    while row * col <= L:
+        row += 1
+    row, col = col, row
+    result = [[""] * col for _ in range(row)]
+
+    for i in range(row):
+        next = i
+        for j in range(col):
+            if L > next:
+                result[i][j] = s[next]
+            else:
+                break
+            next += row
+    return " ".join(["".join(result[j][i] for i in range(col)) for j in range(row)])
+
+
+print(encryption("feedthedog"))  # fto ehg ee dd
+print(encryption("haveaniceday"))  # hae and via ecy      isieae fdtonf fotrga anoyec cttctt tfhhhs sieae
+print(encryption("iffactsdontfittotheorychangethefacts")) # isieae fdtonf fotrga anoyec cttctt tfhhhs
+
+############################################################################################
