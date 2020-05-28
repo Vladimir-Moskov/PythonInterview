@@ -401,5 +401,72 @@ def swapNodes(indexes, queries):
 
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/no-prefix-set/problem
+# No Prefix Set
+
+import os
+
+def no_prefix_set_alternative(data_list):
+    result = []
+    data_list.sort()
+    for i in range(len(data_list) - 1):
+        j = i + 1
+        while j < len(data_list) and data_list[j].startswith(data_list[i]):
+            result.append(data_list[j])
+            j += 1
+    if result:
+        result.insert(0, "BAD SET")
+    else:
+        result.insert(0, "GOOD SET")
+    return result
 
 
+class ChNode:
+    def __init__(self, data, parent, is_end=False):
+        self.data = data
+        self.child = {}
+        self.is_end = is_end
+
+
+def no_prefix_set(data_list):
+    word_dic = ChNode(None, None)
+
+    for current_str in data_list:
+        current_node = word_dic
+        for i in range(0, len(current_str)):
+            ch_val = current_str[i]
+            if ch_val in current_node.child:
+                child_node = current_node.child[ch_val]
+                if child_node.is_end:
+                    return ["BAD SET", current_str]
+                if i == len(current_str) - 1:
+                    return ["BAD SET", current_str]
+                    # for temp_str in data_list:
+                    #     if temp_str.startswith(current_str):
+                    #         return ["BAD SET", temp_str]
+            else:
+                child_node = ChNode(current_str[i], current_node, i == len(current_str) - 1)
+                current_node.child[current_str[i]] = child_node
+            current_node = child_node
+
+    return ["GOOD SET"]
+
+
+data_list = ["aab", "aac", "aacghgh", "aabghgh"]
+# data_list = ["ggbdfdhaffhghbdh", "dcjaichjejgheiaie", "d"]
+# print(no_prefix_set(data_list))
+
+# if __name__ == '__main__':
+#     fptr = open(os.environ['OUTPUT_PATH'], 'w')
+#
+#     Q = int(input())
+#     data_list = [None] * Q
+#     for i in range(Q):
+#         data_list[i] = input()
+#
+#     result = no_prefix_set(data_list)
+#     fptr.write('\n'.join(result))
+#     fptr.write('\n')
+#     fptr.close()
+
+############################################################################################

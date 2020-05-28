@@ -3,6 +3,7 @@ aws.amazon.com/documentation
 aws.amazon.com/whitepapers
 aws.amazon.com/products
 aws.amazon.com/new
+https://aws.amazon.com/serverless/resources/?serverless.sort-by=item.additionalFields.createdDate&serverless.sort-order=desc
 
 # Full overview in 01-010-010-lab-notes.pdf
 
@@ -89,3 +90,53 @@ React + GraphQL = Serverless Apps, no Lambda required, no dedicated nodejs serve
 # Nodejs server
 SSH with Connect to your instance option
 yum update -y
+# ip forwarding
+iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+iptables -A INPUT -p tcp -m tcp --sport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+~/.nvm/nvm.sh
+nvm install node
+node --version
+npm install express -g
+yum install git -y
+git --version
+git clone https://github.com/BackSpaceTech/node-js-sample.git
+cd node-js-sample/
+ls -lah
+npm install
+DEBUG=node-js-sample:* npm start
+# go tu public ip
+ec2-18-218-210-210.us-east-2.compute.amazonaws.com
+
+# create EC2 image
+
+# create EBS for EC2
+# mount ESB storage as drive in Linux
+ssh -i "NVirginia-SSH-ESB.pem" ec2-user@ec2-34-201-61-170.compute-1.amazonaws.com
+lsblk
+# check file system on ESB drive
+sudo file -s /dev/xvdb
+# create file system on ESB drive
+sudo mkfs -e ext4 /dev/xvdb
+# make dir to be mount point for storage
+sudo mkdir /data
+sudo mount /dev/xvdb /data
+# make backup of fstab
+sudo cp /etc/fstab /etc/fstab.origin
+# UUID=3860d2ff-3645-4014-8914-58fd1111f39d
+UUID=3860d2ff-3645-4014-8914-58fd1111f39d   /data   ext4   defaults,nofail   0    2
+# check mount errors
+sudo mount -a
+cd /data
+sudo touch test.txt
+# make ESB snapshot
+# create another volume from this  snapshot
+# create another EC2 instance
+# add existing volume to new EC2 instance
+
+# ECS
+vova-cluster-ECS
+
+# EFS
