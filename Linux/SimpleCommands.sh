@@ -985,3 +985,8 @@ tail /etc/passwd
 
 # see memory pages per process
 /proc/1/smaps
+
+# count lines of code
+# http://cloc.sourceforge.net/
+sudo apt-get install cloc
+cloc .
