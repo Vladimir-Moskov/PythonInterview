@@ -185,27 +185,27 @@ def getMinEffort(C):
     return min_val
 
 # 6
-C = [
-    [12, 6, 5, 3],
-    [6, 13, 3, 15],
-    [8, 2, 6, 9]
-]
-print(getMinEffort(C))
-# 4
-C =  [
-    [5, 1, 3, 2],
-    [7, 4, 1, 8],
-    [6, 7, 5, 9]
-]
-print(getMinEffort(C))
-# 5
-C =  [
-    [13, 14, 13, 1],
-    [8, 12, 12, 9],
-    [15, 15, 14, 14 ],
-    [15, 10, 10, 5]
-]
-print(getMinEffort(C))
+# C = [
+#     [12, 6, 5, 3],
+#     [6, 13, 3, 15],
+#     [8, 2, 6, 9]
+# ]
+# print(getMinEffort(C))
+# # 4
+# C =  [
+#     [5, 1, 3, 2],
+#     [7, 4, 1, 8],
+#     [6, 7, 5, 9]
+# ]
+# print(getMinEffort(C))
+# # 5
+# C =  [
+#     [13, 14, 13, 1],
+#     [8, 12, 12, 9],
+#     [15, 15, 14, 14 ],
+#     [15, 10, 10, 5]
+# ]
+# print(getMinEffort(C))
 
 #################################################################################################
 # https://www.hackerrank.com/contests/hack-the-interview-iv/challenges/maximum-or-1
@@ -329,7 +329,7 @@ def countInRange(x):
 def getNumberOfIntegers_2(L, R, K_):
     global dp, K, M
     dp = []
-    M = 102
+    M = 100
     L = int(L)
     R = int(R)
     K = K_
@@ -354,4 +354,37 @@ def getNumberOfIntegers_2(L, R, K_):
 #
 # print(getNumberOfIntegers_2(10, 55, 2)) # 41
 # print(getNumberOfIntegers_2(1, 100, 1)) # 18
+# print(getNumberOfIntegers_2(1, 100, 2)) # 81
 
+# score 40 / 40 !!!!!!!!!!!!!!!!!!
+def k_nonzero_numbers(R, n, K):
+
+    dp = [[[0] * (K + 2) for _ in range(2)] for _ in range(n+1)]
+    dp[0][0][0] = 1
+    for i in range(n):
+        sm = 0
+        while sm < 2:
+            for j in range(K + 1):
+            # for j in range(K):
+                x = 0
+                while x <= (9 if sm > 0 else int(R[i])):
+                    ind_1 = 0
+                    if sm > 0 or x < int(R[i]):
+                        ind_1 = 1
+                    ind_2 = j + (x > 0)
+                    dp[i + 1][ind_1][ind_2] += dp[i][sm][j]
+                    x += 1
+            sm += 1
+    return dp[n][0][K] + dp[n][1][K]
+
+def getNumberOfIntegers_3(L_str, R_str, K):
+    L = int(L_str)
+    R = int(R_str)
+
+    result = k_nonzero_numbers(R_str, len(R_str), K) - k_nonzero_numbers(L_str, len(L_str), K)
+
+    return result
+
+print(getNumberOfIntegers_3("10", "55", 2))  # 41
+print(getNumberOfIntegers_3("1", "100", 1))  # 18
+print(getNumberOfIntegers_3("1", "100", 2)) # 81
