@@ -140,3 +140,12 @@ sudo touch test.txt
 vova-cluster-ECS
 
 # EFS
+Name: vova-EFS-Zones
+create new EC2 which will use EFS
+sg-0822e4d1b06d92bdd
+
+# mount EFS on EC2
+sudo mkdir efs
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-a875cb2b.efs.us-east-1.amazonaws.com:/ efs
+cd efs
+sudo touch test.txt
