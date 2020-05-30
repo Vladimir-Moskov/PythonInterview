@@ -383,7 +383,7 @@ def getNumberOfIntegers_3(L_str, R_str, K):
 
     result = k_nonzero_numbers(R_str, len(R_str), K) - k_nonzero_numbers(L_str, len(L_str), K)
 
-    return result
+    return result % (1000000000 + 7)
 
 print(getNumberOfIntegers_3("10", "55", 2))  # 41
 print(getNumberOfIntegers_3("1", "100", 1))  # 18
