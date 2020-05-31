@@ -473,3 +473,15 @@ print(encryption("haveaniceday"))  # hae and via ecy      isieae fdtonf fotrga a
 print(encryption("iffactsdontfittotheorychangethefacts")) # isieae fdtonf fotrga anoyec cttctt tfhhhs
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/designer-pdf-viewer/problem
+# Designer PDF Viewer
+
+def designerPdfViewer(h, word):
+    a_val = ord('a')
+    mav_val = 0
+    for ch_val in word:
+        mav_val = max(mav_val, h[ord(ch_val) - a_val])
+
+    return mav_val * len(word)
+
+############################################################################################
