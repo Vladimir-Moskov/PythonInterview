@@ -468,9 +468,9 @@ def encryption(s):
     return " ".join(["".join(result[j][i] for i in range(col)) for j in range(row)])
 
 
-print(encryption("feedthedog"))  # fto ehg ee dd
-print(encryption("haveaniceday"))  # hae and via ecy      isieae fdtonf fotrga anoyec cttctt tfhhhs sieae
-print(encryption("iffactsdontfittotheorychangethefacts")) # isieae fdtonf fotrga anoyec cttctt tfhhhs
+# print(encryption("feedthedog"))  # fto ehg ee dd
+# print(encryption("haveaniceday"))  # hae and via ecy      isieae fdtonf fotrga anoyec cttctt tfhhhs sieae
+# print(encryption("iffactsdontfittotheorychangethefacts")) # isieae fdtonf fotrga anoyec cttctt tfhhhs
 
 ############################################################################################
 # https://www.hackerrank.com/challenges/designer-pdf-viewer/problem
@@ -498,5 +498,19 @@ def utopianTree(n):
             result *= 2
     return result
 ############################################################################################
+# https://www.hackerrank.com/challenges/strange-advertising/problem
+# Viral Advertising
 
+def viralAdvertising(n):
+    Shared = 5
+    Liked = 2
+    result = 2
+    for i in range(n - 1):
+        Shared = math.floor(Shared / 2) * 3
+        Liked = math.floor(Shared / 2)
+        result += Liked
+    return result
 
+# print(viralAdvertising(5))
+
+############################################################################################
