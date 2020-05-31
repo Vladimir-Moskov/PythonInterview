@@ -484,4 +484,19 @@ def designerPdfViewer(h, word):
 
     return mav_val * len(word)
 
+
 ############################################################################################
+# https://www.hackerrank.com/challenges/utopian-tree/problem
+# Utopian Tree
+
+def utopianTree(n):
+    result = 1
+    for i in range(n):
+        if i % 2 != 0:
+            result += 1
+        else:
+            result *= 2
+    return result
+############################################################################################
+
+
