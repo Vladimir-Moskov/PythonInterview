@@ -514,3 +514,17 @@ def viralAdvertising(n):
 # print(viralAdvertising(5))
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/jumping-on-the-clouds-revisited/problem
+# Jumping on the Clouds: Revisited
+
+def jumpingOnClouds(c, k, n):
+    result = 100 #initial energy
+    i = k % n #initial jump from 0
+    result -= c[i] * 2 + 1 #initial energy loss
+    while i != 0:
+        i = (i + k) % n
+        result -= c[i] * 2 + 1
+    return result
+
+############################################################################################
+
