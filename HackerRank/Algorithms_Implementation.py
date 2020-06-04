@@ -527,4 +527,31 @@ def jumpingOnClouds(c, k, n):
     return result
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/minimum-distances/problem
+# Minimum Distances
+
+from collections import defaultdict
+
+
+def minimumDistances(a):
+    result = -1
+    num_dic = defaultdict(list)
+    for i, val in enumerate(a):
+        if len(num_dic[val]) < 2:
+            num_dic[val].append(i)
+        else:
+            if num_dic[val][1] - num_dic[val][0] > i - num_dic[val][1]:
+                num_dic[val][0] = num_dic[val][1]
+                num_dic[val][1] = i
+    for val in num_dic.values():
+        if len(val) == 2:
+            if result == -1:
+                result = val[1] - val[0]
+            else:
+                result = min(result, val[1] - val[0])
+
+    return result
+
+############################################################################################
+
 
