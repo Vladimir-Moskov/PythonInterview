@@ -25,11 +25,3 @@ def timeit(method):
                   (method.__name__, (te - ts) * 1000))
         return result
     return timed
-
-from collections import Counter
-
-
-def solution(arr, int_val):
-    return Counter(arr)[int_val]
-
-print(solution([1, 2, 3, 1], 1))
