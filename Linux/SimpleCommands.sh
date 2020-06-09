@@ -801,6 +801,7 @@ apt-get install openssh-server
 netstat -tupln
 ssh vova@localhost
 cat /etc/ssh/sshd_config
+nano /etc/ssh/sshd_config
 sudo service ssh restart
 ssh-keygen -t rsa -b 4096
 nano .ssh/authorized_keys
