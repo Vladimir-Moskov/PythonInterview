@@ -598,3 +598,19 @@ def permutationEquation(p):
 # print(permutationEquation([4, 3, 5, 1, 2])) # [1, 3, 5, 4, 2]
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/chocolate-feast/problem
+# Chocolate Feast
+
+def chocolateFeast(n, c, m):
+    wrap_count = n // c
+    result = wrap_count
+    while wrap_count >= m:
+        cur_wrap = wrap_count // m
+        wrap_count = cur_wrap + wrap_count % m
+        result += cur_wrap
+    return result
+
+# print(chocolateFeast(15, 3, 2)) # 9
+
+
+############################################################################################
