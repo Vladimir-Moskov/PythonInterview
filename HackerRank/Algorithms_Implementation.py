@@ -553,5 +553,27 @@ def minimumDistances(a):
     return result
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/cut-the-sticks/problem
+# Cut the sticks
+
+
+def cutTheSticks(arr):
+    result = []
+    if len(arr) == 0:
+        return result
+    arr.sort()
+    start = 0
+    while start < len(arr):
+        sum_val = arr[start]
+        result.append(len(arr) - start)
+        while start < len(arr) and arr[start] == sum_val:
+            start += 1
+
+    return result
+
+# print(cutTheSticks([1, 2, 3])) # [3, 2, 1]
+# print(cutTheSticks([5, 4, 4, 2, 2, 8])) # [6, 4, 2, 1]
+
+############################################################################################
 
 
