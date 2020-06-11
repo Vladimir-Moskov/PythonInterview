@@ -1,3 +1,6 @@
+# Hack the Interview IV (U.S.)
+# 45 / 1217 participants
+
 #################################################################################################
 # https://www.hackerrank.com/contests/hack-the-interview-iv/challenges/good-binary-string
 # Valid Binary String
