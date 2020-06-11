@@ -575,5 +575,26 @@ def cutTheSticks(arr):
 # print(cutTheSticks([5, 4, 4, 2, 2, 8])) # [6, 4, 2, 1]
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/permutation-equation/problem
+# Sequence Equation
+
+def permutationEquation(p):
+    result = [0] * len(p)
+    sub_p = [0] * len(p)
+    for i, val in enumerate(p):
+       sub_p[val - 1] = i
+
+    for i in range(len(p)):
+        t = sub_p[i]
+        t = sub_p[sub_p[i]]
+        # t = p[sub_p[sub_p[i]]]
+        # result[i] = p[sub_p[sub_p[i]]]
+        result[i] = t + 1
+    return result
 
 
+# print(permutationEquation([2, 3, 1]))  #  [2, 3, 1]
+# print(permutationEquation([5, 2, 1, 3, 4])) # [4, 2, 5, 1, 3]
+# print(permutationEquation([4, 3, 5, 1, 2])) # [1, 3, 5, 4, 2]
+
+############################################################################################
