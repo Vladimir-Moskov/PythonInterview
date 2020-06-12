@@ -614,3 +614,19 @@ def chocolateFeast(n, c, m):
 
 
 ############################################################################################
+# https://www.hackerrank.com/challenges/find-digits/problem
+# Find Digits
+
+
+def findDigits(n):
+    result = 0
+    current_val = n
+    while current_val > 0:
+        div_val = current_val % 10
+        current_val = current_val // 10
+        if div_val != 0 and n % div_val == 0:
+            result += 1
+
+    return result
+
+# print(findDigits(1012))  # 3
