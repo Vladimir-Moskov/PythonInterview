@@ -630,3 +630,26 @@ def findDigits(n):
     return result
 
 # print(findDigits(1012))  # 3
+
+############################################################################################
+# https://www.hackerrank.com/challenges/circular-array-rotation/problem
+# Circular Array Rotation
+
+
+def circularArrayRotation(a, k, queries):
+    result = [0] * len(queries)
+    k = k % len(a)
+    i = 0
+    for i, q in enumerate(queries):
+        # cur_pos = q - k
+        # if cur_pos >= 0:
+        #     result[i] = a[cur_pos]
+        # else:
+        #     result[i] = a[len(queries) + cur_pos]
+        result[i] = a[(q - k) % len(queries)]
+    return result
+
+# print(circularArrayRotation([1, 2, 3], 2, [0, 1, 2])) # [2, 3, 1]
+# print(circularArrayRotation([1, 2, 3, 4, 5], 4, [0, 1, 2, 3, 4])) # [2, 3, 1]
+
+############################################################################################
