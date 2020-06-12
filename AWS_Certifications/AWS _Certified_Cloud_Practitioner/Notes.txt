@@ -154,6 +154,10 @@ sudo touch test.txt
 create nes bucket - s3-handson-v2
 set life cycle rule tp move all version in archive to glassier
 
+# S3 asses policy
+
+
+
 
 
 
