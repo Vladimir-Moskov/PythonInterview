@@ -8,34 +8,6 @@
         some how few tricky test cases failed that time.
         But even though I was invited to the next round - face to face technical interview - remote.
 
-    Next Round Overview:
-    I had pretty good interview, everything went smoothly tha time:
-      - talk part (self introduction, current/past project experience, team, etc)
-      - answered all technical questions
-            (Java - new feature in 8 streams lambda, concurrency and thread, cons of lambda (you cant reuse it), etc.
-             - went well enough even I was not read to speak about Java at all, some how I expected  Python question for
-              this role, Python Software Engineer)
-            (architecture and design - favorite disign patterns, tinny url architecture etc).
-    Overall, I had very good felling, it was the first time when I was 99% sure I have passed it, but unfortunately
-    got answer bellow, which was kind of frustrating for me. Bad luck ):
-
-    Hi Volodymyr,
-    Thank you for taking the time to speak to our team about the position of Senior Backend Engineer -
-     Text Analytics/NLP! It was a pleasure to learn more about your skills and accomplishments.
-    Unfortunately, after reviewing feedback from your interview, we regret to inform you that your application was not
-     selected for further consideration for this position. Please understand that this decision does not reflect on your
-     abilities, but rather on our current needs and requirements.
-    As we continue to grow we may have opportunities in the near future that could be a match for you, so we encourage
-    you to keep in touch via this link. You will be the first to receive relevant info on developments in e-commerce,
-    open positions, meetups we host, and conferences we will attend.
-    In the meantime, we would like to hear your feedback on your personal experience with our recruitment process. In a
-     couple of days, we will invite you to take a short survey. Your input will help us offer a better candidate
-     experience. Thank you once again for your interest in a career with Zalando SE. We wish you all the best with
-      your professional endeavors.
-    Sara Bettencourt
-    Recruitment Specialist Technology
-    Sourcing & Recruiting Team
-    Zalando SE
 """
 
 

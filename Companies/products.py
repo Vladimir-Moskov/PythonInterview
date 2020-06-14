@@ -4,34 +4,18 @@
  Refactored:
  Created by: Volodymyr Moskov
 
- Summary: Hi Volodymyr,
-    Thanks again for your application, and for submitting the assignment.
-    Unfortunately, we have decided not to move forward with you in the hiring process as we believe we have other
-     candidates more fit for the role in our pipeline right now.
+ Summary:
 
-    We wish you the best in your next career steps.
+    Unfortunately, we have decided not to move forward with you...
 
-    Best regards,
-    EclecticIQ
 """
 
 """
-Hi Volodymyr,
 
-Thank you for your application. In order to make an assessment of your Python knowledge and eye for detail,
-we'd like to ask you to complete a short assignment.
 
 I've attached a piece of code that I'd like you to review as if it was a regular code review -
  imagine you're a senior member of a team and a junior asks for your approval. Point out whatever flaws you find,
  explain them if necessary, and maybe even point out some suggestions on how to do things better.
-
-We would prefer to see your review as a set of in-line comments in the Python module,
-but you're free to choose another way if it works better for you.
-
-Please submit the assignment by 2019-12-03. Thank you!
-
-Best regards,
-EclecticIQ
 
 """
 

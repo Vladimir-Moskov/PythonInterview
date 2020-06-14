@@ -5,8 +5,7 @@
 
  Summary: I had passed the interview, had a good feedback,
  was invited to finish hiring process with on site round.
- It was the last stop - company had denied to do visa sponsorship,
- which was mandatory, at this point - hr person had just miss lead me with this.
+
 """
 
 

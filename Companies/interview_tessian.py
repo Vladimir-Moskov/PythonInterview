@@ -6,28 +6,16 @@
     Summary:
         score is  about 80% with www.hackerrank.com, had spend 2 hours on it - supposed to do it in 80 minutes
 
-        I was very concerned again, that it was very low result, I was not familiar with first type of task and task
-        itself where very confusing and I was just shucked for a while.
-        But even though I was invited to the next round, remote - face to face  technical interview.
 
-        Rob Par****
-        Hi Volodymyr,
-        Great news!
-        We would like to progress to the next stage of the interview, this is a 90 minute technical interview via
-        Zoom (Code pair) exercise.
-        What does your diary look like this week?
-        All the best,
-        Rob
         
     Interview #2: Next Technical Interview for Stage 3 -  (Code pair) exercise
        Date: 2020-01-08
-       Summary: Had a quick feedback - Interview had been sucsessfuly passed, self estime increased, 
-                even if provided solution was not perfect (interviewing is still too stressful for me)
+       Summary: Had a quick feedback - Interview had been successfully passed,
       
       Classical Python Questions:
             1. Difference betwen Tuple and List
             2. What is generators
-            3. concurency in python, pros and cons for every option (Thread, Processes, Async)
+            3. concurrency in python, pros and cons for every option (Thread, Processes, Async)
             
        Coding task:
             given class, it needs to implement in order to sotisfy test cases and solves problem below,
@@ -65,12 +53,7 @@
          print(occur.get("name1", "name2")) # result = 2
          print(occur.get("name3", "name2")) # result = 1
          print(occur.get("name6", "name2")) # result = 0
-  
- Update(15-01-2020)- Interview #3: Next Technical Interview for Stage 4
-    Well, I ashamed to addmit, that this was tough expireance for me, I had sucsessfully failed the interview
-    (there were two tech guys) - code qestions was fine, but archetecture and design questions needs a lot of improvment from my side.
-    also, early morning 6/7 am still a factot and do effect overall interview performance.
-    Unfortunately, Had not get any meaninful performance feedback from them.
+
 """
 
 from typing import Dict, Optional, Tuple
