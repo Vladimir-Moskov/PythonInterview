@@ -65,6 +65,66 @@ def hackerrankCity(valueIn):
     return result
 
 
-print(hackerrankCity([2, 1]))
+# print(hackerrankCity([2, 1]))
+
+##################################################################################################
+# https://www.hackerrank.com/challenges/maxsubarray/problem
+# The Maximum Subarray
+
+
+def maxSubarray(arr):
+    # calculate max subsequence sum
+    min_val = -10000
+    sum_val = 0
+    only_negative = True
+    for val in arr:
+        if val > 0:
+            sum_val += val
+            only_negative = False
+        else:
+            min_val = max(min_val, val)
+    if only_negative:
+        sum_val = min_val
+
+    # maximum subarray sum
+    result = 0
+    cur_max = arr[0]
+    prev_max = cur_max
+    for i in range(1, len(arr)):
+        val = arr[i]
+        if cur_max < 0:
+            cur_max = max(cur_max, val)
+        elif val >= 0:
+            cur_max += val
+        else:
+            prev_max = max(cur_max, prev_max)
+            cur_max += val
+
+    result = max(cur_max, prev_max)
+
+    return [result, sum_val]
+
+# print(maxSubarray([1, 2, 3, 4]))  # 10, 10
+# print(maxSubarray([2, -1, 2, 3, 4, -5]))  # 10, 11
+# print(maxSubarray([-2, -3, -1, -4, -6]))  # -1, -1
+# print(maxSubarray([-1, 2, 3, -4, 5, 10]))  # 16, 20
+
+
+def max_sum_subsequence(a, n):
+    m = a[0]
+    t = 0
+    for i in range(n):
+        m = max(m, a[i])
+        if a[i] >= 0:
+            t += a[i]
+    return t if m >= 0 else m
+
+def max_sum_subarray(a, n):
+    f = a[0]
+    ans = f
+    for i in range(1, n):
+        f = max(a[i], f + a[i])
+        ans = max(ans, f)
+    return ans
 
 ##################################################################################################
