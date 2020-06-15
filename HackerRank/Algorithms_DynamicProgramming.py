@@ -42,6 +42,7 @@ def getWays_better(n, c):
 # https://www.hackerrank.com/challenges/hr-city/problem
 # HackerRank City
 
+
 def hackerrankCity(valueIn):
     result = 0
     n = len(valueIn)
@@ -65,3 +66,5 @@ def hackerrankCity(valueIn):
 
 
 print(hackerrankCity([2, 1]))
+
+##################################################################################################
