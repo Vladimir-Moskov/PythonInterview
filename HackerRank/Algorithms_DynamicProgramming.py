@@ -119,6 +119,7 @@ def max_sum_subsequence(a, n):
             t += a[i]
     return t if m >= 0 else m
 
+
 def max_sum_subarray(a, n):
     f = a[0]
     ans = f
@@ -128,3 +129,33 @@ def max_sum_subarray(a, n):
     return ans
 
 ##################################################################################################
+# https://www.hackerrank.com/challenges/stockmax/problem
+# Stock Maximize
+
+
+def stockmax(prices):
+    result = 0
+    max_back_ar = [0] * len(prices)
+    for i in range(len(prices) - 1, -1, -1):
+        if i < len(prices) - 1:
+            max_back_ar[i] = i if prices[i] > prices[max_back_ar[i+1]] else max_back_ar[i + 1]
+        else:
+            max_back_ar[i] = i
+
+    start = 0
+    end = -1
+    while end < len(prices) - 1:
+        end = max_back_ar[end + 1]
+        max_val = prices[end]
+        while start < end:
+            result += max_val - prices[start]
+            start += 1
+        start = end + 1
+
+    return result
+
+print(stockmax([1, 2])) # 1
+print(stockmax([2, 1])) # 0
+print(stockmax([1, 3, 1, 2])) # 3
+print(stockmax([5, 3, 2])) # 0
+print(stockmax([1, 2, 100])) # 197
