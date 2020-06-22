@@ -91,4 +91,102 @@ def solutionSpecialSubtree():
     print(prims(n, edges, start))
 
 ##################################################################################
+# https://www.hackerrank.com/challenges/journey-to-the-moon/problem
+# Journey to the Moon
 
+
+def _journeyToMoon(n, astronaut):
+    result = 0
+    all_links = [set([i]) for i in range(n)]
+    all_dick = set(i for i in range(n))
+    for i, val in enumerate(astronaut):
+        left_val, right_val = val
+        set_big, set_small, small_val = (all_links[right_val], all_links[left_val], left_val) \
+            if len(all_links[right_val]) > len(all_links[left_val]) \
+            else (all_links[left_val], all_links[right_val], right_val)
+
+        set_big.update(set_small)
+        for val in set_small:
+            all_links[val] = set_big
+            if val in all_dick:
+                all_dick.remove(val)
+
+    if len(all_dick) > 1:
+        len_ar = [len(all_links[val]) for val in all_dick]
+        sum = 0;
+        result = 0
+
+        for size in len_ar:
+            result += sum * size
+            sum += size
+
+        return result
+
+
+class DisjointSet:
+    def __init__(self):
+        self.parent = self
+        self.size = 1
+
+    def find_parent(self):
+        if self.parent != self:
+            self.parent = self.parent.find_parent()
+        return self.parent
+
+    def union(self, other):
+        if self == other:
+            return
+        root = self.find_parent()
+        other_root = other.find_parent()
+        if root == other_root:
+            return
+        if root.size > other_root.size:
+            other_root.parent = root
+            root.size += other_root.size
+        else:
+            root.parent = other_root
+            other_root.size += root.size
+
+
+def journeyToMoon(n, astronaut):
+
+    all_links = [DisjointSet() for _ in range(n)]
+    for i, val in enumerate(astronaut):
+        left_val, right_val = val
+        left_set = all_links[left_val]
+        right_set = all_links[right_val]
+        if left_set.size > left_set.size:
+            left_set.union(right_set)
+        else:
+            right_set.union(left_set)
+
+    root_dic = {}
+    for set_val in all_links:
+        if set_val.parent not in root_dic:
+            root_dic[set_val.parent] = set_val.size
+        else:
+            root_dic[set_val.parent] = max(set_val.size, root_dic[set_val.parent])
+
+    result = 0
+    if len(root_dic) > 1:
+
+        len_ar = [val.size for val in root_dic]
+        for i in range(len(len_ar) - 1):
+            next_val = 0
+            for j in range(i + 1, len(len_ar)):
+                next_val += len_ar[i] * len_ar[j]
+            result += next_val
+
+    return result
+
+#
+# case_1 = [[0, 1],
+#           [2, 3],
+#           [0, 4]]
+# print(journeyToMoon(5, case_1))  # 6
+#
+# case_2 = [[1, 2],
+#           [2, 3]]
+# print(journeyToMoon(4, case_2))  # 3
+
+##################################################################################
