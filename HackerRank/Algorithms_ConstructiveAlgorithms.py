@@ -41,3 +41,32 @@ arr = [5, 2, 6, 3, 4]  # andy
 #print(gamingArray(arr))
 
 ######################################################################################
+# https://www.hackerrank.com/challenges/flipping-the-matrix/problem
+# Flipping the Matrix
+
+
+def flippingMatrix(matrix):
+    result = 0
+    n = len(matrix) // 2
+
+    for i in range(n):
+        for j in range(n):
+            ar = [matrix[i][j], matrix[i][-(1 + j)], matrix[-(1 + i)][j], matrix[-(1 + i)][-(1 + j)]]
+            val = max(ar)
+            result += val
+    return result
+
+case_1 = [[1, 2],
+          [3, 4]]
+#print(flippingMatrix(case_1)) # 4
+
+
+case_2 = [[112, 42, 83, 119],
+          [56, 125, 56, 49],
+          [15, 78, 101, 43],
+          [62, 98, 114, 108]]
+print(flippingMatrix(case_2)) # 414
+
+
+
+######################################################################################
