@@ -65,8 +65,26 @@ case_2 = [[112, 42, 83, 119],
           [56, 125, 56, 49],
           [15, 78, 101, 43],
           [62, 98, 114, 108]]
-print(flippingMatrix(case_2)) # 414
+# print(flippingMatrix(case_2)) # 414
 
 
+
+######################################################################################
+# https://www.hackerrank.com/challenges/construct-the-array/problem
+# Construct the Array
+
+
+def countArray(n, k, x):
+    result = 1 if x != 1 else 0
+    next_res = k - 1
+    mod = 1000000007
+    for _ in range(n - 2):
+        result = (next_res - result) % mod
+        next_res = (next_res * (k - 1)) % mod
+
+    return result
+
+
+print(countArray(761, 99, 1,)) # 236568308
 
 ######################################################################################
