@@ -85,6 +85,54 @@ def countArray(n, k, x):
     return result
 
 
-print(countArray(761, 99, 1,)) # 236568308
+# print(countArray(761, 99, 1,)) # 236568308
 
 ######################################################################################
+# https://www.hackerrank.com/challenges/red-john-is-back/problem
+# Red John is Back
+
+
+def isPrime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i = i + 6
+    return True
+
+
+def redJohn(n):
+    pre_calc = [0] * n
+    result = 0
+    if n < 4:
+        return 0
+    pre_calc[0] = 1
+    pre_calc[1] = 1
+    pre_calc[2] = 1
+    pre_calc[3] = 2
+
+    for i in range(4, n):
+        sum_4 = pre_calc[i - 4] + pre_calc[i - 1]
+        pre_calc[i] = sum_4
+
+    for i in range(2, pre_calc[-1] + 1):
+        if isPrime(i):
+            result += 1
+    return result
+
+
+# print(redJohn(1))  # 1 -> 0
+# print(redJohn(5))  # 3 -> 2
+# print(redJohn(7))  # 5 -> 3
+# print(redJohn(8))  # 5 -> 4
+
+######################################################################################
+
+
+
