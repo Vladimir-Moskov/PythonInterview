@@ -285,8 +285,8 @@ def legoBlocks(wall_height, wall_width):
     return h[-1] % mod
 # print(legoBlocks(2, 2))
 # print(legoBlocks(3, 2))
-print(legoBlocks(2, 3))
-print(legoBlocks(4, 4))
+# print(legoBlocks(2, 3))
+# print(legoBlocks(4, 4))
 
 """
     import java.util.Scanner;
@@ -364,5 +364,30 @@ print(legoBlocks(4, 4))
         }
     }
 """
+
+##################################################################################################
+# https://www.hackerrank.com/challenges/unbounded-knapsack/problem
+# Knapsack
+
+
+def unboundedKnapsack(k, arr):
+    result = 0
+    uniq_val = set(arr)
+    dp_ar = [0] * (k + 1)
+    dp_ar[0] = 1
+    for i in range(1, k + 1):
+        for val in uniq_val:
+            prev_index = i - val
+            if prev_index >= 0 and dp_ar[i] == 0:
+                dp_ar[i] = dp_ar[prev_index]
+    last = k
+    while last >= 0:
+        if dp_ar[last] == 1:
+            return last
+        last -= 1
+    return result
+
+# print(unboundedKnapsack(12, [1, 6, 9])) # 12
+# print(unboundedKnapsack(9, [3, 4, 4, 8])) # 9
 
 ##################################################################################################
