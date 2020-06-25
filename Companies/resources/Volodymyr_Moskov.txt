@@ -1,6 +1,0 @@
-Time taken to complete part 1: 1 hour for naive string base solution
-                               + 1hour for bit manipulation solution with minimal space complexity
-
-Expected hourly rate: 35-50($)
-Email address: boba.mockob@gmail.com
-Challenge response: 267395706
