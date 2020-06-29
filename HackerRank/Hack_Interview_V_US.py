@@ -2,7 +2,8 @@
 #
 
 #################################################################################################
-
+# https://www.hackerrank.com/contests/hack-the-interview-v/challenges/strange-keyboard-1
+# New Keyboard 10 points , 100%
 
 def _receivedText(S):
     numlock_on = True
@@ -84,9 +85,8 @@ def receivedText(S):
 # print(receivedText("HE*<LR>O")) # LLHO
 
 #################################################################################################
-
-
-# The XOR Problem
+# https://www.hackerrank.com/contests/hack-the-interview-v/challenges/the-xor-problem
+# The XOR Problem - 20 points, 100%
 
 def maxXorValue(x, k):
     result = ["0"] * len(x)
@@ -106,7 +106,8 @@ def maxXorValue(x, k):
 # print(maxXorValue("01010", 1)) # 10000
 
 #################################################################################################
-# Jewel Game
+# https://www.hackerrank.com/contests/hack-the-interview-v/challenges/candy-crush-4
+# Jewel Game - 30 points 100%
 
 from collections import deque
 
@@ -135,7 +136,8 @@ def getMaxScore(jewels):
 # print(getMaxScore("abcd")) # 0
 
 #################################################################################################
-# Rerouting
+# https://www.hackerrank.com/contests/hack-the-interview-v/challenges/rerouting/problem
+# Rerouting - 20 points = 50%
 
 
 def _getMinConnectionChange(connection):
@@ -204,6 +206,25 @@ def getMinConnectionChange(connection):
     return len(root_dic) - 1
 
 
+def solve(n, connection):
+    # Write your code here
+    assert 1 <= n <= 300000
+    assert all(1 <= i <= n for i in connection)
+
+    vis = [0] * (n + 1)
+    ct = 0
+    col = 0
+    for i in range(1, n + 1):
+        if not vis[i]:
+            cur = i
+            col += 1
+            while not vis[cur]:
+                vis[cur] = col
+                cur = connection[cur - 1]
+                ct += col == vis[cur]
+    ct -= any(i == connection[i - 1] for i in range(1, n + 1))
+    return ct
+
 print(getMinConnectionChange([2, 3, 4, 1, 5]))  # 1
 print(getMinConnectionChange([1, 2, 3, 4]))  # 3
 print(getMinConnectionChange([2, 3, 4, 1]))  # 1
@@ -212,3 +233,5 @@ print(getMinConnectionChange([2, 1, 4, 3, 5]))  # 2
 print(getMinConnectionChange([1, 3, 4, 4]))  # 1
 
 print(getMinConnectionChange([1, 2, 4, 3]))
+
+#################################################################################################
