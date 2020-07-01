@@ -652,4 +652,25 @@ def circularArrayRotation(a, k, queries):
 # print(circularArrayRotation([1, 2, 3], 2, [0, 1, 2])) # [2, 3, 1]
 # print(circularArrayRotation([1, 2, 3, 4, 5], 4, [0, 1, 2, 3, 4])) # [2, 3, 1]
 
+
+############################################################################################
+# https://www.hackerrank.com/challenges/halloween-sale/problem
+# Halloween Sale
+
+
+def howManyGames(original_price, decrement, min_prise, sum_available):
+    result = 0
+    while sum_available - original_price >= 0:
+        result += 1
+        sum_available -= original_price
+        new_price = original_price - decrement
+        if new_price < min_prise:
+            new_price = min_prise
+        original_price = new_price
+
+    return result
+
+
+print(howManyGames(20, 3, 6, 85))  # 7
+
 ############################################################################################
