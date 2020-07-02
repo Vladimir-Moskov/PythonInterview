@@ -247,3 +247,19 @@ def solutionBearSteadyGene():
 # solutionBearSteadyGene()
 
 ####################################################################################################
+# https://www.hackerrank.com/challenges/hackerrank-in-a-string/problem
+# HackerRank in a String!
+
+def hackerrankInString(s):
+    main_str = "hackerrank"
+    start = 0
+    if len(s) >= len(main_str):
+        i = 0
+        while start < len(main_str) and i < len(s):
+            if main_str[start] == s[i]:
+                start += 1
+            i += 1
+
+    return "YES" if start == len(main_str) else "NO"
+
+####################################################################################################
