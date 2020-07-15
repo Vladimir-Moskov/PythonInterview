@@ -31,6 +31,7 @@ def PlusMinus(num_int):
         values.append(num_int % 10)
         num_int = num_int // 10
     values.reverse()
+    max_total = sum(num_int)
 
     current_q = deque([Node(values[0], False, 0)])
     for i in range(1, len(values)):
@@ -39,7 +40,9 @@ def PlusMinus(num_int):
 
             left = Node(node.value - values[i], True, node.minus_count + 1, node)
             right = Node(node.value + values[i], False, node.minus_count, node)
+            #if left.value > -max_total - left.value
             new_q.append(left)
+            #if right.value < max_total - right.value
             new_q.append(right)
             node.left = left
             node.right = right
@@ -81,7 +84,7 @@ def LongestIncreasingSequence(arr):
 
 def _LongestIncreasingSequence(arr):
     # time complexity n * 2 :( - can be n * logn with binary search
-    # cant use this terrible online IDE - so copy/past from my development tool
+    # cant use this terrible online IDE - so copy/past from my development toolp
     if len(arr) == 0:
         return 0
 
