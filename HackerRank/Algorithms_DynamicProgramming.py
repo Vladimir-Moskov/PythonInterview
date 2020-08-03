@@ -391,3 +391,23 @@ def unboundedKnapsack(k, arr):
 # print(unboundedKnapsack(9, [3, 4, 4, 8])) # 9
 
 ##################################################################################################
+# https://www.hackerrank.com/challenges/dynamic-programming-classics-the-longest-common-subsequence/problem
+# The Longest Common Subsequence
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
