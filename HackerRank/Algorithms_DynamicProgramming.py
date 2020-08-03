@@ -425,17 +425,17 @@ def longestCommonSubsequence(a, b):
 
 a = [3, 2, 3, 4, 5]
 b = [3, 3, 7, 8, 9, 5]
-print(longestCommonSubsequence(a, b))  # 3 3 5
+# print(longestCommonSubsequence(a, b))  # 3 3 5
 
 a = [1, 2, 3, 4, 1]
 b = [3, 4, 1, 2, 1, 3]
-print(longestCommonSubsequence(a, b))  # 1 2 3
+# print(longestCommonSubsequence(a, b))  # 1 2 3
 
 a = [3, 9, 8, 3, 9, 7, 9, 7, 0]
 b = [3, 3, 9, 9, 9, 1, 7, 2, 0, 6]
-print(longestCommonSubsequence(a, b))  # 3 3 9 9 7 0
+# print(longestCommonSubsequence(a, b))  # 3 3 9 9 7 0
 
-
+##################################################################################################
 
 
 
