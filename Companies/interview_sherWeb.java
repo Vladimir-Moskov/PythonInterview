@@ -53,13 +53,13 @@ static public int solution2(int[] A) {
 				   int factorial = 0;
 				   int v = entry.getValue();
 				   if (v > 1) {
-					   factorial = 1;
+					   combination = 1;
 		        	   for (int i = 3; i <= v; i ++) {
-		        		   factorial = factorial * (i - 1);
+		        		   combination = combination + (i - 1);
 		        	   }
 		           }
 
-				   result += factorial;
+				   result += combination;
 			   }
 
 		}
