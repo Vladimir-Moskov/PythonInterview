@@ -17,7 +17,7 @@ def chocolateInBox(arr):
     b = 0
     for i in arr:
         b ^= i
-    return sum([int(i^b < i) for i in arr])
+    return sum([int(i ^ b < i) for i in arr])
 
 print(chocolateInBox([2, 3]))  # 1
 print(chocolateInBox([2, 3, 3]))  # 3

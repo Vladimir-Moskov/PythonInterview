@@ -27,6 +27,35 @@ def solution(given_array, num_shifts):
     print(" ".join(map(str, result_ar)))
     return result_ar
 
-solution([1, 2, 3, 4, 5], 4)
+# solution([1, 2, 3, 4, 5], 4)
+
+#####################################################################
+# https://www.hackerrank.com/challenges/dynamic-array/problem
+# Dynamic Array
+
+def dynamicArray(n, queries):
+    arr = [[] for _ in range(n)]
+    result = []
+    last = 0
+    for i, x, y in queries:
+        index = (x ^ last) % n
+        if i == 1:
+            arr[index].append(y)
+        else:
+            second_index = y % len(arr[index])
+            last = arr[index][second_index]
+            result.append(last)
+
+    return result
+
+n = 2
+queries = [
+    [1, 0, 5],
+    [1, 1, 7],
+    [1, 0, 3],
+    [2, 1, 0],
+    [2, 1, 1],
+]
+print(dynamicArray(n, queries))
 
 #####################################################################
