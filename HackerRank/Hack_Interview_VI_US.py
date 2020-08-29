@@ -103,9 +103,9 @@ def treeConstruction(N, X):
 
     return result_to_tree(result)
 
-print(treeConstruction(5, 6))
-print(treeConstruction(5, 7))
-print(treeConstruction(3, 1))
+# print(treeConstruction(5, 6))
+# print(treeConstruction(5, 7))
+# print(treeConstruction(3, 1))
 
 # print(treeConstruction(6, 8))
 # print(treeConstruction(5, 7))
