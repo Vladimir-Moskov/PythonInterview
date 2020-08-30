@@ -232,4 +232,11 @@ friendships = [[1, 2]]
 # print(configureProjectPresentation(n, friendships))
 
 #########################################################################################
+# https://www.hackerrank.com/contests/hacktheinterview3/challenges/flipped-beauty
+# Minimum String Co-Efficient
 
+
+def minStringCoeff(s, p):
+    result = 0
+
+    return result
