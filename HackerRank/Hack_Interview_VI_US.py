@@ -130,4 +130,99 @@ def treeConstruction(N, X):
 # https://www.hackerrank.com/contests/hack-the-interview-vi/challenges/the-cup-game
 # Solving for Queries with Cups
 
+# slow solution -> 40% of score
+def _countCups(n, balls, swaps, queries):
+    result = []
 
+    backets = [0] * (n + 1)
+
+    for val in balls:
+        backets[val] = 1
+
+    for a, b in swaps:
+        backets[a], backets[b] = backets[b], backets[a]
+
+    for start, end in queries:
+        result.append(sum(backets[start:(end + 1)]))
+
+    return result
+
+# faster solution -> 50% of score
+def __countCups(n, balls, swaps, queries):
+    result = []
+
+    backets = set(balls)
+
+    for a, b in swaps:
+        if a in backets:
+            if b not in backets:
+                backets.remove(a)
+                backets.add(b)
+        else:
+            if b in backets:
+                backets.remove(b)
+                backets.add(a)
+
+    backets = sorted(list(backets))
+    for start, end in queries:
+        left_ind = 0
+        right_ind = 0
+        for i in range(len(backets)):
+            if backets[i] > start:
+                left_ind = i - 1
+            elif backets[i] == start:
+                left_ind = i
+
+            if backets[i] > end:
+                right_ind = i - 1
+            elif backets[i] == end:
+                right_ind = i
+        result.append(right_ind - left_ind)
+
+    return result
+
+from bisect import bisect_left as bl, bisect_right as br
+
+def countCups(n, balls, swaps, queries):
+    # Write your code here
+    m = set(balls)
+    for i,j in swaps:
+        if i in m and j not in m:
+            m.add(j)
+            m.remove(i)
+        elif i not in m and j in m:
+            m.remove(j)
+            m.add(i)
+    l = list(m)
+    l.sort()
+    return [br(l,j) - bl(l,i) for i,j in queries]
+
+n = 4
+m = 2
+balls = [2, 4]
+swaps = [[2, 4], [2, 1], [2, 3]]
+queries = [[2, 4]]
+# print(countCups(n, balls, swaps, queries)) # 2
+
+n = 3
+m = 1
+balls = [2]
+swaps = [[1, 2], [1, 3], [3, 1]]
+queries = [[1, 2], [1, 3]]
+# print(countCups(n, balls, swaps, queries)) # 1 1
+
+n = 3
+n = 100000
+m = 2
+balls = [1, 3]
+swaps = [[1, 3], [3, 2]]
+queries = [[1, 2], [3, 3]]
+# print(countCups(n, balls, swaps, queries))
+
+n = 4
+m = 3
+balls = [1, 3, 4]
+swaps = [[3, 2], [1, 4]]
+queries = [[1, 1], [2, 2], [3, 3], [4, 4]]
+print(countCups(n, balls, swaps, queries))
+######################################################################
