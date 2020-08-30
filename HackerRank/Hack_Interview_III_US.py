@@ -118,3 +118,118 @@ queries = [
 # print(getMaxCharCount(s, queries)) # 1 2 1 2 1
 
 #########################################################################################
+# https://www.hackerrank.com/contests/hacktheinterview3/challenges/yashs-party
+# Configuring Project Management
+
+from collections import deque, defaultdict
+
+def _configureProjectPresentation(n, friendships):
+    result = [-1]
+    edges = [set() for i in range(n + 1)]
+
+
+    for x, y in friendships:
+        edges[x].add(y)
+        edges[y].add(x)
+
+    visited = set([2, 1])
+    current_friend_2 = set(edges[2])
+    q = deque(edges[2])
+    current_friend_2.add(2)
+
+    while q:
+        next_q = set()
+        for val in q:
+            if val not in visited:
+                visited.add(val)
+                current_friend_2.add(val)
+                next_q.update(edges[val])
+
+        q = deque(next_q)
+
+    q = deque(edges[1])
+    current_friend = set()
+    for val in edges[1]:
+        if val not in current_friend_2:
+            current_friend.add(val)
+    # current_friend = set(edges[1])
+    # if 2 in current_friend:
+    #     current_friend.remove(2)
+    # visited = set([2, 1])
+    #
+    # while q:
+    #     next_q = set()
+    #     for val in q:
+    #         if val not in visited:
+    #             visited.add(val)
+    #             if val not in current_friend_2:
+    #                 current_friend.add(val)
+    #                 next_q.update(edges[val])
+    #             else:
+    #                 if val in current_friend:
+    #                     current_friend.remove(val)
+    #
+    #     q = deque(next_q)
+    if current_friend:
+        result = list(current_friend)
+        result.sort()
+
+    return result
+
+from collections import defaultdict
+
+
+def configureProjectPresentation(n, friendships):
+    g = defaultdict(list)
+
+    for a, b in friendships:
+        g[a].append(b)
+        g[b].append(a)
+
+    invited = []
+    uninvited = [2]
+    invited.extend(g[1])
+    invited = set(invited)
+
+    for i in g[2]:
+        if i == 1:
+            continue
+        uninvited.append(i)
+        uninvited.extend(g[i])
+    uninvited = set(uninvited)
+    result = set()
+    for i in invited:
+        if i not in uninvited and i != 1:
+            result.add(i)
+
+    if result:
+        result = sorted(result)
+    else:
+        result = [-1]
+
+    return result
+
+
+n = 3
+friendships = [
+    [1, 2],
+    [3, 2]]
+# print(configureProjectPresentation(n, friendships))
+
+n = 9
+friendships = [[1, 3],
+[1, 4],
+[3, 2],
+[5, 6],
+[7, 1],
+[2, 8],
+[8, 9],
+[9, 1]]
+# print(configureProjectPresentation(n, friendships))
+
+n = 2
+friendships = [[1, 2]]
+# print(configureProjectPresentation(n, friendships))
+
+#########################################################################################
+
