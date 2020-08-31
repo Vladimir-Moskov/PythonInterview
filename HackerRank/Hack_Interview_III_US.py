@@ -236,7 +236,41 @@ friendships = [[1, 2]]
 # Minimum String Co-Efficient
 
 
-def minStringCoeff(s, p):
-    result = 0
+def minStringCoeff(given_str, flips):
+    points = []
+    started_0 = False
+    count_0 = 0
+    count_1 = 0
+    started_1 = True
+    for val in given_str:
+        if not started_0:
+            started_0 = val == "0"
+        else:
+            if val == "1":
+                count_0 += 1
+            else:
+                points.append(count_0)
+                count_0 = 0
 
+        if not started_1:
+            started_1 = val == "1"
+        else:
+            if val == "0":
+                count_1 += 1
+            else:
+                points.append(count_1)
+                count_1 = 0
+
+    points.sort()
+    flips = min(flips, len(points))
+    min_points = points[:-flips]
+    result = sum(min_points)
     return result
+
+s = "1101"
+p = 1
+# print(minStringCoeff(s, p)) # 0
+
+s = "1011010"
+p = 1
+print(minStringCoeff(s, p)) # 2
